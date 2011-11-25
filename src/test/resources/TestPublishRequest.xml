@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<request id="1320668425354" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu">
+    <Command>
+        <Publish>
+            <params>
+                <File id="0">
+                    <filename>abc.txt</filename>
+                    <abstract>This is a sample file</abstract>
+                    <filesize>20</filesize>
+                    <ipaddress>10.12.2.1</ipaddress>
+                    <filedigest>0847</filedigest>
+                </File>
+                <File id="1">
+                    <filename>xyz.txt</filename>
+                    <abstract>This is a sample file</abstract>
+                    <filesize>20</filesize>
+                    <ipaddress>10.12.2.1</ipaddress>
+                    <filedigest>0847</filedigest>
+                </File>
+                <File id="2">
+                    <filename>abc.txt</filename>
+                    <abstract>This is a sample file</abstract>
+                    <filesize>20</filesize>
+                    <ipaddress>10.12.2.4</ipaddress>
+                    <filedigest>0847</filedigest>
+                </File>
+                <File id="3">
+                    <filename>abc.txt</filename>
+                    <abstract>This is a sample file</abstract>
+                    <filesize>20</filesize>
+                    <ipaddress>10.12.2.1</ipaddress>
+                    <filedigest>0847</filedigest>
+                </File>
+            </params>
+        </Publish>
+    </Command>
+</request>

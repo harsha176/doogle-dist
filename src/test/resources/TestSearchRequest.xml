@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<request id="1320609109506" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu">
+    <Command>
+        <Search>
+            <params>
+                <username>harsha176</username>
+                <search>13801294803983440</search>
+            </params>
+        </Search>
+    </Command>
+</request>

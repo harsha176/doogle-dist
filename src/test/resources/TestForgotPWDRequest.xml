@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<request id="1320609108620" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu">
+    <Command>
+        <ForgotPWD>
+            <params>
+                <username>harsha176</username>
+                <email_id>harsha176@gmail.com</email_id>
+            </params>
+        </ForgotPWD>
+    </Command>
+</request>

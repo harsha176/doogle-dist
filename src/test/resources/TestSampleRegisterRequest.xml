@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<request id="1320002483076" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu">
+    <Command>
+        <Register>
+            <params>
+                <username>harsha176</username>
+                <password>abcdef</password>
+                <firstname>harsha</firstname>
+                <lastname>reddy</lastname>
+                <email_id>harsha176@gmail.com</email_id>
+                <designation>guest</designation>
+            </params>
+        </Register>
+    </Command>
+</request>

@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.doogle.project.csc573.csc.ncsu.edu" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu"
+	elementFormDefault="qualified">
+	<xs:include schemaLocation="doogleRequestMessagesSchema.xsd"/>
+	<xs:complexType name="Response">
+		<xs:sequence>
+			<!--<xs:element name="Status" type="StatusType"></xs:element> -->
+			<xs:element name="Command" type="CommandResponseType"></xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:integer" use="required">
+		</xs:attribute>
+	</xs:complexType>
+
+	<!--<xs:ComplexType name="StatusType"> <xs:attribute name="code" type="xs:integer" 
+		use="required"> </xs:attribute> </xs:ComplexType> -->
+
+	<xs:complexType name="CommandResponseType">
+		<xs:choice>
+			<xs:element name="RegisterResponse" type="RegisterResponseType"></xs:element>
+			<xs:element name="LoginResponse" type="LoginResponseType"></xs:element>
+			<xs:element name="LogoutResponse" type="LogoutResponseType"></xs:element>
+			<xs:element name="ForgotPWDResponse" type="ForgotPWDResponseType"></xs:element>
+			<xs:element name="SearchResponse" type="SearchResponseType"></xs:element>
+			<xs:element name="PublishResponse" type="PublishResponseType"></xs:element>
+                        <xs:element name="ChangePasswordResponse" type="ChangePasswordResponseType"></xs:element>
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:complexType name="RegisterResponseType">
+		<xs:sequence>
+			<xs:element name="Operation" type="xs:string" fixed="RegisterResponse" />
+			<xs:element name="params" type="RegisterResponseParamsType">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RegisterResponseParamsType">
+		<xs:sequence>
+			<xs:element name="statuscode" type="xs:integer" />
+			<xs:element name="message" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="LoginResponseType">
+		<xs:sequence>
+			<xs:element name="Operation" type="xs:string" fixed="LoginResponse" />
+			<xs:element name="params" type="LoginResponseParamsType">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LoginResponseParamsType">
+		<xs:sequence>
+			<xs:element name="statuscode" type="xs:integer" />
+			<xs:element name="message" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="LogoutResponseType">
+		<xs:sequence>
+			<xs:element name="Operation" type="xs:string" fixed="LogoutResponse" />
+			<xs:element name="params" type="LogoutResponseParamsType">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LogoutResponseParamsType">
+		<xs:sequence>
+			<xs:element name="statuscode" type="xs:integer" />
+		</xs:sequence>
+	</xs:complexType>
+
+
+
+	<xs:complexType name="ForgotPWDResponseType">
+		<xs:sequence>
+			<xs:element name="Operation" type="xs:string" fixed="ForgotPWDResponse" />
+			<xs:element name="params" type="ForgotPWDResponseParamsType">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ForgotPWDResponseParamsType">
+		<xs:sequence>
+			<xs:element name="statuscode" type="xs:integer" />
+			<xs:element name="message" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+
+<xs:complexType name="ChangePasswordResponseType">
+		<xs:sequence>
+			<xs:element name="Operation" type="xs:string" fixed="ChangePasswordResponse" />
+			<xs:element name="params" type="ChangePasswordResponseParamsType">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ChangePasswordResponseParamsType">
+		<xs:sequence>
+			<xs:element name="statuscode" type="xs:integer" />
+			<xs:element name="message" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+        
+	<xs:complexType name="SearchResponseType">
+		<xs:sequence>
+			<xs:element name="Operation" type="xs:string" fixed="SearchResponse" />
+			<xs:element name="params" type="SearchResponseTypeParams">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SearchResponseTypeParams">
+		<xs:sequence>
+			<xs:element name="File" type="FileParamType" maxOccurs="100" />
+		</xs:sequence>
+	</xs:complexType>
+        
+	<xs:complexType name="PublishResponseType">
+		<xs:sequence>
+			<xs:element name="Operation" type="xs:string" fixed="PublishResponse" />
+			<xs:element name="params" type="PublishResponseTypeParams">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PublishResponseTypeParams">
+		<xs:sequence>
+			<xs:element name="statuscode" type="xs:integer" />
+			<xs:element name="message" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
