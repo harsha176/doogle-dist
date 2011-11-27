@@ -21,6 +21,10 @@
 			<xs:element name="Search" type="SearchType"></xs:element>
 			<xs:element name="Publish" type="PublishType"></xs:element>
                         <xs:element name="ChangePassword" type="ChangePasswordType"></xs:element>
+                        <xs:element name="Join" type="JoinType"></xs:element>
+                        <xs:element name="Leave" type="LeaveType"></xs:element>
+                        <xs:element name="Put" type="PutType"></xs:element>
+                        <xs:element name="Get" type="GetType"></xs:element>
 		</xs:choice>
 	</xs:complexType>
 
@@ -114,6 +118,7 @@
 		</xs:sequence>
 	</xs:complexType>
 
+
 	<xs:complexType name="PublishType">
 		<xs:sequence>
 			<xs:element name="Operation" type="xs:string" fixed="Publish" />
@@ -136,6 +141,82 @@
 			<xs:element name="filedigest" type="xs:string" />
 		</xs:sequence>
 		<xs:attribute name="id" type="xs:int" use="required"></xs:attribute>
+	</xs:complexType>
+
+
+	<xs:complexType name="JoinType">
+		<xs:sequence>
+			<xs:element name="Operation" type="xs:string" fixed="Join" />
+			<xs:element name="params" type="JoinTypeParams">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="JoinTypeParams">
+		<xs:sequence>
+			<xs:element name="ipaddress" type="xs:string" />
+			<xs:element name="peerid" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+        
+        
+        <xs:complexType name="LeaveType">
+		<xs:sequence>
+			<xs:element name="Operation" type="xs:string" fixed="Leave" />
+			<xs:element name="params" type="LeaveTypeParams">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LeaveTypeParams">
+		<xs:sequence>
+			<xs:element name="ipaddress" type="xs:string" />
+			<xs:element name="peerid" type="xs:string" />
+                        <xs:element name="firsthash" type="xs:string" />
+                        <xs:element name="lasthash" type="xs:string" />
+                        <xs:element name="File" type="FileParamType" maxOccurs="100" />
+                        <xs:element name="Table" type="TableParamType" maxOccurs="100" />                   
+		</xs:sequence>
+	</xs:complexType>
+        
+        	<xs:complexType name="TableParamType">
+		<xs:sequence>
+			<xs:element name="firsthash" type="xs:string" />
+			<xs:element name="lasthash" type="xs:string" />
+			<xs:element name="nexthop" type="xs:string" />
+		</xs:sequence>
+		<xs:attribute name="entry" type="xs:int" use="required"></xs:attribute>
+	</xs:complexType>
+        
+	<xs:complexType name="PutType">
+		<xs:sequence>
+			<xs:element name="Operation" type="xs:string" fixed="Put" />
+			<xs:element name="params" type="PutTypeParams">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PutTypeParams">
+		<xs:sequence>
+			<xs:element name="filename" type="xs:string" />
+			<xs:element name="abstract" type="xs:string" />
+			<xs:element name="filesize" type="xs:string" />
+			<xs:element name="ipaddress" type="xs:string" />
+			<xs:element name="filedigest" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+        
+        
+	<xs:complexType name="GetType">
+		<xs:sequence>
+			<xs:element name="Operation" type="xs:string" fixed="Get" />
+			<xs:element name="params" type="GetTypeParams">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetTypeParams">
+		<xs:sequence>
+			<xs:element name="ipaddress" type="xs:string" />
+			<xs:element name="searchdigest" type="xs:string" />
+                        <xs:element name="ttl" type="xs:string" />
+		</xs:sequence>
 	</xs:complexType>
         
 </xs:schema>

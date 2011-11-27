@@ -26,6 +26,10 @@ public enum EnumParamsType {
 	MESSAGE,
         FIRSTNAME,
         LASTNAME,
-        NEWPASSWORD // Used
+        NEWPASSWORD,
+        PEERID,
+        FIRSTHASH,
+        LASTHASH,
+        NEXTHOP     // Used
 																																						// different.// It can be used for other fields as well.
 }
