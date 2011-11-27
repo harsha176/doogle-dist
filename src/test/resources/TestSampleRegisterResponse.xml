@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<response id="1320621635601" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu">
+<Response id="1320621635601" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu">
     <Command>
         <RegisterResponse>
             <params>
@@ -8,5 +8,5 @@
             </params>
         </RegisterResponse>
     </Command>
-</response>
+</Response>
 

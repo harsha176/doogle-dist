@@ -2,14 +2,16 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	targetNamespace="http://www.doogle.project.csc573.csc.ncsu.edu" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu"
 	elementFormDefault="qualified">
-	<xs:complexType name="Request">
+	<xs:element name="Request">
+	<xs:complexType>
 		<xs:sequence>
 			<xs:element name="Command" type="CommandRequestType"></xs:element>
 		</xs:sequence>
 		<xs:attribute name="id" type="xs:integer" use="required">
 		</xs:attribute>
 	</xs:complexType>
-
+	</xs:element>
+	
 	<xs:complexType name="CommandRequestType">
 		<xs:choice>
 			<xs:element name="Register" type="RegisterType"></xs:element>

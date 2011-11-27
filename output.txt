@@ -1,0 +1,941 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for edu.ncsu.csc573.project:doogle-dist:jar:0.0.1-SNAPSHOT
+[WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: junit:junit:jar -> duplicate declaration of version 4.10 @ line 33, column 15
+[WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: junit:junit:jar -> duplicate declaration of version 4.10 @ line 38, column 15
+[WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: junit:junit:jar -> duplicate declaration of version 4.10 @ line 43, column 15
+[WARNING] 'build.plugins.plugin.version' for com.sun.tools.xjc.maven2:maven-jaxb-plugin is missing. @ line 63, column 12
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-jar-plugin is missing. @ line 106, column 12
+[WARNING] 'repositories.repository.layout' for java.net uses the unsupported value 'legacy', artifact resolution might fail. @ line 13, column 12
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building doogle-dist 0.0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ doogle-dist ---
+[INFO] Deleting /home/doogle-dev/java-workspace/doogle-dist/target
+[INFO] 
+[INFO] --- maven-jaxb-plugin:1.1.1:generate (default) @ doogle-dist ---
+[INFO] Compiling file:/home/doogle-dev/java-workspace/doogle-dist/src/main/resources/doogleRequestMessagesSchema.xsd and others
+[INFO] Writing output to /home/doogle-dev/java-workspace/doogle-dist/src/main/java
+[INFO] 
+[INFO] --- maven-resources-plugin:2.4.3:resources (default-resources) @ doogle-dist ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 8 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.3.2:compile (default-compile) @ doogle-dist ---
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 113 source files to /home/doogle-dev/java-workspace/doogle-dist/target/classes
+[WARNING] /home/doogle-dev/java-workspace/doogle-dist/src/main/java/edu/ncsu/csc573/project/common/ByteOperationUtil.java:[7,15] BASE64Decoder is internal proprietary API and may be removed in a future release
+[WARNING] /home/doogle-dev/java-workspace/doogle-dist/src/main/java/edu/ncsu/csc573/project/common/ByteOperationUtil.java:[8,15] BASE64Encoder is internal proprietary API and may be removed in a future release
+[WARNING] /home/doogle-dev/java-workspace/doogle-dist/src/main/java/edu/ncsu/csc573/project/common/EncDecUtil.java:[17,15] BASE64Decoder is internal proprietary API and may be removed in a future release
+[WARNING] /home/doogle-dev/java-workspace/doogle-dist/src/main/java/edu/ncsu/csc573/project/common/EncDecUtil.java:[18,15] BASE64Encoder is internal proprietary API and may be removed in a future release
+[WARNING] /home/doogle-dev/java-workspace/doogle-dist/src/main/java/edu/ncsu/csc573/project/common/ByteOperationUtil.java:[15,2] BASE64Encoder is internal proprietary API and may be removed in a future release
+[WARNING] /home/doogle-dev/java-workspace/doogle-dist/src/main/java/edu/ncsu/csc573/project/common/ByteOperationUtil.java:[15,30] BASE64Encoder is internal proprietary API and may be removed in a future release
+[WARNING] /home/doogle-dev/java-workspace/doogle-dist/src/main/java/edu/ncsu/csc573/project/common/ByteOperationUtil.java:[20,2] BASE64Decoder is internal proprietary API and may be removed in a future release
+[WARNING] /home/doogle-dev/java-workspace/doogle-dist/src/main/java/edu/ncsu/csc573/project/common/ByteOperationUtil.java:[20,30] BASE64Decoder is internal proprietary API and may be removed in a future release
+[WARNING] /home/doogle-dev/java-workspace/doogle-dist/src/main/java/edu/ncsu/csc573/project/common/EncDecUtil.java:[78,11] BASE64Encoder is internal proprietary API and may be removed in a future release
+[WARNING] /home/doogle-dev/java-workspace/doogle-dist/src/main/java/edu/ncsu/csc573/project/common/EncDecUtil.java:[78,46] BASE64Encoder is internal proprietary API and may be removed in a future release
+[WARNING] /home/doogle-dev/java-workspace/doogle-dist/src/main/java/edu/ncsu/csc573/project/common/EncDecUtil.java:[107,11] BASE64Decoder is internal proprietary API and may be removed in a future release
+[WARNING] /home/doogle-dev/java-workspace/doogle-dist/src/main/java/edu/ncsu/csc573/project/common/EncDecUtil.java:[107,46] BASE64Decoder is internal proprietary API and may be removed in a future release
+[INFO] 
+[INFO] --- maven-resources-plugin:2.4.3:testResources (default-testResources) @ doogle-dist ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 19 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.3.2:testCompile (default-testCompile) @ doogle-dist ---
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 11 source files to /home/doogle-dev/java-workspace/doogle-dist/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.7.2:test (default-test) @ doogle-dist ---
+[INFO] Surefire report directory: /home/doogle-dev/java-workspace/doogle-dist/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running edu.ncsu.csc573.project.doogle.test.commlayer.TestCommunicationFactory
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.064 sec
+Running edu.ncsu.csc573.project.doogle.test.commlayer.TestCommunicationService
+main DEBUG CommunicationService - Inside initialization of communication handler
+main INFO  CommunicationService - Start server
+Thread-0 INFO  PeerServer - Launching server thread...
+Thread-0 INFO  PeerServer - Waiting for clients to connet...
+main DEBUG CommunicationService - Enabled Keepalive socket option
+Thread-0 INFO  PeerServer - Client connected: /127.0.0.1:45320
+main DEBUG CommunicationService - Successfully opened socket for file transfer
+main DEBUG CommunicationService - Sent request File:IMP - Test.txt
+Thread-0 INFO  PeerServer - Waiting for clients to connet...
+Thread-0 INFO  PeerServer - Client connected: /127.0.0.1:45321
+Thread-0 INFO  PeerServer - Waiting for clients to connet...
+Thread-1 INFO  UsersManager - Reading userdatabase file
+Thread-2 INFO  UsersManager - Reading userdatabase file
+Thread-1 INFO  UsersManager - Loaded 0 users from database
+Thread-2 INFO  UsersManager - Loaded 0 users from database
+Thread-1 INFO  ClientHandler - Handling client /127.0.0.1:45320
+Thread-2 INFO  ClientHandler - Handling client /127.0.0.1:45321
+Thread-1 DEBUG ClientHandler - Waiting for request from client /127.0.0.1:45320
+Thread-2 DEBUG ClientHandler - Waiting for request from client /127.0.0.1:45321
+Thread-2 DEBUG ClientHandler - Receiving request from client
+Thread-2 DEBUG ClientHandler - received data from client <request>
+File:IMP - Test.txt
+</request>
+Thread-2 INFO  ClientHandler - Done ! Sending file contents
+Thread-2 INFO  ClientHandler - Successfully transfered file
+main INFO  CommunicationService - Successfully saved downloaded file at /home/doogle-dev/temp/IMP - Test.txt
+Thread-2 INFO  ClientHandler - Successfully closed connection for client Socket[addr=/127.0.0.1,port=45321,localport=9000]
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.21 sec
+Running edu.ncsu.csc573.project.doogle.test.hashmanagement.TestDigest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.14 sec
+Running edu.ncsu.csc573.project.doogle.test.schema.TestConfigurationManager
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec
+Running edu.ncsu.csc573.project.doogle.test.schema.TestRequestMessages
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Request id="1322348682172" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu">
+    <Command>
+        <Login>
+            <params>
+                <username>harsha176</username>
+                <password>abcdef</password>
+            </params>
+        </Login>
+    </Command>
+</Request>
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Request id="1322348682370" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu">
+    <Command>
+        <Logout>
+            <params>
+                <username>harsha176</username>
+            </params>
+        </Logout>
+    </Command>
+</Request>
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Request id="1322348682422" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu">
+    <Command>
+        <ForgotPWD>
+            <params>
+                <username>harsha176</username>
+            </params>
+        </ForgotPWD>
+    </Command>
+</Request>
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Request id="1322348682498" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu">
+    <Command>
+        <ChangePassword>
+            <params>
+                <username>harsha176</username>
+                <password>hmalipa</password>
+                <newpassword>krishna</newpassword>
+            </params>
+        </ChangePassword>
+    </Command>
+</Request>
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Request id="1322348682567" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu">
+    <Command>
+        <Search>
+            <params>
+                <username>harsha176</username>
+                <search>12123412312</search>
+            </params>
+        </Search>
+    </Command>
+</Request>
+
+main ERROR RegisterRequestMessage - Unable to parse request from string
+javax.xml.bind.UnmarshalException: unexpected element (uri:"http://www.doogle.project.csc573.csc.ncsu.edu", local:"request"). Expected elements are <{http://www.doogle.project.csc573.csc.ncsu.edu}Request>
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.handleEvent(UnmarshallingContext.java:647)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportError(Loader.java:243)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportError(Loader.java:238)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportUnexpectedChildElement(Loader.java:105)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext$DefaultRootLoader.childElement(UnmarshallingContext.java:1048)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext._startElement(UnmarshallingContext.java:483)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.startElement(UnmarshallingContext.java:465)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.SAXConnector.startElement(SAXConnector.java:135)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.startElement(AbstractSAXParser.java:506)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.scanStartElement(XMLNSDocumentScannerImpl.java:376)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl$NSContentDriver.scanRootElementHook(XMLNSDocumentScannerImpl.java:602)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:3063)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(XMLDocumentScannerImpl.java:881)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:607)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(XMLNSDocumentScannerImpl.java:116)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:488)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:835)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:764)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:123)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1210)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:568)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl.unmarshal0(UnmarshallerImpl.java:202)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl.unmarshal(UnmarshallerImpl.java:174)
+	at javax.xml.bind.helpers.AbstractUnmarshallerImpl.unmarshal(AbstractUnmarshallerImpl.java:157)
+	at javax.xml.bind.helpers.AbstractUnmarshallerImpl.unmarshal(AbstractUnmarshallerImpl.java:214)
+	at edu.ncsu.csc573.project.common.messages.RequestMessage.getRequestFromGenXML(RequestMessage.java:116)
+	at edu.ncsu.csc573.project.common.messages.RequestMessage.getRequest(RequestMessage.java:77)
+	at edu.ncsu.csc573.project.common.messages.RegisterRequestMessage.parseXML(RegisterRequestMessage.java:41)
+	at edu.ncsu.csc573.project.doogle.test.schema.TestRequestMessages.testRegisterRequestMessageParseXML(TestRequestMessages.java:209)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:35)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:115)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:97)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.apache.maven.surefire.booter.ProviderFactory$ClassLoaderProxy.invoke(ProviderFactory.java:103)
+	at $Proxy0.invoke(Unknown Source)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:150)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcess(SurefireStarter.java:91)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:69)
+main ERROR ChangePasswordRequestMessage - Unable to parse request from string
+javax.xml.bind.UnmarshalException: unexpected element (uri:"http://www.doogle.project.csc573.csc.ncsu.edu", local:"request"). Expected elements are <{http://www.doogle.project.csc573.csc.ncsu.edu}Request>
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.handleEvent(UnmarshallingContext.java:647)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportError(Loader.java:243)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportError(Loader.java:238)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportUnexpectedChildElement(Loader.java:105)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext$DefaultRootLoader.childElement(UnmarshallingContext.java:1048)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext._startElement(UnmarshallingContext.java:483)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.startElement(UnmarshallingContext.java:465)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.SAXConnector.startElement(SAXConnector.java:135)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.startElement(AbstractSAXParser.java:506)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.scanStartElement(XMLNSDocumentScannerImpl.java:376)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl$NSContentDriver.scanRootElementHook(XMLNSDocumentScannerImpl.java:602)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:3063)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(XMLDocumentScannerImpl.java:881)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:607)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(XMLNSDocumentScannerImpl.java:116)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:488)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:835)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:764)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:123)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1210)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:568)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl.unmarshal0(UnmarshallerImpl.java:202)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl.unmarshal(UnmarshallerImpl.java:174)
+	at javax.xml.bind.helpers.AbstractUnmarshallerImpl.unmarshal(AbstractUnmarshallerImpl.java:157)
+	at javax.xml.bind.helpers.AbstractUnmarshallerImpl.unmarshal(AbstractUnmarshallerImpl.java:214)
+	at edu.ncsu.csc573.project.common.messages.RequestMessage.getRequestFromGenXML(RequestMessage.java:116)
+	at edu.ncsu.csc573.project.common.messages.RequestMessage.getRequest(RequestMessage.java:77)
+	at edu.ncsu.csc573.project.common.messages.ChangePasswordRequestMessage.parseXML(ChangePasswordRequestMessage.java:46)
+	at edu.ncsu.csc573.project.doogle.test.schema.TestRequestMessages.testChangePWDRequestMessageParseXML(TestRequestMessages.java:331)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:35)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:115)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:97)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.apache.maven.surefire.booter.ProviderFactory$ClassLoaderProxy.invoke(ProviderFactory.java:103)
+	at $Proxy0.invoke(Unknown Source)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:150)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcess(SurefireStarter.java:91)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:69)
+main ERROR RegisterRequestMessage - Unable to parse request from string
+javax.xml.bind.UnmarshalException: unexpected element (uri:"http://www.doogle.project.csc573.csc.ncsu.edu", local:"request"). Expected elements are <{http://www.doogle.project.csc573.csc.ncsu.edu}Request>
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.handleEvent(UnmarshallingContext.java:647)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportError(Loader.java:243)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportError(Loader.java:238)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportUnexpectedChildElement(Loader.java:105)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext$DefaultRootLoader.childElement(UnmarshallingContext.java:1048)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext._startElement(UnmarshallingContext.java:483)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.startElement(UnmarshallingContext.java:465)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.SAXConnector.startElement(SAXConnector.java:135)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.startElement(AbstractSAXParser.java:506)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.scanStartElement(XMLNSDocumentScannerImpl.java:376)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl$NSContentDriver.scanRootElementHook(XMLNSDocumentScannerImpl.java:602)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:3063)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(XMLDocumentScannerImpl.java:881)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:607)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(XMLNSDocumentScannerImpl.java:116)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:488)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:835)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:764)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:123)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1210)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:568)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl.unmarshal0(UnmarshallerImpl.java:202)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl.unmarshal(UnmarshallerImpl.java:174)
+	at javax.xml.bind.helpers.AbstractUnmarshallerImpl.unmarshal(AbstractUnmarshallerImpl.java:157)
+	at javax.xml.bind.helpers.AbstractUnmarshallerImpl.unmarshal(AbstractUnmarshallerImpl.java:214)
+	at edu.ncsu.csc573.project.common.messages.RequestMessage.getRequestFromGenXML(RequestMessage.java:116)
+	at edu.ncsu.csc573.project.common.messages.RequestMessage.getRequest(RequestMessage.java:77)
+	at edu.ncsu.csc573.project.common.messages.SearchRequestMessage.parseXML(SearchRequestMessage.java:41)
+	at edu.ncsu.csc573.project.doogle.test.schema.TestRequestMessages.testSearchRequestMessageParseXML(TestRequestMessages.java:360)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:35)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:115)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:97)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.apache.maven.surefire.booter.ProviderFactory$ClassLoaderProxy.invoke(ProviderFactory.java:103)
+	at $Proxy0.invoke(Unknown Source)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:150)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcess(SurefireStarter.java:91)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:69)
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Request id="1322348683088" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu">
+    <Command>
+        <Register>
+            <params>
+                <username>krishna</username>
+                <password>abcdef</password>
+                <firstname>sri</firstname>
+                <lastname>krishna</lastname>
+                <email_id>harsha176@gmail.com</email_id>
+                <designation>guest</designation>
+            </params>
+        </Register>
+    </Command>
+</Request>
+
+Tests run: 12, Failures: 3, Errors: 3, Skipped: 0, Time elapsed: 0.982 sec <<< FAILURE!
+Running edu.ncsu.csc573.project.doogle.test.schema.TestPublishSearchMessages
+/home/doogle-dev/java-workspace/doogle-dist/target/test-classes/samplePublishFolder
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Request id="1322348683241" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu">
+    <Command>
+        <Publish>
+            <params>
+                <File id="0">
+                    <filename>Metallica.txt</filename>
+                    <abstract>Metallica at The O2 Arena in 2008. From left to right: Kirk Hammett, Lars Ulrich, James Hetfield and Robert Trujillo.Background information</abstract>
+                    <filesize>51174</filesize>
+                    <ipaddress>127.0.0.1</ipaddress>
+                    <filedigest>wAJyKWC8SuY2iUAiDGCVKGkiABBI4oASEoQ9vpxYlsB+qY5wADLB8h+r9wsXOZ2aThEhhBVjhAiw
+AHIjYAgKGAo4WUACA38xwAAGkUAIAtUQBgA12A6QKBEABwHHYAkABkA68ABMAWYv4ACxkbRMGYYq
+IIPQABBzr5AAPKGmWAGOASAAAwDruACAkwD9H74ACAAQ/gb4IAYpAClT04AAeqkRAiOghwcIgAAG
+0e+BDpLb7MUFEQtXAhibRHqCACGZgIlNfptq6lw/988YAPBg02H3X7tSmWcx6f6AGBwBCMkKLIgA
+GgAAHU5oAAAOwjEyiQAvN4DzAAgSkA8AhjAAoLwIGlypAgIRD3AAhIkAUEBBigNAAEKIjaoAPUCA
+HAEiIAQBAAWr3soACCO5OOUJAAF0OuAAlgKpaA/1AAaRAEpKoA0JQIkAFgwRygFBMfPtgtZNhX5d
+LD2AAKAEgDMWBFkpM338eEQdoQXIAO41uDX35i1NpmCA6ACgQEkUQHYACAKgACAABLSigAQrAACG
+CAAABGCvUAIAAMClAABCRkAQEAABKAAABQAAAAIAAXKNfpCQAIIkTH/ix3oAACAQVxfaIygHolMP
+FIA0Y+/UAAA1CMCFkBWBxAIAAIBLiAMy5OElQAAQAAN0PcYCEAHBRxACHFABEBb8ZNLwAQgAACIB
+RAAQAjU3vQYG6zxE0+7Ux/g/2JI0QBRB1rBREMLLAyiUEHXgBAg1MM1maXSYCiBAAUAhAYDFEHIp
+A3y3IhKoAAgxTgBAyEsCAgJFAAzEksc0sDfTxhSD94mSNP1euKokuGTC8qRbgLAnMOogIAIhQCAE
+JSrxAAEQG4LqAAACIQoWcACPKAUC+IIZXEQiJoBAF8AIAIEAAANAu06/7gDgHkRIP/O+8gIdCCH/
+D56AESAgsoOSSGJCQ+T+/WZgavFpCObFQ6t1AMBACBBAAAdr9KAh20Abid9YhAHEQlByeNQHAFx2
+CUmg4IMugADNCExEXTZdwAQgCAAVrXhAAqEJ+rrIEgDuTmy+fugAwkAhcB9ZAEPeIQBzggkOsEGQ
+KIgAIAAIgUCw4Pwm1AAjBREIBLBgAMC8CIADNoeXIUQ31qYAAKUCWH6zuLVoMTmJwAAAAQAAAEAS
+igIMgcwADdFnAAAyigIAABAAGrpAIgB8NoCB4KUQAABAgCAEBaQCBkABMAAgAhAAAGRAAAFQAAAQ
+BuATCAAAAAAUAkgAhANABAAkAAEABAAAMQBIAAkATBIgIkABQAAEAgADAAKAyAKAAACAoAAIAAAA
+AAkAwCAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</filedigest>
+                </File>
+                <File id="0">
+                    <filename>dance_of_death.txt</filename>
+                    <abstract>Dance of deathLet me tell you a story to chill the bones</abstract>
+                    <filesize>2029</filesize>
+                    <ipaddress>127.0.0.1</ipaddress>
+                    <filedigest>gAAAAQAkAEIAAAAAAAAAAAACAAAIAAAAEAAAHAgEgAhMgAQAAAAAgBCAIwJAAIkQBAAgAAABgAAA
+AEIAACgACAAAAAAAAiIgAAAAAAAAAkAAAIAhgAIAAAAAAAABAAkAAAAQgAAAAEQCAAAQEAAAEgQA
+AAEAAAgBAAAAAAAAAAAAAAAAAAAiCACAAQBIADAAAAAAEAAAAAQAACAAAIAAGAAAAAAAAAAAgAAA
+QEoAAAAACAAAEAESAAAAAAAgAAAQAAAACJIggAAnCAIAAIBgAACFQBBQgAQgQAAAIAgAAAAAAAhA
+AAAAAABAAAAEQgAAAAAAhABAAAAQgAUAACAAAAAAAAABAAAAAAAAAAAAgEAAAAIAAAAIAIAAIAAA
+AAEAQAAAAAEAVgAAAAMhOIEAAAAAKEAAAAAAAAQBAAAAAEAAAAABAAEAAAgAAAAAAAAJAIAAAABQ
+IBAEAAAAgCAEAAEAAjRAIAAEAAAAAEokACAgAAhIQAAAQAAAAAAAAAAAAAAAAAAAABAAgAABAAAA
+AAAABEAAAAAAAAAEAAAAAkAAAAAAAAAAAAAAAAAAADAEKEAAAAAAABGAAwAAAAAAAxICACAEABAA
+AAAAAEBAAAABAACAAAIAAAAAAIBAAAAAAABAQAAAAAIADEAAAACAAgAAAQAAAA6IAAAAAQAAAAAA
+AAAQAAAAAAAAoAhAAAzAAkABAAAAAgBAAgCQAACIAAAEAAEgAAAAAABCIQAACAAAAAAAAAACAAAA
+AAABAAAgAAAQAAAAAAAAAgBAAAAAgBQgACECAgCCQAABAIQAAIAAAECAAgBSgIAhAoAAAAACAAAA
+AACAAAAAAQCAAAAAAAAAQAAIAAAAgAIAUAAAAAAAAAAAAAAAAAAAEEYAQAAIAAAAMwAlAAAAgAAB
+AggAAAAAAAACAAAAAAAQEAAAACAAAEQAAAABAAAACABAAAAAQKAAwAAAAEAAAACEAAAAAAABAAgA
+AAgAQAAEAACAAAxEUAAIAAAAAAAAACAAAIABECiAAADEQAAANAAAAABBAANAAAMAAAAQAAAAAAAA
+AAAAAAAAAAAAAAQAAAAAABAAABAAAAAAAAAAAIABAQACMAIAACAAgEIACCBAEQAAAAAAAAAAAAAA
+AAAIAAgAAAAAAAAAAAAAAAAABrhAAAAIBAABiAEQAAIAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAABgAAAAEAAAAAAAAAACEAAAAAAAAAAAAAAAAAAAAAgAAAAACAAAAAAAAA
+AAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</filedigest>
+                </File>
+                <File id="0">
+                    <filename>battle_of_tippecanoe.txt</filename>
+                    <abstract>The Battle of Tippecanoe was fought on November 7, 1811, between U.S. forces led by Governor William Henry Harrison and warriors of a Native American confederation led by Shawnee brothers Tenskwatawa (pictured) and Tecumseh. While Tecumseh was away recruiting allies, Harrison marched with about 1,000 men to disperse the confederation's headquarters at Prophetstown, near the confluence of the Tippecanoe and Wabash Rivers in what is now the U.S. state of Indiana. The outnumbered warriors from Prophetstown launched a surprise attack, but Harrison's army prevailed. Public opinion in the United States blamed the conflict on British interference, a suspicion that served as a catalyst to the War of 1812. When the U.S. declared war on Great Britain in June 1812, Tecumseh's confederacy, now allied with the British, initiated its own war against the United Statesnull</abstract>
+                    <filesize>865</filesize>
+                    <ipaddress>127.0.0.1</ipaddress>
+                    <filedigest>gAAgAQAEAIAAIAAAAAABAAAAAAAAoAAAAAAABABQgABkAIAAAAAAABKAhQIEAAyIBAAAQAAAgAgA
+AEAAAAAAAAAYAAAAAAABQAAAAAAAAkAAAAAAgAKAAAAAAAABAAgAAAAIIAAAAEAAIAABAAAACAQA
+AAIAAAAAgAAAAICACACAAQAAAAAAAAAAAAAQACAAAAAAgABAAAAAAAAAAAAAgAAAAAAAAAAAAAAA
+QAoAABASSEAAEABAAAAAAAEAgAAAAAAAAAAAIAAkAAwAAAAAAADGQhIQAAAAACQAABAAAAAAAAAA
+AAAAAAAAAAAAgCAAAAAAAAAiAAAAkAEAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAIAEAAA
+AAAAAAAAAAAACkAAAAMgCKAAAAAAIAAAAAAAAAAAAAABAEAAAAAAAAAAAAAAwgAAMEBAAAAEACAA
+AAAAAAAAAAEEAAAAAiUAYAAFAAAIAAAAACEgYARMBAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAISAAAAAAAABEAAAAAAAAAVAAAAAAAAgAA
+AAAAAAAAAAAAAAAAAACAAAAAAAAAgAAAAIAEAAAAAAAgCQAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA
+AAAQABAABAAAwAgEAAxAAABRAAAAAAAAQgAAAAAAAAAAIARgAABgCAgCAAAACAAAAAAAAAAAAAAA
+AAAAAAAIAAAQAAAAAAAAAAAAAAAAAAQAACCABAAAAAGAAJAAEAAAAACAAAQAgIAgAIAAAAAAAAAA
+AAAAAAAAAgAIAAACAAgEAAAAAAAAAAIAHAAAAAAQAAAAAAAAAAIAEAAIAADAAAAAFgCAgCAAAAAQ
+ARoAAAAAAAAAAIACAAASIAAgCCEAAAQAAAIAAIAACAAAAAAAAAAAAAAQEAQAAADAAAAAAAAAAAAA
+AAAAIAAkAAAAAAwAQAAAwAAAAAAIJAkAAAABMAjAAADEAACADkgAgAADAAACAAAEAAgggAAAIACA
+AAAAAAAAgAAgAAAAAAAAAQAAABAAAAAEAAAAAAABAAQFEAAAAAAAAAIAgCAAgQAQAAAAAAAAAAAQ
+AAAIgIgAAAAAAAAAAAAAAAAGADhAAAAEAAABwAQQAAAAhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</filedigest>
+                </File>
+                <File id="0">
+                    <filename>October_revolution.txt</filename>
+                    <abstract>"Red October" redirects here. For other uses, see Red October (disambiguation).This article is about the Soviet Revolution of 1917. For other uses, see October Revolution (disambiguation).</abstract>
+                    <filesize>27991</filesize>
+                    <ipaddress>127.0.0.1</ipaddress>
+                    <filedigest>gAQACYC8Au4ihEAAACATIAwAAAIA4gAQGgEzHJzcksBuqY8gADLAsBurt9sXKcmYRgAhTg0hgICA
+AGIgQAAACBoYAAAAAn0pwAAAEWAAAtFAAICFgBawAAGBAIgHAAgAACA6+ABUQEUmoAAxEpVMXawI
+QINQAAgjjUAAOKDleAGeAQAABgBCiAAAAgD6D7oAAAAAng/oAAUBAAFFsNAAcCAAAgOABgAgoAFG
+wa4ABVJayEQAUQPHEh6ZBGAAEGCZkEAJnJMq6Dw3Vg4AAuZiwrHdR7pSjGc1ZGoACCyBCAEPJIgA
+AAAAEEzAAAAHwqEygAALtkDiQAgQkA8AEigCIJAMAVSoAAIRGmAAAIEICUDDigNAA2AIACoANEAA
+EBMoIACACAEJ3oAAACIhfOkAAAB8OkpBAIIgYgS9AAYRAEJgBAEFgAEAAAUBxgHJMfD8iAIFAXYM
+OJkEAIAGoiMWmMkjQ/9IcAaVoZKAgGIEED0xRg5Nb8CA6ACgCE4AADAACAAAAAAAACAgAAApAEQg
+CIAABEA3GAJAACDgAAAgAFABFQAEPCAAAIABAAIAMHKNfoAAAAJiABvi4xIAAAAAfRcaICEGIhYM
+AgAMUe3VAAAtBEClgEGARgIEQIAAoAAy1eEFQAAAAAIgGcAAAAEBRwAEHUwAMBTYZNLgAQgAAAIB
+QAAQABYDlAQE6wxEk0zA9mB9uJR4IBTC5pAQEcAJAyiEgG/wgCChuMxiaXCAgADiQEAAAABCBCII
+YZS2IpChAAgRAAARQgICCkBEAIzEs9YksH/SbsCC8EkbcN1fOKYhMGSiQgRbg/AxEIggAAEAgBAA
+JSr4AAAAGwLOAAADIQoBcAAPaAAG+IYQXEQAJoMUFcAAAAAAAAFAmU67QADABEQIP9vmwAAdGwB3
+E54AESEgIgOSCOJKIeV+/AIganlwCETDM4oFgMgAKBEAAAIp0qQEy0Abid5BLADEYgD2GdQPAkBx
+BRmA/cMkkFLNWk5OXXQZgAQADAAYrTxKgJEBmprqAADMVmjsPGggksBBUBZeAAPeLMCwhAmEOACw
+MAxAAAAIoACwAHggRABCBRIAALAgAEEMAADDIpEQIKAHEEYAACEQ+G6jOrFoMSnJQAAAAAAAAAAC
+AgEIgcwARcNmgQAgigAAAgAAIjpAAAAMJoAB4IUQAAAAhAAEAyQABkAAAAAEAAADAQDAAAIAMAAA
+AuACgAAAABgQAEAAAAFQAAAAAAEABAAIMQAAAAEAAAQAIEAAABAgAAQEAAIAiAiAEACAAAAAAAAA
+gAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</filedigest>
+                </File>
+            </params>
+        </Publish>
+    </Command>
+</Request>
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.147 sec
+Running edu.ncsu.csc573.project.doogle.test.schema.TestResponseMessages
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Response id="1322348683306" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu">
+    <Command>
+        <RegisterResponse>
+            <params>
+                <statuscode>0</statuscode>
+                <message>abcdef</message>
+            </params>
+        </RegisterResponse>
+    </Command>
+</Response>
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Response id="1322348683376" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu">
+    <Command>
+        <LoginResponse>
+            <params>
+                <statuscode>1</statuscode>
+                <message>abcdefed</message>
+            </params>
+        </LoginResponse>
+    </Command>
+</Response>
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Response id="1322348683431" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu">
+    <Command>
+        <LogoutResponse>
+            <params>
+                <statuscode>0</statuscode>
+            </params>
+        </LogoutResponse>
+    </Command>
+</Response>
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Response id="1322348683482" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu">
+    <Command>
+        <PublishResponse>
+            <params>
+                <statuscode>0</statuscode>
+                <message>abcdef</message>
+            </params>
+        </PublishResponse>
+    </Command>
+</Response>
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Response id="1322348683532" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu">
+    <Command>
+        <ForgotPWDResponse>
+            <params>
+                <statuscode>0</statuscode>
+                <message>abcdef</message>
+            </params>
+        </ForgotPWDResponse>
+    </Command>
+</Response>
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Response id="1322348683580" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu">
+    <Command>
+        <ChangePasswordResponse>
+            <params>
+                <statuscode>0</statuscode>
+                <message>abcdef</message>
+            </params>
+        </ChangePasswordResponse>
+    </Command>
+</Response>
+
+main ERROR RegisterResponseMessage - Unable to parse request from string
+javax.xml.bind.UnmarshalException: unexpected element (uri:"http://www.doogle.project.csc573.csc.ncsu.edu", local:"response"). Expected elements are <{http://www.doogle.project.csc573.csc.ncsu.edu}Response>
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.handleEvent(UnmarshallingContext.java:647)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportError(Loader.java:243)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportError(Loader.java:238)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportUnexpectedChildElement(Loader.java:105)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext$DefaultRootLoader.childElement(UnmarshallingContext.java:1048)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext._startElement(UnmarshallingContext.java:483)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.startElement(UnmarshallingContext.java:465)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.SAXConnector.startElement(SAXConnector.java:135)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.startElement(AbstractSAXParser.java:506)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.scanStartElement(XMLNSDocumentScannerImpl.java:376)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl$NSContentDriver.scanRootElementHook(XMLNSDocumentScannerImpl.java:602)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:3063)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(XMLDocumentScannerImpl.java:881)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:607)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(XMLNSDocumentScannerImpl.java:116)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:488)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:835)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:764)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:123)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1210)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:568)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl.unmarshal0(UnmarshallerImpl.java:202)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl.unmarshal(UnmarshallerImpl.java:174)
+	at javax.xml.bind.helpers.AbstractUnmarshallerImpl.unmarshal(AbstractUnmarshallerImpl.java:157)
+	at javax.xml.bind.helpers.AbstractUnmarshallerImpl.unmarshal(AbstractUnmarshallerImpl.java:214)
+	at edu.ncsu.csc573.project.common.messages.ResponseMessage.getResponse(ResponseMessage.java:83)
+	at edu.ncsu.csc573.project.common.messages.RegisterResponseMessage.parseXML(RegisterResponseMessage.java:41)
+	at edu.ncsu.csc573.project.doogle.test.schema.TestResponseMessages.testRegisterResponseMessageParseXML(TestResponseMessages.java:195)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:35)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:115)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:97)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.apache.maven.surefire.booter.ProviderFactory$ClassLoaderProxy.invoke(ProviderFactory.java:103)
+	at $Proxy0.invoke(Unknown Source)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:150)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcess(SurefireStarter.java:91)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:69)
+main ERROR LoginResponseMessage - Unable to parse request from string
+javax.xml.bind.UnmarshalException: unexpected element (uri:"http://www.doogle.project.csc573.csc.ncsu.edu", local:"response"). Expected elements are <{http://www.doogle.project.csc573.csc.ncsu.edu}Response>
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.handleEvent(UnmarshallingContext.java:647)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportError(Loader.java:243)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportError(Loader.java:238)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportUnexpectedChildElement(Loader.java:105)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext$DefaultRootLoader.childElement(UnmarshallingContext.java:1048)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext._startElement(UnmarshallingContext.java:483)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.startElement(UnmarshallingContext.java:465)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.SAXConnector.startElement(SAXConnector.java:135)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.startElement(AbstractSAXParser.java:506)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.scanStartElement(XMLNSDocumentScannerImpl.java:376)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl$NSContentDriver.scanRootElementHook(XMLNSDocumentScannerImpl.java:602)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:3063)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(XMLDocumentScannerImpl.java:881)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:607)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(XMLNSDocumentScannerImpl.java:116)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:488)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:835)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:764)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:123)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1210)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:568)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl.unmarshal0(UnmarshallerImpl.java:202)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl.unmarshal(UnmarshallerImpl.java:174)
+	at javax.xml.bind.helpers.AbstractUnmarshallerImpl.unmarshal(AbstractUnmarshallerImpl.java:157)
+	at javax.xml.bind.helpers.AbstractUnmarshallerImpl.unmarshal(AbstractUnmarshallerImpl.java:214)
+	at edu.ncsu.csc573.project.common.messages.ResponseMessage.getResponse(ResponseMessage.java:83)
+	at edu.ncsu.csc573.project.common.messages.LoginResponseMessage.parseXML(LoginResponseMessage.java:40)
+	at edu.ncsu.csc573.project.doogle.test.schema.TestResponseMessages.testLoginResponseMessageParseXML(TestResponseMessages.java:223)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:35)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:115)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:97)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.apache.maven.surefire.booter.ProviderFactory$ClassLoaderProxy.invoke(ProviderFactory.java:103)
+	at $Proxy0.invoke(Unknown Source)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:150)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcess(SurefireStarter.java:91)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:69)
+main ERROR LogoutResponseMessage - Unable to parse request from string
+javax.xml.bind.UnmarshalException: unexpected element (uri:"http://www.doogle.project.csc573.csc.ncsu.edu", local:"response"). Expected elements are <{http://www.doogle.project.csc573.csc.ncsu.edu}Response>
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.handleEvent(UnmarshallingContext.java:647)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportError(Loader.java:243)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportError(Loader.java:238)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportUnexpectedChildElement(Loader.java:105)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext$DefaultRootLoader.childElement(UnmarshallingContext.java:1048)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext._startElement(UnmarshallingContext.java:483)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.startElement(UnmarshallingContext.java:465)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.SAXConnector.startElement(SAXConnector.java:135)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.startElement(AbstractSAXParser.java:506)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.scanStartElement(XMLNSDocumentScannerImpl.java:376)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl$NSContentDriver.scanRootElementHook(XMLNSDocumentScannerImpl.java:602)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:3063)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(XMLDocumentScannerImpl.java:881)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:607)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(XMLNSDocumentScannerImpl.java:116)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:488)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:835)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:764)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:123)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1210)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:568)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl.unmarshal0(UnmarshallerImpl.java:202)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl.unmarshal(UnmarshallerImpl.java:174)
+	at javax.xml.bind.helpers.AbstractUnmarshallerImpl.unmarshal(AbstractUnmarshallerImpl.java:157)
+	at javax.xml.bind.helpers.AbstractUnmarshallerImpl.unmarshal(AbstractUnmarshallerImpl.java:214)
+	at edu.ncsu.csc573.project.common.messages.ResponseMessage.getResponse(ResponseMessage.java:83)
+	at edu.ncsu.csc573.project.common.messages.LogoutResponseMessage.parseXML(LogoutResponseMessage.java:41)
+	at edu.ncsu.csc573.project.doogle.test.schema.TestResponseMessages.testLogoutResponseMessageParseXML(TestResponseMessages.java:252)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:35)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:115)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:97)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.apache.maven.surefire.booter.ProviderFactory$ClassLoaderProxy.invoke(ProviderFactory.java:103)
+	at $Proxy0.invoke(Unknown Source)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:150)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcess(SurefireStarter.java:91)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:69)
+main ERROR ForgotPWDResponseMessage - Unable to parse request from string
+javax.xml.bind.UnmarshalException: unexpected element (uri:"http://www.doogle.project.csc573.csc.ncsu.edu", local:"response"). Expected elements are <{http://www.doogle.project.csc573.csc.ncsu.edu}Response>
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.handleEvent(UnmarshallingContext.java:647)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportError(Loader.java:243)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportError(Loader.java:238)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportUnexpectedChildElement(Loader.java:105)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext$DefaultRootLoader.childElement(UnmarshallingContext.java:1048)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext._startElement(UnmarshallingContext.java:483)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.startElement(UnmarshallingContext.java:465)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.SAXConnector.startElement(SAXConnector.java:135)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.startElement(AbstractSAXParser.java:506)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.scanStartElement(XMLNSDocumentScannerImpl.java:376)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl$NSContentDriver.scanRootElementHook(XMLNSDocumentScannerImpl.java:602)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:3063)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(XMLDocumentScannerImpl.java:881)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:607)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(XMLNSDocumentScannerImpl.java:116)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:488)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:835)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:764)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:123)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1210)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:568)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl.unmarshal0(UnmarshallerImpl.java:202)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl.unmarshal(UnmarshallerImpl.java:174)
+	at javax.xml.bind.helpers.AbstractUnmarshallerImpl.unmarshal(AbstractUnmarshallerImpl.java:157)
+	at javax.xml.bind.helpers.AbstractUnmarshallerImpl.unmarshal(AbstractUnmarshallerImpl.java:214)
+	at edu.ncsu.csc573.project.common.messages.ResponseMessage.getResponse(ResponseMessage.java:83)
+	at edu.ncsu.csc573.project.common.messages.ForgotPWDResponseMessage.parseXML(ForgotPWDResponseMessage.java:41)
+	at edu.ncsu.csc573.project.doogle.test.schema.TestResponseMessages.testForgotPWDResponseMessageParseXML(TestResponseMessages.java:278)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:35)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:115)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:97)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.apache.maven.surefire.booter.ProviderFactory$ClassLoaderProxy.invoke(ProviderFactory.java:103)
+	at $Proxy0.invoke(Unknown Source)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:150)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcess(SurefireStarter.java:91)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:69)
+main ERROR ForgotPWDResponseMessage - Unable to parse request from string
+javax.xml.bind.UnmarshalException: unexpected element (uri:"http://www.doogle.project.csc573.csc.ncsu.edu", local:"response"). Expected elements are <{http://www.doogle.project.csc573.csc.ncsu.edu}Response>
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.handleEvent(UnmarshallingContext.java:647)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportError(Loader.java:243)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportError(Loader.java:238)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportUnexpectedChildElement(Loader.java:105)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext$DefaultRootLoader.childElement(UnmarshallingContext.java:1048)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext._startElement(UnmarshallingContext.java:483)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.startElement(UnmarshallingContext.java:465)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.SAXConnector.startElement(SAXConnector.java:135)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.startElement(AbstractSAXParser.java:506)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.scanStartElement(XMLNSDocumentScannerImpl.java:376)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl$NSContentDriver.scanRootElementHook(XMLNSDocumentScannerImpl.java:602)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:3063)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(XMLDocumentScannerImpl.java:881)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:607)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(XMLNSDocumentScannerImpl.java:116)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:488)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:835)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:764)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:123)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1210)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:568)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl.unmarshal0(UnmarshallerImpl.java:202)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl.unmarshal(UnmarshallerImpl.java:174)
+	at javax.xml.bind.helpers.AbstractUnmarshallerImpl.unmarshal(AbstractUnmarshallerImpl.java:157)
+	at javax.xml.bind.helpers.AbstractUnmarshallerImpl.unmarshal(AbstractUnmarshallerImpl.java:214)
+	at edu.ncsu.csc573.project.common.messages.ResponseMessage.getResponse(ResponseMessage.java:83)
+	at edu.ncsu.csc573.project.common.messages.ChangePasswordResponseMessage.parseXML(ChangePasswordResponseMessage.java:44)
+	at edu.ncsu.csc573.project.doogle.test.schema.TestResponseMessages.testChangePWDResponseMessageParseXML(TestResponseMessages.java:307)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:35)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:115)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:97)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.apache.maven.surefire.booter.ProviderFactory$ClassLoaderProxy.invoke(ProviderFactory.java:103)
+	at $Proxy0.invoke(Unknown Source)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:150)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcess(SurefireStarter.java:91)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:69)
+main ERROR PublishResponseMessage - Unable to parse request from string
+javax.xml.bind.UnmarshalException: unexpected element (uri:"http://www.doogle.project.csc573.csc.ncsu.edu", local:"response"). Expected elements are <{http://www.doogle.project.csc573.csc.ncsu.edu}Response>
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.handleEvent(UnmarshallingContext.java:647)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportError(Loader.java:243)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportError(Loader.java:238)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader.reportUnexpectedChildElement(Loader.java:105)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext$DefaultRootLoader.childElement(UnmarshallingContext.java:1048)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext._startElement(UnmarshallingContext.java:483)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.startElement(UnmarshallingContext.java:465)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.SAXConnector.startElement(SAXConnector.java:135)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.startElement(AbstractSAXParser.java:506)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.scanStartElement(XMLNSDocumentScannerImpl.java:376)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl$NSContentDriver.scanRootElementHook(XMLNSDocumentScannerImpl.java:602)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:3063)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(XMLDocumentScannerImpl.java:881)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:607)
+	at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(XMLNSDocumentScannerImpl.java:116)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:488)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:835)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:764)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:123)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1210)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:568)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl.unmarshal0(UnmarshallerImpl.java:202)
+	at com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl.unmarshal(UnmarshallerImpl.java:174)
+	at javax.xml.bind.helpers.AbstractUnmarshallerImpl.unmarshal(AbstractUnmarshallerImpl.java:157)
+	at javax.xml.bind.helpers.AbstractUnmarshallerImpl.unmarshal(AbstractUnmarshallerImpl.java:214)
+	at edu.ncsu.csc573.project.common.messages.ResponseMessage.getResponse(ResponseMessage.java:83)
+	at edu.ncsu.csc573.project.common.messages.PublishResponseMessage.parseXML(PublishResponseMessage.java:41)
+	at edu.ncsu.csc573.project.doogle.test.schema.TestResponseMessages.testPublishResponseMessageParseXML(TestResponseMessages.java:336)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:35)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:115)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:97)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.apache.maven.surefire.booter.ProviderFactory$ClassLoaderProxy.invoke(ProviderFactory.java:103)
+	at $Proxy0.invoke(Unknown Source)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:150)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcess(SurefireStarter.java:91)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:69)
+Tests run: 12, Failures: 6, Errors: 0, Skipped: 0, Time elapsed: 0.65 sec <<< FAILURE!
+Running edu.ncsu.csc573.projcet.doogle.test.usermanagement.TestUserManager
+main INFO  User - Loaded key successfully
+Done
+main INFO  UsersManager - harsha176 successfully logged in
+main ERROR UsersManager - Username or password is wrong
+main ERROR UsersManager - harsha176 not registered
+main ERROR UsersManager - Username or password is wrong
+main ERROR UsersManager - harsha not registered
+main INFO  UsersManager - krishna successfully logged in
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.583 sec
+
+Results :
+
+Failed tests: 
+  testRegisterRequestMessageParseXML(edu.ncsu.csc573.project.doogle.test.schema.TestRequestMessages): expected:<REGISTER> but was:<null>
+  testChangePWDRequestMessageParseXML(edu.ncsu.csc573.project.doogle.test.schema.TestRequestMessages): expected:<CHANGEPASSWORD> but was:<null>
+  testSearchRequestMessageParseXML(edu.ncsu.csc573.project.doogle.test.schema.TestRequestMessages): expected:<SEARCH> but was:<null>
+  testRegisterResponseMessageParseXML(edu.ncsu.csc573.project.doogle.test.schema.TestResponseMessages): expected:<REGISTERRESPONSE> but was:<null>
+  testLoginResponseMessageParseXML(edu.ncsu.csc573.project.doogle.test.schema.TestResponseMessages): expected:<LOGINRESPONSE> but was:<null>
+  testLogoutResponseMessageParseXML(edu.ncsu.csc573.project.doogle.test.schema.TestResponseMessages): expected:<LOGOUTRESPONSE> but was:<null>
+  testForgotPWDResponseMessageParseXML(edu.ncsu.csc573.project.doogle.test.schema.TestResponseMessages): expected:<FORGOTPASSWORDRESPONSE> but was:<null>
+  testChangePWDResponseMessageParseXML(edu.ncsu.csc573.project.doogle.test.schema.TestResponseMessages): expected:<CHANGEPASSWORDRESPONSE> but was:<null>
+  testPublishResponseMessageParseXML(edu.ncsu.csc573.project.doogle.test.schema.TestResponseMessages): expected:<PUBLISHRESPONSE> but was:<null>
+
+Tests in error: 
+  testLoginRequestMessageParseXML(edu.ncsu.csc573.project.doogle.test.schema.TestRequestMessages)
+  testLogoutRequestMessageParseXML(edu.ncsu.csc573.project.doogle.test.schema.TestRequestMessages)
+  testForgotPWDRequestMessageParseXML(edu.ncsu.csc573.project.doogle.test.schema.TestRequestMessages)
+
+Tests run: 37, Failures: 9, Errors: 3, Skipped: 0
+
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Skipping doogle-dist
+[INFO] This project has been banned from the build due to previous failures.
+[INFO] ------------------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 12.973s
+[INFO] Finished at: Sat Nov 26 18:04:46 EST 2011
+[INFO] Final Memory: 16M/170M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.7.2:test (default-test) on project doogle-dist: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /home/doogle-dev/java-workspace/doogle-dist/target/surefire-reports for the individual test results.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

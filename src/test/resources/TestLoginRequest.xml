@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<request id="1320609109131" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu">
+<Request id="1322348682172" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu">
     <Command>
         <Login>
             <params>
@@ -8,5 +8,5 @@
             </params>
         </Login>
     </Command>
-</request>
+</Request>
 

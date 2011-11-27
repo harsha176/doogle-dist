@@ -3,7 +3,9 @@
 	targetNamespace="http://www.doogle.project.csc573.csc.ncsu.edu" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu"
 	elementFormDefault="qualified">
 	<xs:include schemaLocation="doogleRequestMessagesSchema.xsd"/>
-	<xs:complexType name="Response">
+	
+	<xs:element name="Response">
+	<xs:complexType>
 		<xs:sequence>
 			<!--<xs:element name="Status" type="StatusType"></xs:element> -->
 			<xs:element name="Command" type="CommandResponseType"></xs:element>
@@ -11,7 +13,7 @@
 		<xs:attribute name="id" type="xs:integer" use="required">
 		</xs:attribute>
 	</xs:complexType>
-
+	</xs:element>
 	<!--<xs:ComplexType name="StatusType"> <xs:attribute name="code" type="xs:integer" 
 		use="required"> </xs:attribute> </xs:ComplexType> -->
 
@@ -28,6 +30,7 @@
                         <xs:element name="LeaveResponse" type="LeaveResponseType"></xs:element>
                         <xs:element name="GetResponse" type="GetResponseType"></xs:element>
                         <xs:element name="PutResponse" type="PutResponseType"></xs:element>                 
+                        <xs:element name="InvalidResponse" type="InvalidResponseType"></xs:element>
 		</xs:choice>
 	</xs:complexType>
 
@@ -129,6 +132,7 @@
 			<xs:element name="message" type="xs:string" />
 		</xs:sequence>
 	</xs:complexType>
+<<<<<<< HEAD
         
         
         <xs:complexType name="JoinResponseType">
@@ -194,4 +198,17 @@
 		</xs:sequence>
 	</xs:complexType>
         
+	<xs:complexType name="InvalidResponseType">
+		<xs:sequence>
+			<xs:element name="Operation" type="xs:string" fixed="PublishResponse" />
+			<xs:element name="params" type="InvalidResponseTypeParams">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="InvalidResponseTypeParams">
+		<xs:sequence>
+			<xs:element name="statuscode" type="xs:integer" />
+			<xs:element name="message" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
 </xs:schema>

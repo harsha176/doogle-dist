@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<request id="1320609108620" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu">
+<Request id="1322348682172" xmlns="http://www.doogle.project.csc573.csc.ncsu.edu">
     <Command>
         <ForgotPWD>
             <params>
@@ -8,4 +8,4 @@
             </params>
         </ForgotPWD>
     </Command>
-</request>
+</Request>
