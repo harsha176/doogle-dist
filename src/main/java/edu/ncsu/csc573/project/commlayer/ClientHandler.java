@@ -68,7 +68,7 @@ public class ClientHandler implements Runnable {
 				
 				StringBuffer sb = new StringBuffer();
 				int c;
-				while ((c = br.read()) != -1 && sb.indexOf("</request>") == -1) {
+				while ((c = br.read()) != -1 && sb.indexOf("</Request>") == -1) {
 					//logger.debug(c);
 					sb.append((char) c);
 				}

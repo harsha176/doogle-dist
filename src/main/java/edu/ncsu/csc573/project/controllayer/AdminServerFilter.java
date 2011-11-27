@@ -15,6 +15,12 @@ public class AdminServerFilter implements IFilter {
 			 	default: 
 			 		return true;
 			 }
+		 } else {
+			 switch (opType) {
+			 case PUBLISH:
+			 case SEARCH:
+				 return true;
+			 }
 		 }
 		return false;
 	}

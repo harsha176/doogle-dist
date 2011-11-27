@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -20,8 +21,12 @@ import java.net.UnknownHostException;
 import org.apache.log4j.Logger;
 import edu.ncsu.csc573.project.common.ConfigurationManager;
 import edu.ncsu.csc573.project.common.messages.EnumOperationType;
+import edu.ncsu.csc573.project.common.messages.EnumParamsType;
+import edu.ncsu.csc573.project.common.messages.IParameter;
 import edu.ncsu.csc573.project.common.messages.IRequest;
 import edu.ncsu.csc573.project.common.messages.IResponse;
+import edu.ncsu.csc573.project.common.messages.InvalidResponseMessage;
+import edu.ncsu.csc573.project.common.messages.Parameter;
 import edu.ncsu.csc573.project.common.messages.ResponseMessage;
 
 /**
@@ -142,10 +147,11 @@ public class CommunicationService implements ICommunicationService {
 	 * (edu.ncsu.csc573.project.common.messages.IRequest)
 	 */
 	public IResponse executeRequest(IRequest request) throws Exception{
-		BlockingThread bt = new BlockingThread(clientSocket, request);
+		BlockingThread bt = new BlockingThread(clientSocket, request, "Op: " + request.getOperationType() + " req thread ");
 		bt.start();
 		try {
 			bt.join(ConfigurationManager.getInstance().getCLITimeOut());
+			bt.stopListener();
 			if(!bt.isResponseReady()) {
 				logger.info("Failed to get response for the request : " + request.getOperationType());
 				throw new Exception();
@@ -218,9 +224,9 @@ public class CommunicationService implements ICommunicationService {
 		private Socket clientSocket;
 		private IRequest request;
 		private IResponse response = null;
-		
-		BlockingThread(Socket clientSocket, IRequest request) {
-			super();
+		private boolean isToBeStopped = false;
+		BlockingThread(Socket clientSocket, IRequest request, String name) {
+			super(name);
 			this.clientSocket = clientSocket;
 			this.request = request;
 		}
@@ -242,12 +248,27 @@ public class CommunicationService implements ICommunicationService {
 				StringBuffer sb = new StringBuffer();
 				//String temp;
 			
-				while(!br.ready()) {
+				while(!br.ready() && !isToBeStopped) {
 					logger.info("No data received from server. Trying again...");
 					Thread.sleep(1000);  // to be removed
 				}
+				
+				if(isToBeStopped) {
+					logger.info("No response received for the request with in the specified time");
+					logger.info("returning default response");
+					response = new InvalidResponseMessage();
+					IParameter Regparams = new Parameter();
+					Regparams.add(EnumParamsType.STATUSCODE,
+							new BigInteger(String.valueOf(1)));
+					Regparams.add(
+							EnumParamsType.MESSAGE, request.getOperationType() + " request timedout");
+					response.createResponse(EnumOperationType.INVALIDRESPONSE,
+							Regparams);
+					return ;
+				}
+				
 				int ch;
-				while ((ch = br.read()) != -1 && sb.indexOf("</response>") == -1) {
+				while ((ch = br.read()) != -1 && sb.indexOf("</Response>") == -1) {
 					sb.append((char)ch);
 				}
 				
@@ -267,6 +288,10 @@ public class CommunicationService implements ICommunicationService {
 		
 		public boolean isResponseReady() {
 			return (response == null ? false : true);
+		}
+		
+		public void stopListener() {
+			isToBeStopped = true;
 		}
 	}
 

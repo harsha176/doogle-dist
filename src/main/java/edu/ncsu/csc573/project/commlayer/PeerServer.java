@@ -16,6 +16,7 @@ import edu.ncsu.csc573.project.common.ConfigurationManager;
  * 
  */
 class PeerServer {
+	private static final String PEER_SERVER_NAME = "PeerServer Thread";
 	private Thread serverThread;
 	private ServerSocket peerServerSocket;
 	private int serverPort;
@@ -31,7 +32,7 @@ class PeerServer {
 			}
 		};
 		isToBeStopped = false;
-		serverThread = new Thread(r);
+		serverThread = new Thread(r, PEER_SERVER_NAME);
 		serverThread.start();
 	}
 
@@ -46,7 +47,7 @@ class PeerServer {
 				connSoc = peerServerSocket.accept();
 				logger.info("Client connected: "
 						+ connSoc.getRemoteSocketAddress());
-				new Thread(new ClientHandler(connSoc)).start();
+				new Thread(new ClientHandler(connSoc), "Client - " + connSoc.getRemoteSocketAddress().toString() + " service thread").start();
 			}
 		} catch (IOException e) {
 			logger.error("Unable to launch server", e);

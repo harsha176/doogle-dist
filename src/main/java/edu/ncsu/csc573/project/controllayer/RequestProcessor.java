@@ -9,6 +9,7 @@ import edu.ncsu.csc573.project.common.messages.ForgotPWDResponseMessage;
 import edu.ncsu.csc573.project.common.messages.IParameter;
 import edu.ncsu.csc573.project.common.messages.IRequest;
 import edu.ncsu.csc573.project.common.messages.IResponse;
+import edu.ncsu.csc573.project.common.messages.InvalidResponseMessage;
 import edu.ncsu.csc573.project.common.messages.LoginResponseMessage;
 import edu.ncsu.csc573.project.common.messages.LogoutResponseMessage;
 import edu.ncsu.csc573.project.common.messages.Parameter;
@@ -28,11 +29,13 @@ public class RequestProcessor {
 	private Logger logger;
 	private IUsersManager usermanager;
 	private IHashSpaceManager hashSpaceManager;
+	private IFilter adminFilter;
 
 	public RequestProcessor() {
 		try {
 			usermanager = IUsersManager.getInstance();
 			hashSpaceManager = HashSpaceManagerFactory.getInstance();
+			adminFilter = new AdminServerFilter();
 		} catch (Exception e) {
 			logger.error("Unable to initialize UserManager module", e);
 		}
@@ -42,6 +45,23 @@ public class RequestProcessor {
 		logger = Logger.getLogger(RequestProcessor.class);
 		IResponse response = null;
 		IParameter params = null;
+
+		/*
+		 * Check if its a valid request for this node
+		 */
+		if (!adminFilter.isRequestValid(req.getOperationType())) {
+			response = new InvalidResponseMessage();
+			IParameter Regparams = new Parameter();
+			Regparams.add(EnumParamsType.STATUSCODE,
+					new BigInteger(String.valueOf(1)));
+			Regparams.add(
+					EnumParamsType.MESSAGE,
+					req.getOperationType() + "is not a requested operation ");
+			response.createResponse(EnumOperationType.INVALIDRESPONSE,
+					Regparams);
+			return response;
+		}
+		
 		// sample responses
 		switch (req.getOperationType()) {
 		case REGISTER:
@@ -181,14 +201,15 @@ public class RequestProcessor {
 			logger.debug("Processing search request");
 			response = new SearchResponseMessage();
 			IParameter searchResponseparams;
-			String query_string = req
-					.getParameter().getParamValue(EnumParamsType.SEARCHKEY)
-					.toString();
-			searchResponseparams = hashSpaceManager.search(new Query(query_string));
+			String query_string = req.getParameter()
+					.getParamValue(EnumParamsType.SEARCHKEY).toString();
+			searchResponseparams = hashSpaceManager.search(new Query(
+					query_string));
 			response.createResponse(EnumOperationType.SEARCHRESPONSE,
 					searchResponseparams);
 
-			response.createResponse(EnumOperationType.SEARCHRESPONSE, searchResponseparams);
+			response.createResponse(EnumOperationType.SEARCHRESPONSE,
+					searchResponseparams);
 			break;
 		default:
 			try {
