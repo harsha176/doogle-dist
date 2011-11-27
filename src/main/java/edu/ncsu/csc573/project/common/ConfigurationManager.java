@@ -20,6 +20,8 @@ public class ConfigurationManager {
     public static final int DEFAULT_FILE_TRANSFER_PORT = 9000;
     private static final String DEFAULT_DOWNLOAD_DIRECTORY = System.getProperty("user.home") + "/temp";
     private static final String DEFAULT_PUBLISH_DIRECTORY = System.getProperty("user.home") + "/temp";
+	private static final boolean DEFAULT_ADMIN_SERVER = false;
+
     private int serverPort;
     private int timeOut;
     private long cliTimeOut;
@@ -29,6 +31,7 @@ public class ConfigurationManager {
     private File downloadDirectory;
     private File publishDirectory;
 	private double thresholdValue = 0.0;
+	private Boolean isadminServer = null;
     private static Properties config = null;
     private static ConfigurationManager confManager = null;
     private static Logger logger;
@@ -132,6 +135,24 @@ public class ConfigurationManager {
         }
 	}
     
+    private Boolean getAsBoolean(String parameter, boolean default_value) {
+    	String timeOutPropertyVal = config.getProperty(parameter).trim();
+        if (timeOutPropertyVal == null || timeOutPropertyVal.trim().equals("")) {
+            logger.error("Unable to fetch " + parameter
+                    + "for configuration file");
+            logger.info("Using default value " + default_value + "for "
+                    + parameter);
+            return default_value;
+        }
+        try {
+            return Boolean.parseBoolean(timeOutPropertyVal);
+        } catch (Exception e) {
+            logger.error("The given parameter " + parameter
+                    + "is not a valid integer/long");
+            logger.error("Please configure it as an integer value in configurations.xml file");
+            return default_value;
+        }
+	}
     private void setAsString(String paramater, String value) throws Exception {
         config.setProperty(paramater, value);
         URL url = ClassLoader.getSystemResource(CONFIGURATION_PROPERTIES);
@@ -240,5 +261,10 @@ public class ConfigurationManager {
     	return thresholdValue;
     }
 
-	
+    public boolean isAdminServer() {
+    	if(isadminServer  == null) {
+    		isadminServer = getAsBoolean("ADMIN_SERVER", DEFAULT_ADMIN_SERVER);
+    	}
+    	return isadminServer;
+    }
 }

@@ -12,6 +12,7 @@ import edu.ncsu.csc573.project.common.messages.EnumOperationType;
 import edu.ncsu.csc573.project.common.messages.EnumParamsType;
 import edu.ncsu.csc573.project.common.messages.IParameter;
 import edu.ncsu.csc573.project.common.messages.IResponse;
+import edu.ncsu.csc573.project.common.messages.InvalidResponseMessage;
 import edu.ncsu.csc573.project.common.messages.LoginResponseMessage;
 import edu.ncsu.csc573.project.common.messages.LogoutResponseMessage;
 import edu.ncsu.csc573.project.common.messages.Parameter;
@@ -23,7 +24,32 @@ import java.math.BigInteger;
 
 public class TestResponseMessages {
 
-    @Test
+	@Test
+	public void testInvalidResponseToXML() throws Exception {
+		IResponse regRequest = getInvalidResponse();
+
+		try {
+			System.out.println(regRequest.getRequestInXML());
+			Assert.assertTrue("Successfully parsed xml", true);
+		} catch (Exception e) {
+                    e.printStackTrace();
+                    Assert.fail();
+			
+		}
+	}
+        
+	public static IResponse getInvalidResponse() throws Exception {
+		IResponse regRequest = new InvalidResponseMessage();
+		IParameter Regparams = new Parameter();
+		Regparams.add(EnumParamsType.STATUSCODE, new BigInteger(String.valueOf(0)));
+		Regparams.add(EnumParamsType.MESSAGE, "abcdef");
+		regRequest.createResponse(EnumOperationType.INVALIDRESPONSE, Regparams);
+		//System.out.println(regRequest.getRequestInXML());
+		return regRequest;
+	}
+	
+	
+	@Test
 	public void testRegisterResponseMessageToXML() throws Exception {
 		IResponse regRequest = getRegisterResponse();
 
@@ -46,8 +72,9 @@ public class TestResponseMessages {
 		//System.out.println(regRequest.getRequestInXML());
 		return regRequest;
 	}
-        
-        @Test
+    
+	
+    @Test
 	public void testLoginResponseMessageToXML() throws Exception {
 		IResponse regRequest = getLoginResponse();
 
@@ -201,7 +228,35 @@ public class TestResponseMessages {
 		Assert.assertEquals("abcdef", regReq.getParameter()
 				.getParamValue(EnumParamsType.MESSAGE).toString());
 	}
-        
+    
+	@Test
+	public void testInvalidResponseMessageParseXML() {
+		InputStream is = ClassLoader
+				.getSystemResourceAsStream("TestInvalidResponse.xml");
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+		StringBuffer sb = new StringBuffer();
+		String temp;
+		try {
+			while ((temp = br.readLine()) != null) {
+				sb.append(temp);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+
+		ResponseMessage regReq = new InvalidResponseMessage();
+		regReq.parseXML(sb.toString());
+		Assert.assertEquals(EnumOperationType.INVALIDRESPONSE,
+				regReq.getOperationType());
+		Assert.assertEquals("0",
+				regReq.getParameter().getParamValue(EnumParamsType.STATUSCODE)
+						.toString());
+		Assert.assertEquals("qwerty1", regReq.getParameter()
+				.getParamValue(EnumParamsType.MESSAGE).toString());
+	}
+	
 	@Test
 	public void testLoginResponseMessageParseXML() {
 		InputStream is = ClassLoader
