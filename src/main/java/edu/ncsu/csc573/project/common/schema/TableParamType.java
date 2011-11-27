@@ -10,24 +10,26 @@ package edu.ncsu.csc573.project.common.schema;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for ChangePasswordParamsType complex type.
+ * <p>Java class for TableParamType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="ChangePasswordParamsType">
+ * &lt;complexType name="TableParamType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="newpassword" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="firsthash" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="lasthash" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="nexthop" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
+ *       &lt;attribute name="entry" use="required" type="{http://www.w3.org/2001/XMLSchema}int" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -36,90 +38,108 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ChangePasswordParamsType", propOrder = {
-    "username",
-    "password",
-    "newpassword"
+@XmlType(name = "TableParamType", propOrder = {
+    "firsthash",
+    "lasthash",
+    "nexthop"
 })
-public class ChangePasswordParamsType {
+public class TableParamType {
 
     @XmlElement(required = true)
-    protected String username;
+    protected String firsthash;
     @XmlElement(required = true)
-    protected String password;
+    protected String lasthash;
     @XmlElement(required = true)
-    protected String newpassword;
+    protected String nexthop;
+    @XmlAttribute(required = true)
+    protected int entry;
 
     /**
-     * Gets the value of the username property.
+     * Gets the value of the firsthash property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getUsername() {
-        return username;
+    public String getFirsthash() {
+        return firsthash;
     }
 
     /**
-     * Sets the value of the username property.
+     * Sets the value of the firsthash property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setUsername(String value) {
-        this.username = value;
+    public void setFirsthash(String value) {
+        this.firsthash = value;
     }
 
     /**
-     * Gets the value of the password property.
+     * Gets the value of the lasthash property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getPassword() {
-        return password;
+    public String getLasthash() {
+        return lasthash;
     }
 
     /**
-     * Sets the value of the password property.
+     * Sets the value of the lasthash property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setPassword(String value) {
-        this.password = value;
+    public void setLasthash(String value) {
+        this.lasthash = value;
     }
 
     /**
-     * Gets the value of the newpassword property.
+     * Gets the value of the nexthop property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getNewpassword() {
-        return newpassword;
+    public String getNexthop() {
+        return nexthop;
     }
 
     /**
-     * Sets the value of the newpassword property.
+     * Sets the value of the nexthop property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setNewpassword(String value) {
-        this.newpassword = value;
+    public void setNexthop(String value) {
+        this.nexthop = value;
+    }
+
+    /**
+     * Gets the value of the entry property.
+     * 
+     */
+    public int getEntry() {
+        return entry;
+    }
+
+    /**
+     * Sets the value of the entry property.
+     * 
+     */
+    public void setEntry(int value) {
+        this.entry = value;
     }
 
 }

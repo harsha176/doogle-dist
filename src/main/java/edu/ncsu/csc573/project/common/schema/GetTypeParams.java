@@ -15,18 +15,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for ChangePasswordParamsType complex type.
+ * <p>Java class for GetTypeParams complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="ChangePasswordParamsType">
+ * &lt;complexType name="GetTypeParams">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="newpassword" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="ipaddress" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="searchdigest" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="ttl" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,90 +36,90 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ChangePasswordParamsType", propOrder = {
-    "username",
-    "password",
-    "newpassword"
+@XmlType(name = "GetTypeParams", propOrder = {
+    "ipaddress",
+    "searchdigest",
+    "ttl"
 })
-public class ChangePasswordParamsType {
+public class GetTypeParams {
 
     @XmlElement(required = true)
-    protected String username;
+    protected String ipaddress;
     @XmlElement(required = true)
-    protected String password;
+    protected String searchdigest;
     @XmlElement(required = true)
-    protected String newpassword;
+    protected String ttl;
 
     /**
-     * Gets the value of the username property.
+     * Gets the value of the ipaddress property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getUsername() {
-        return username;
+    public String getIpaddress() {
+        return ipaddress;
     }
 
     /**
-     * Sets the value of the username property.
+     * Sets the value of the ipaddress property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setUsername(String value) {
-        this.username = value;
+    public void setIpaddress(String value) {
+        this.ipaddress = value;
     }
 
     /**
-     * Gets the value of the password property.
+     * Gets the value of the searchdigest property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getPassword() {
-        return password;
+    public String getSearchdigest() {
+        return searchdigest;
     }
 
     /**
-     * Sets the value of the password property.
+     * Sets the value of the searchdigest property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setPassword(String value) {
-        this.password = value;
+    public void setSearchdigest(String value) {
+        this.searchdigest = value;
     }
 
     /**
-     * Gets the value of the newpassword property.
+     * Gets the value of the ttl property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getNewpassword() {
-        return newpassword;
+    public String getTtl() {
+        return ttl;
     }
 
     /**
-     * Sets the value of the newpassword property.
+     * Sets the value of the ttl property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setNewpassword(String value) {
-        this.newpassword = value;
+    public void setTtl(String value) {
+        this.ttl = value;
     }
 
 }

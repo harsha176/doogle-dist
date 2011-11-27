@@ -15,17 +15,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for InvalidResponseType complex type.
+ * <p>Java class for JoinTypeParams complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="InvalidResponseType">
+ * &lt;complexType name="JoinTypeParams">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Operation" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="params" type="{http://www.doogle.project.csc573.csc.ncsu.edu}InvalidResponseTypeParams"/>
+ *         &lt;element name="ipaddress" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="peerid" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,63 +35,63 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "InvalidResponseType", propOrder = {
-    "operation",
-    "params"
+@XmlType(name = "JoinTypeParams", propOrder = {
+    "ipaddress",
+    "peerid"
 })
-public class InvalidResponseType {
+public class JoinTypeParams {
 
-    @XmlElement(name = "Operation", required = true)
-    protected String operation;
     @XmlElement(required = true)
-    protected InvalidResponseTypeParams params;
+    protected String ipaddress;
+    @XmlElement(required = true)
+    protected String peerid;
 
     /**
-     * Gets the value of the operation property.
+     * Gets the value of the ipaddress property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getOperation() {
-        return operation;
+    public String getIpaddress() {
+        return ipaddress;
     }
 
     /**
-     * Sets the value of the operation property.
+     * Sets the value of the ipaddress property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setOperation(String value) {
-        this.operation = value;
+    public void setIpaddress(String value) {
+        this.ipaddress = value;
     }
 
     /**
-     * Gets the value of the params property.
+     * Gets the value of the peerid property.
      * 
      * @return
      *     possible object is
-     *     {@link InvalidResponseTypeParams }
+     *     {@link String }
      *     
      */
-    public InvalidResponseTypeParams getParams() {
-        return params;
+    public String getPeerid() {
+        return peerid;
     }
 
     /**
-     * Sets the value of the params property.
+     * Sets the value of the peerid property.
      * 
      * @param value
      *     allowed object is
-     *     {@link InvalidResponseTypeParams }
+     *     {@link String }
      *     
      */
-    public void setParams(InvalidResponseTypeParams value) {
-        this.params = value;
+    public void setPeerid(String value) {
+        this.peerid = value;
     }
 
 }

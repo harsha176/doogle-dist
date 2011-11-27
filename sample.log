@@ -2414,3 +2414,35 @@ File:IMP - Test.txt
 3540 [Thread-3] INFO  edu.ncsu.csc573.project.commlayer.ClientHandler  - Successfully transfered file
 3540 [Thread-3] INFO  edu.ncsu.csc573.project.commlayer.ClientHandler  - Successfully closed connection for client Socket[addr=/127.0.0.1,port=50870,localport=9000]
 3540 [main] INFO  edu.ncsu.csc573.project.commlayer.CommunicationService  - Successfully saved downloaded file at C:\Users\krishna\temp\IMP - Test.txt
+0    [main] INFO  edu.ncsu.csc573.project.controllayer.usermanagement.UsersManager  - Reading userdatabase file
+4    [main] INFO  edu.ncsu.csc573.project.controllayer.usermanagement.UsersManager  - Loaded 0 users from database
+51   [main] ERROR edu.ncsu.csc573.project.controllayer.usermanagement.UsersManager  - Username or password is wrong
+51   [main] ERROR edu.ncsu.csc573.project.controllayer.usermanagement.UsersManager  - harsha176 not registered
+83   [main] INFO  edu.ncsu.csc573.project.controllayer.usermanagement.User  - Loaded key successfully
+743  [main] INFO  edu.ncsu.csc573.project.controllayer.usermanagement.UsersManager  - krishna successfully logged in
+766  [main] INFO  edu.ncsu.csc573.project.controllayer.usermanagement.UsersManager  - harsha176 successfully logged in
+770  [main] ERROR edu.ncsu.csc573.project.controllayer.usermanagement.UsersManager  - Username or password is wrong
+771  [main] ERROR edu.ncsu.csc573.project.controllayer.usermanagement.UsersManager  - harsha not registered
+3339 [main] DEBUG edu.ncsu.csc573.project.commlayer.CommunicationService  - Inside initialization of communication handler
+3340 [main] INFO  edu.ncsu.csc573.project.commlayer.CommunicationService  - Start server
+3432 [main] DEBUG edu.ncsu.csc573.project.commlayer.CommunicationService  - Enabled Keepalive socket option
+3443 [Thread-1] INFO  edu.ncsu.csc573.project.commlayer.PeerServer  - Launching server thread...
+3448 [Thread-1] INFO  edu.ncsu.csc573.project.commlayer.PeerServer  - Waiting for clients to connet...
+3837 [Thread-1] INFO  edu.ncsu.csc573.project.commlayer.PeerServer  - Client connected: /127.0.0.1:52201
+3837 [main] DEBUG edu.ncsu.csc573.project.commlayer.CommunicationService  - Successfully opened socket for file transfer
+3838 [main] DEBUG edu.ncsu.csc573.project.commlayer.CommunicationService  - Sent request File:IMP - Test.txt
+3848 [Thread-1] INFO  edu.ncsu.csc573.project.commlayer.PeerServer  - Waiting for clients to connet...
+3849 [Thread-1] INFO  edu.ncsu.csc573.project.commlayer.PeerServer  - Client connected: /127.0.0.1:52202
+3849 [Thread-1] INFO  edu.ncsu.csc573.project.commlayer.PeerServer  - Waiting for clients to connet...
+3962 [Thread-3] INFO  edu.ncsu.csc573.project.commlayer.ClientHandler  - Handling client /127.0.0.1:52202
+3962 [Thread-2] INFO  edu.ncsu.csc573.project.commlayer.ClientHandler  - Handling client /127.0.0.1:52201
+3963 [Thread-3] DEBUG edu.ncsu.csc573.project.commlayer.ClientHandler  - Waiting for request from client /127.0.0.1:52202
+3964 [Thread-2] DEBUG edu.ncsu.csc573.project.commlayer.ClientHandler  - Waiting for request from client /127.0.0.1:52201
+3964 [Thread-3] DEBUG edu.ncsu.csc573.project.commlayer.ClientHandler  - Receiving request from client
+3964 [Thread-3] DEBUG edu.ncsu.csc573.project.commlayer.ClientHandler  - received data from client <request>
+File:IMP - Test.txt
+</request>
+3965 [Thread-3] INFO  edu.ncsu.csc573.project.commlayer.ClientHandler  - Done ! Sending file contents
+3966 [main] INFO  edu.ncsu.csc573.project.commlayer.CommunicationService  - Successfully saved downloaded file at C:\Users\krishna\temp\IMP - Test.txt
+3967 [Thread-3] INFO  edu.ncsu.csc573.project.commlayer.ClientHandler  - Successfully transfered file
+3967 [Thread-3] INFO  edu.ncsu.csc573.project.commlayer.ClientHandler  - Successfully closed connection for client Socket[addr=/127.0.0.1,port=52202,localport=9000]

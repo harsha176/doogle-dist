@@ -15,17 +15,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for InvalidResponseType complex type.
+ * <p>Java class for JoinResponseType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="InvalidResponseType">
+ * &lt;complexType name="JoinResponseType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="Operation" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="params" type="{http://www.doogle.project.csc573.csc.ncsu.edu}InvalidResponseTypeParams"/>
+ *         &lt;element name="params" type="{http://www.doogle.project.csc573.csc.ncsu.edu}JoinResponseTypeParams"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,16 +35,16 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "InvalidResponseType", propOrder = {
+@XmlType(name = "JoinResponseType", propOrder = {
     "operation",
     "params"
 })
-public class InvalidResponseType {
+public class JoinResponseType {
 
     @XmlElement(name = "Operation", required = true)
     protected String operation;
     @XmlElement(required = true)
-    protected InvalidResponseTypeParams params;
+    protected JoinResponseTypeParams params;
 
     /**
      * Gets the value of the operation property.
@@ -75,10 +75,10 @@ public class InvalidResponseType {
      * 
      * @return
      *     possible object is
-     *     {@link InvalidResponseTypeParams }
+     *     {@link JoinResponseTypeParams }
      *     
      */
-    public InvalidResponseTypeParams getParams() {
+    public JoinResponseTypeParams getParams() {
         return params;
     }
 
@@ -87,10 +87,10 @@ public class InvalidResponseType {
      * 
      * @param value
      *     allowed object is
-     *     {@link InvalidResponseTypeParams }
+     *     {@link JoinResponseTypeParams }
      *     
      */
-    public void setParams(InvalidResponseTypeParams value) {
+    public void setParams(JoinResponseTypeParams value) {
         this.params = value;
     }
 
