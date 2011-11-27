@@ -131,9 +131,7 @@
 			<xs:element name="statuscode" type="xs:integer" />
 			<xs:element name="message" type="xs:string" />
 		</xs:sequence>
-	</xs:complexType>
-<<<<<<< HEAD
-        
+	</xs:complexType>        
         
         <xs:complexType name="JoinResponseType">
 		<xs:sequence>
