@@ -232,7 +232,7 @@ private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 private void SettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SettingsActionPerformed
 // TODO add your handling code here:
     SettingsFrame Settings = new SettingsFrame();
-    this.setVisible(false);
+    //this.setVisible(false);
     Settings.setVisible(true);
 }//GEN-LAST:event_SettingsActionPerformed
 
