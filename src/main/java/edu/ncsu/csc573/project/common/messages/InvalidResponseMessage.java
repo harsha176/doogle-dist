@@ -54,4 +54,18 @@ public class InvalidResponseMessage extends ResponseMessage {
 			logger.error("Unable to parse request from string", e);
 		} 
 	} 
+	
+	public InvalidResponseMessage(int status, String message) {
+		super();
+		IParameter param = new Parameter();
+		param.add(EnumParamsType.STATUSCODE, status);
+		param.add(EnumParamsType.MESSAGE, message);
+		
+		this.setOperationType(EnumOperationType.INVALIDRESPONSE);
+		this.setParameter(param);
+	}
+	
+	public InvalidResponseMessage(String message) {
+		this(1, message);
+	}
 }

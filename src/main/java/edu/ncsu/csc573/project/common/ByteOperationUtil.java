@@ -1,6 +1,7 @@
 package edu.ncsu.csc573.project.common;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.apache.log4j.Logger;
 
@@ -10,7 +11,8 @@ import sun.misc.BASE64Encoder;
 public class ByteOperationUtil {
 	private static final int BYTE_SIZE_IN_BITS = 8;
 	private static final int DIGEST_SIZE = 1024;
-
+	private static int grid_dimensions = ConfigurationManager.getInstance().getDimensions();
+	
 	public static String convertBytesToString(byte[] digest) {
 		BASE64Encoder encoder = new BASE64Encoder();
 		return encoder.encode(digest);
@@ -61,4 +63,33 @@ public class ByteOperationUtil {
 		}
 		return count;
 	}
+	
+	public static byte[] getCordinates(byte[] digest) {
+		int totalLength = digest.length;
+		byte[] coordinates = new byte[grid_dimensions];
+		int step = totalLength/grid_dimensions;
+		
+		for(int i = step, j = 0; i <= totalLength && j < grid_dimensions; i = i + step, j++) {
+			//System.out.println((i-step)+","+(i-1));
+			coordinates[j] =  (byte)countSetBits(Arrays.copyOfRange(digest, i-step, i));
+		}
+		
+		return coordinates;
+	}
+	
+	public static byte[] getCordinates(String digest) {
+		return getCordinates(convertStringToBytes(digest));
+	}
+	
+	public static String printCoordinates(byte[] coordinate) {
+		StringBuilder sb = new StringBuilder();
+		int count = 0;
+		for(byte b: coordinate) {
+			sb.append(b + ",");
+			count += b;
+		}
+		//System.out.println(count);
+		return sb.toString();
+	}
 }
+

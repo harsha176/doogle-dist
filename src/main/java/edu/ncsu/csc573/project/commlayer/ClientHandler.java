@@ -18,6 +18,7 @@ import java.net.SocketAddress;
 import org.apache.log4j.Logger;
 import edu.ncsu.csc573.project.common.ConfigurationManager;
 import edu.ncsu.csc573.project.common.messages.EnumOperationType;
+import edu.ncsu.csc573.project.common.messages.EnumParamsType;
 import edu.ncsu.csc573.project.common.messages.IRequest;
 import edu.ncsu.csc573.project.common.messages.IResponse;
 import edu.ncsu.csc573.project.common.messages.RequestMessage;
@@ -32,10 +33,12 @@ import edu.ncsu.csc573.project.controllayer.RequestProcessor;
 public class ClientHandler implements Runnable {
 	private Socket conncetedSocket;
 	private Logger logger;
-
+	private ICommunicationService distCommService;
+	
 	public ClientHandler(Socket connSock) {
 		logger = Logger.getLogger(ClientHandler.class);
 		conncetedSocket = connSock;
+		distCommService = CommunicationServiceFactory.getInstance();
 	}
 
 	
@@ -43,6 +46,7 @@ public class ClientHandler implements Runnable {
 		SocketAddress clientAddress = conncetedSocket.getRemoteSocketAddress();
 		RequestProcessor reqProcessor = new RequestProcessor();
 		logger.info("Handling client " + clientAddress);
+		
 		boolean isFileTransfer = false;
 		// Expect register or login request from the client
 		try {
@@ -93,9 +97,20 @@ public class ClientHandler implements Runnable {
 					req = RequestMessage.createRequest(sb.toString().trim());
 					logger.info("Request from client " + conncetedSocket.getRemoteSocketAddress() + " is : "
 							+ req.getRequestInXML());
-					response = reqProcessor.processRequest(req);
-					pw.println(response.getRequestInXML());
-					pw.flush();
+					response = distCommService.executeRequest(req);
+					/*
+					 * check if the response is an ACK or not
+					 */
+					if(response.getOperationType() == EnumOperationType.ACKRESPONSE) {
+						pw.println(response.getRequestInXML());
+						pw.flush();
+						return ;
+					} 
+					/*
+					 * send response to destination host
+					 */
+					req.getParameter().getParamValue(EnumParamsType.IPADDRESS);
+					
 				} catch (Exception e) {
 					logger.error("Unable to parse request", e);
 				}

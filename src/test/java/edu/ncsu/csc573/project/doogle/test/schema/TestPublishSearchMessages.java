@@ -27,7 +27,7 @@ import edu.ncsu.csc573.project.controllayer.hashspacemanagement.DigestAdaptor;
 import edu.ncsu.csc573.project.controllayer.hashspacemanagement.IDigest;
 
 public class TestPublishSearchMessages {
-
+	/*
 	@Test
 	public void testPublishRequestMessageToXML() {
 		
@@ -78,7 +78,7 @@ public class TestPublishSearchMessages {
 	 * PublishRequest.createRequest(EnumOperationType.PUBLISH, publishParams);
 	 * return PublishRequest; }
 	 */
-
+	/*
 	private IRequest testPublishFolderRequest() throws Exception {
 		URL url = ClassLoader.getSystemResource("samplePublishFolder");
 		Assert.assertNotNull(url);

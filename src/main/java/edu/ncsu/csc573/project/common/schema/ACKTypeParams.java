@@ -8,6 +8,7 @@
 
 package edu.ncsu.csc573.project.common.schema;
 
+import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -15,17 +16,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for LogoutResponseType complex type.
+ * <p>Java class for ACKTypeParams complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="LogoutResponseType">
+ * &lt;complexType name="ACKTypeParams">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Operation" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="params" type="{http://www.doogle.project.csc573.csc.ncsu.edu}LogoutResponseParamsType"/>
+ *         &lt;element name="statuscode" type="{http://www.w3.org/2001/XMLSchema}integer"/>
+ *         &lt;element name="message" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,63 +36,63 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "LogoutResponseType", propOrder = {
-    "operation",
-    "params"
+@XmlType(name = "ACKTypeParams", propOrder = {
+    "statuscode",
+    "message"
 })
-public class LogoutResponseType {
+public class ACKTypeParams {
 
-    @XmlElement(name = "Operation", required = true)
-    protected String operation;
     @XmlElement(required = true)
-    protected LogoutResponseParamsType params;
+    protected BigInteger statuscode;
+    @XmlElement(required = true)
+    protected String message;
 
     /**
-     * Gets the value of the operation property.
+     * Gets the value of the statuscode property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link BigInteger }
+     *     
+     */
+    public BigInteger getStatuscode() {
+        return statuscode;
+    }
+
+    /**
+     * Sets the value of the statuscode property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BigInteger }
+     *     
+     */
+    public void setStatuscode(BigInteger value) {
+        this.statuscode = value;
+    }
+
+    /**
+     * Gets the value of the message property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getOperation() {
-        return operation;
+    public String getMessage() {
+        return message;
     }
 
     /**
-     * Sets the value of the operation property.
+     * Sets the value of the message property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setOperation(String value) {
-        this.operation = value;
-    }
-
-    /**
-     * Gets the value of the params property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link LogoutResponseParamsType }
-     *     
-     */
-    public LogoutResponseParamsType getParams() {
-        return params;
-    }
-
-    /**
-     * Sets the value of the params property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link LogoutResponseParamsType }
-     *     
-     */
-    public void setParams(LogoutResponseParamsType value) {
-        this.params = value;
+    public void setMessage(String value) {
+        this.message = value;
     }
 
 }

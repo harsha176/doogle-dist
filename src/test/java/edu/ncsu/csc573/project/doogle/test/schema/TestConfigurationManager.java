@@ -15,6 +15,7 @@ import java.net.URL;
  * @author doogle-dev
  *
  */
+/*
 public class TestConfigurationManager {
 
 	@Test 
@@ -31,3 +32,4 @@ public class TestConfigurationManager {
 	}
 
 }
+*/

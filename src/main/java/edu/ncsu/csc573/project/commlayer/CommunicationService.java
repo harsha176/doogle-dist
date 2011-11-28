@@ -11,22 +11,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
+
 import org.apache.log4j.Logger;
+
 import edu.ncsu.csc573.project.common.ConfigurationManager;
 import edu.ncsu.csc573.project.common.messages.EnumOperationType;
-import edu.ncsu.csc573.project.common.messages.EnumParamsType;
-import edu.ncsu.csc573.project.common.messages.IParameter;
 import edu.ncsu.csc573.project.common.messages.IRequest;
 import edu.ncsu.csc573.project.common.messages.IResponse;
 import edu.ncsu.csc573.project.common.messages.InvalidResponseMessage;
-import edu.ncsu.csc573.project.common.messages.Parameter;
 import edu.ncsu.csc573.project.common.messages.ResponseMessage;
 
 /**
@@ -40,7 +38,7 @@ public class CommunicationService implements ICommunicationService {
 	private static Logger logger;
 	private PeerServer server;
 	private IPublishHandler publishHandler;
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -53,29 +51,30 @@ public class CommunicationService implements ICommunicationService {
 		// get a logger instance for this class
 		logger = Logger.getLogger(this.getClass());
 		logger.debug("Inside initialization of communication handler");
-		
+
 		publishHandler = aPublishHandler;
-		
+
 		/*
 		 * if the socket is already connected then initialization is already
 		 * done and so simply exiting.
 		 */
 		synchronized (CommunicationService.class) {
-			if (clientSocket != null && !clientSocket.isClosed() && server != null && server.isServerRunning()) {
+			if (clientSocket != null && !clientSocket.isClosed()
+					&& server != null && server.isServerRunning()) {
 				logger.debug("Already connected to bootstrapserver");
 				logger.info("Already initialized");
 				return;
 			}
-			if(server == null || !server.isServerRunning()) {
+			if (server == null || !server.isServerRunning()) {
 				logger.info("Start server");
 				server = new PeerServer();
 			}
-			initializeConnectedSocket(BootStrapServer); 
+			initializeConnectedSocket(BootStrapServer);
 		}
 
 	}
 
-	private void initializeConnectedSocket(String BootStrapServer)
+	protected void initializeConnectedSocket(String BootStrapServer)
 			throws Exception, UnknownHostException, SocketException,
 			SocketTimeoutException, IOException {
 		BSSAddress = getInetAddress(BootStrapServer);
@@ -88,7 +87,7 @@ public class CommunicationService implements ICommunicationService {
 				BSSport);
 		clientSocket.setKeepAlive(true);
 		clientSocket.setTcpNoDelay(true);
-		
+
 		logger.debug("Enabled Keepalive socket option");
 		try {
 			clientSocket.connect(serverSocket, timeOut);
@@ -103,8 +102,8 @@ public class CommunicationService implements ICommunicationService {
 		}
 	}
 
-	private InetAddress getInetAddress(String BootStrapServer) throws Exception,
-			UnknownHostException {
+	private InetAddress getInetAddress(String BootStrapServer)
+			throws Exception, UnknownHostException {
 		InetAddress address = null;
 		try {
 			address = InetAddress.getByName(BootStrapServer);
@@ -113,8 +112,8 @@ public class CommunicationService implements ICommunicationService {
 				logger.info("Unable to find the address of the host: "
 						+ BootStrapServer + " by name");
 				logger.info("Trying by ip address");
-				address = InetAddress.getByAddress(BootStrapServer
-						.trim().getBytes());
+				address = InetAddress.getByAddress(BootStrapServer.trim()
+						.getBytes());
 			} catch (UnknownHostException excpByIpAddress) {
 				logger.info("Unable to find the address of host: "
 						+ BootStrapServer + " even by ip address");
@@ -125,20 +124,21 @@ public class CommunicationService implements ICommunicationService {
 		return address;
 	}
 
-	private void cleanUp() throws Exception{
-		
-		if(server != null) {
+	private void cleanUp() throws Exception {
+
+		if (server != null) {
 			server.stop();
 		}
-		while(!server.isServerRunning()) {
+		while (!server.isServerRunning()) {
 			logger.info("Waiting for peer server to close");
 			Thread.sleep(100);
 		}
-		if(clientSocket != null) {
+		if (clientSocket != null) {
 			clientSocket.close();
 		}
 		logger.error("Unable to initialize Communication layer. Exiting from Application");
 	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -146,24 +146,27 @@ public class CommunicationService implements ICommunicationService {
 	 * edu.ncsu.csc573.project.commlayer.ICommunicationService#executeRequest
 	 * (edu.ncsu.csc573.project.common.messages.IRequest)
 	 */
-	public IResponse executeRequest(IRequest request) throws Exception{
-		BlockingThread bt = new BlockingThread(clientSocket, request, "Op: " + request.getOperationType() + " req thread ");
+	public IResponse executeRequest(IRequest request) throws Exception {
+		BlockingThread bt = new BlockingThread(clientSocket, request, "Op: "
+				+ request.getOperationType() + " req thread ");
 		bt.start();
 		try {
 			bt.join(ConfigurationManager.getInstance().getCLITimeOut());
 			bt.stopListener();
-			if(!bt.isResponseReady()) {
-				logger.info("Failed to get response for the request : " + request.getOperationType());
+			if (!bt.isResponseReady()) {
+				logger.info("Failed to get response for the request : "
+						+ request.getOperationType());
 				throw new Exception();
 			} else {
 				logger.info("Received response : " + bt.getResponse());
 			}
 		} catch (InterruptedException e) {
-			
-		} finally{
-			if(bt.getResponse().getOperationType() == EnumOperationType.LOGOUTRESPONSE) {
+
+		} finally {
+			// CHANGE IT: this comment will not work for centralized system.
+			//if (bt.getResponse().getOperationType() == EnumOperationType.LOGOUTRESPONSE) {
 				clientSocket.close();
-			}
+			//}
 		}
 		return bt.getResponse();
 	}
@@ -225,6 +228,7 @@ public class CommunicationService implements ICommunicationService {
 		private IRequest request;
 		private IResponse response = null;
 		private boolean isToBeStopped = false;
+
 		BlockingThread(Socket clientSocket, IRequest request, String name) {
 			super(name);
 			this.clientSocket = clientSocket;
@@ -240,56 +244,50 @@ public class CommunicationService implements ICommunicationService {
 				PrintWriter pw = new PrintWriter(new BufferedWriter(
 						new OutputStreamWriter(clientSocket.getOutputStream())));
 				pw.println(request.getRequestInXML());
-				//pw.println(System.);
+				// pw.println(System.);
 				pw.flush();
 
 				BufferedReader br = new BufferedReader(new InputStreamReader(
 						clientSocket.getInputStream()));
 				StringBuffer sb = new StringBuffer();
-				//String temp;
-			
-				while(!br.ready() && !isToBeStopped) {
+				// String temp;
+
+				while (!br.ready() && !isToBeStopped) {
 					logger.info("No data received from server. Trying again...");
-					Thread.sleep(1000);  // to be removed
+					Thread.sleep(1000); // to be removed
 				}
-				
-				if(isToBeStopped) {
+
+				if (isToBeStopped) {
 					logger.info("No response received for the request with in the specified time");
 					logger.info("returning default response");
-					response = new InvalidResponseMessage();
-					IParameter Regparams = new Parameter();
-					Regparams.add(EnumParamsType.STATUSCODE,
-							new BigInteger(String.valueOf(1)));
-					Regparams.add(
-							EnumParamsType.MESSAGE, request.getOperationType() + " request timedout");
-					response.createResponse(EnumOperationType.INVALIDRESPONSE,
-							Regparams);
-					return ;
+					response = new InvalidResponseMessage(1,
+							request.getOperationType() + " request timedout");
+					return;
 				}
-				
+
 				int ch;
-				while ((ch = br.read()) != -1 && sb.indexOf("</Response>") == -1) {
-					sb.append((char)ch);
+				while ((ch = br.read()) != -1
+						&& sb.indexOf("</Response>") == -1) {
+					sb.append((char) ch);
 				}
-				
-				
+
 				response = ResponseMessage.createResponse(sb.toString());
 				logger.info("Response is : " + response.getRequestInXML());
 				logger.info(response);
-				
+
 			} catch (Exception e) {
 				logger.error("Unable to parse response ", e);
 			}
 		}
-		
+
 		public IResponse getResponse() {
 			return response;
 		}
-		
+
 		public boolean isResponseReady() {
 			return (response == null ? false : true);
 		}
-		
+
 		public void stopListener() {
 			isToBeStopped = true;
 		}
@@ -305,56 +303,64 @@ public class CommunicationService implements ICommunicationService {
 		BufferedReader br = null;
 		PrintWriter pwFile = null;
 		File newFile = null;
-		
+
 		try {
-			ftSoc = new Socket(getInetAddress(IPAddress), ConfigurationManager.getInstance().getFileTransferPort());
-			pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(ftSoc.getOutputStream())));
+			ftSoc = new Socket(getInetAddress(IPAddress), ConfigurationManager
+					.getInstance().getFileTransferPort());
+			pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(
+					ftSoc.getOutputStream())));
 			logger.debug("Successfully opened socket for file transfer");
-			
+
 			pw.println("<request>");
-			pw.println("File:"+fileName);
+			pw.println("File:" + fileName);
 			pw.println("</request>");
 			pw.flush();
-			logger.debug("Sent request "+"File:"+fileName);
-			br = new BufferedReader(new InputStreamReader(ftSoc.getInputStream()));
+			logger.debug("Sent request " + "File:" + fileName);
+			br = new BufferedReader(new InputStreamReader(
+					ftSoc.getInputStream()));
 			String buff;
-			newFile = new File(ConfigurationManager.getInstance().getDownloadDirectory(),fileName.substring(0, fileName.indexOf("."))/*+"_"+System.currentTimeMillis()*/+".txt");
-			
-			pwFile = new PrintWriter(new BufferedWriter(new FileWriter(newFile)));
-			
-			while((buff = br.readLine())!=null) {
+			newFile = new File(ConfigurationManager.getInstance()
+					.getDownloadDirectory(), fileName.substring(0,
+					fileName.indexOf("."))/* +"_"+System.currentTimeMillis() */
+					+ ".txt");
+
+			pwFile = new PrintWriter(
+					new BufferedWriter(new FileWriter(newFile)));
+
+			while ((buff = br.readLine()) != null) {
 				pwFile.println(buff);
 				pwFile.flush();
-				logger.trace("Read: " +buff);
+				logger.trace("Read: " + buff);
 			}
 			pwFile.flush();
-			logger.info("Successfully saved downloaded file at " + newFile.getAbsolutePath());
+			logger.info("Successfully saved downloaded file at "
+					+ newFile.getAbsolutePath());
 			pw.println("a");
 			pw.flush();
 		} catch (UnknownHostException e) {
-			logger.error("Unable to find host",e);
+			logger.error("Unable to find host", e);
 		} catch (IOException e) {
-			logger.error("Unable to perform IO",e);
+			logger.error("Unable to perform IO", e);
 		} catch (Exception e) {
-			logger.error("Unable to get file",e);
+			logger.error("Unable to get file", e);
 		} finally {
-			if(ftSoc != null) {
+			if (ftSoc != null) {
 				try {
 					ftSoc.close();
 				} catch (IOException e) {
-					logger.error("Unable to close socket",e);
+					logger.error("Unable to close socket", e);
 				}
 			}
-			if(pw != null)
+			if (pw != null)
 				pw.close();
-			if(pwFile != null) 
+			if (pwFile != null)
 				pwFile.close();
 		}
 		return newFile;
 	}
 
 	public File getFileToUpload(String fileName) {
-		if(publishHandler != null) {
+		if (publishHandler != null) {
 			return publishHandler.getFileToUpload(fileName);
 		} else {
 			logger.error("PublishHandler is not initialized");

@@ -50,18 +50,11 @@ public class RequestProcessor {
 		 * Check if its a valid request for this node
 		 */
 		if (!adminFilter.isRequestValid(req.getOperationType())) {
-			response = new InvalidResponseMessage();
-			IParameter Regparams = new Parameter();
-			Regparams.add(EnumParamsType.STATUSCODE,
-					new BigInteger(String.valueOf(1)));
-			Regparams.add(
-					EnumParamsType.MESSAGE,
-					req.getOperationType() + "is not a requested operation ");
-			response.createResponse(EnumOperationType.INVALIDRESPONSE,
-					Regparams);
+			response = new InvalidResponseMessage(1, req.getOperationType()
+					+ "is not a requested operation ");
 			return response;
 		}
-		
+
 		// sample responses
 		switch (req.getOperationType()) {
 		case REGISTER:
@@ -210,6 +203,8 @@ public class RequestProcessor {
 
 			response.createResponse(EnumOperationType.SEARCHRESPONSE,
 					searchResponseparams);
+			break;
+		case JOIN: 
 			break;
 		default:
 			try {

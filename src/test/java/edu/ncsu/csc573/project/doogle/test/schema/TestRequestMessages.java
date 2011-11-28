@@ -36,6 +36,7 @@ public class TestRequestMessages {
 	 * @throws Exception
 	 * @throws JAXBException
 	 */
+	/*
 	@Test
 	public void testRegisterRequestMessageToXML() throws Exception {
 		IRequest regRequest = getRegisterRequest();
@@ -364,5 +365,5 @@ public class TestRequestMessages {
 				.getParamValue(EnumParamsType.USERNAME).toString());
 		Assert.assertEquals("13801294803983440", SearchReq.getParameter()
 				.getParamValue(EnumParamsType.SEARCHKEY).toString());
-	}
+	}*/
 }

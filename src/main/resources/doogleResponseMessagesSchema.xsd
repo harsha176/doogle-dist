@@ -31,6 +31,7 @@
                         <xs:element name="GetResponse" type="GetResponseType"></xs:element>
                         <xs:element name="PutResponse" type="PutResponseType"></xs:element>                 
                         <xs:element name="InvalidResponse" type="InvalidResponseType"></xs:element>
+                        <xs:element name="ACK" type="ACKType"></xs:element>
 		</xs:choice>
 	</xs:complexType>
 
@@ -198,12 +199,26 @@
         
 	<xs:complexType name="InvalidResponseType">
 		<xs:sequence>
-			<xs:element name="Operation" type="xs:string" fixed="PublishResponse" />
+			<xs:element name="Operation" type="xs:string" fixed="InvalidResponse" />
 			<xs:element name="params" type="InvalidResponseTypeParams">
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="InvalidResponseTypeParams">
+		<xs:sequence>
+			<xs:element name="statuscode" type="xs:integer" />
+			<xs:element name="message" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ACKType">
+		<xs:sequence>
+			<xs:element name="Operation" type="xs:string" fixed="ACK" />
+			<xs:element name="params" type="ACKTypeParams">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ACKTypeParams">
 		<xs:sequence>
 			<xs:element name="statuscode" type="xs:integer" />
 			<xs:element name="message" type="xs:string" />
