@@ -112,6 +112,9 @@ public abstract class ResponseMessage extends RequestMessage implements
 		} else if (XML.indexOf("Search") != -1) {
 			res = new SearchResponseMessage();
 			res.parseXML(XML);
+		}else if (XML.indexOf("Invalid") != -1) {
+			res = new InvalidResponseMessage(1, "");
+			res.parseXML(XML);
 		}
 		 else {
 			logger.error("Given XML " + XML + " is an invalid request");

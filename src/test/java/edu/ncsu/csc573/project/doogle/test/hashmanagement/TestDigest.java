@@ -1,7 +1,8 @@
 package edu.ncsu.csc573.project.doogle.test.hashmanagement;
 
 
-import junit.framework.Assert;
+import java.io.File;
+import java.util.Arrays;
 
 import org.junit.Test;
 
@@ -12,7 +13,7 @@ import edu.ncsu.csc573.project.controllayer.hashspacemanagement.IDigest;
 public class TestDigest {
 	
 	
-	@Test 
+	/*@Test 
 	public void testDigestComputation() {
 		try {
 			IDigest digestUtil = DigestAdaptor.getInstance();
@@ -27,6 +28,22 @@ public class TestDigest {
 			Assert.assertFalse(false);
 			e.printStackTrace();
 		}
+	}*/
+	
+	public static String testCoordinates() {
+		try{
+			IDigest digestUtil = DigestAdaptor.getInstance();
+			String query = "Today is sunday";
+			String filename = "/home/doogle-dev/downloads/Metallica.txt";
+			//System.out.println(filename);
+			byte[] queryDigest = digestUtil.getDigest(new File(filename));
+			return ByteOperationUtil.convertBytesToString((ByteOperationUtil.getCordinates(queryDigest)));
+			//System.out.println("Total number of set bits " + ByteOperationUtil.countSetBits(Arrays.copyOf(queryDigest, queryDigest.length)));
+			//System.out.println((ByteOperationUtil.printCoordinates(ByteOperationUtil.getCordinates(queryDigest))));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	/*@Test
 	public void testquery(){

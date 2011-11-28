@@ -20,7 +20,7 @@ public class TestClientHandler {
 		Assert.assertEquals(fileName, ClientHandler.getFileName(prepareGetFileRequest(fileName)));
 	}*/
     
-	
+	/*
 	public static StringBuffer prepareGetFileRequest(String fileName) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<request>");
@@ -30,6 +30,6 @@ public class TestClientHandler {
 		sb.append("</request>");
 		
 		return sb;
-	}
+	}*/
 	
 }

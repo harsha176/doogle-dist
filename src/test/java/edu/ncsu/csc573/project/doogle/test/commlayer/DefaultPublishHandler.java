@@ -11,7 +11,7 @@ import junit.framework.Assert;
 import edu.ncsu.csc573.project.commlayer.IPublishHandler;
 
 public class DefaultPublishHandler implements IPublishHandler {
-
+	
 	public File getFileToUpload(String fileName) {
 		//File publishDirectory = ConfigurationManager.getInstance().getPublishDirectory();
 		URL url = ClassLoader.getSystemResource("samplePublishFolder");

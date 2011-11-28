@@ -33,7 +33,7 @@ public class TestCommunicationService {
 	 * @throws java.lang.Exception
 	 *
 	 */
-	
+	/*
 	@BeforeClass 
 	public static void classSetup () throws Exception {
 		
@@ -98,7 +98,7 @@ public class TestCommunicationService {
 		//}
 	}*/
 	
-	@Test
+	/*@Test
 	public void testDownloadFile() {
 		ICommunicationService CommService = CommunicationServiceFactory.getInstance();
 		try {
@@ -139,7 +139,7 @@ public class TestCommunicationService {
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@After
+	/*@After
 	public void tearDown() throws Exception {
 	}
 

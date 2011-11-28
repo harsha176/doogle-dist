@@ -15,7 +15,7 @@ import edu.ncsu.csc573.project.commlayer.ICommunicationService;
  * 
  */
 public class TestCommunicationFactory {
-	@Test
+	/*@Test
 	public void testGetInstance() {
 		ICommunicationService commService = CommunicationServiceFactory
 				.getInstance();
@@ -34,5 +34,5 @@ public class TestCommunicationFactory {
 		assertEquals(
 				"Singleton functionality of Communication service factory is not working properly",
 				commServiceInstance1, commServiceInstance2);
-	}
+	}*/
 }

@@ -10,7 +10,8 @@ import org.apache.log4j.Logger;
 
 public class ConfigurationManager {
 
-    private static final double DEFAULT_THRESHOLD_MATCH_VALUE = 0.80;
+    private static final int DEFAULT_GRID_DIMENSIONS = 16;
+	private static final double DEFAULT_THRESHOLD_MATCH_VALUE = 0.80;
 	private static final String DEFAULT_HOST_INTERFACE = "127.0.0.1";
 	private static final String CONFIGURATION_PROPERTIES = "configuration.properties";
     public static final int DEFAULT_SERVER_PORT = 9000;
@@ -32,6 +33,7 @@ public class ConfigurationManager {
     private File publishDirectory;
 	private double thresholdValue = 0.0;
 	private Boolean isadminServer = null;
+	private Integer dimensions;
     private static Properties config = null;
     private static ConfigurationManager confManager = null;
     private static Logger logger;
@@ -266,5 +268,12 @@ public class ConfigurationManager {
     		isadminServer = getAsBoolean("ADMIN_SERVER", DEFAULT_ADMIN_SERVER);
     	}
     	return isadminServer;
+    }
+    
+    public int getDimensions() {
+    	if(dimensions == null){
+    		dimensions = getAsInt("GRID_DIMENSIONS", DEFAULT_GRID_DIMENSIONS);
+    	}
+    	return dimensions;
     }
 }

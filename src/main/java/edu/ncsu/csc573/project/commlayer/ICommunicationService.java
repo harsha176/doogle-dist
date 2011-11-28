@@ -81,7 +81,7 @@ public interface ICommunicationService {
 	 */
 	public void subscribeRequestTopic(EnumOperationType operationType,
 			IRequestListener reqListener);
-	
+
 	/**
 	 * This method retrieves the file from the remote server
 	 * 

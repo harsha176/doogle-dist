@@ -21,7 +21,7 @@ public class CommunicationServiceFactory {
 	public static ICommunicationService getInstance() {
 		synchronized (CommunicationServiceFactory.class) {
 			if (commService == null) {
-				commService = new CommunicationService();
+				commService = new DistributedCommunicationService();
 			}
 			return commService;
 		}
