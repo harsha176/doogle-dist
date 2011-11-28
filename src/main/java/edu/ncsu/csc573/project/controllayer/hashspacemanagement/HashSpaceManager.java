@@ -3,9 +3,11 @@
  */
 package edu.ncsu.csc573.project.controllayer.hashspacemanagement;
 
+import edu.ncsu.csc573.project.common.messages.PutRequest;
 import org.apache.log4j.Logger;
 
 import edu.ncsu.csc573.project.common.messages.EnumParamsType;
+import edu.ncsu.csc573.project.common.messages.IParameter;
 import edu.ncsu.csc573.project.common.messages.PublishRequestMessage;
 import edu.ncsu.csc573.project.common.messages.PublishSearchParameter;
 
@@ -98,5 +100,19 @@ public class HashSpaceManager implements IHashSpaceManager {
 		logger.info("Added "  + publishedFilesParam.getSize()+ " published files into database");
 		logger.info("Total size of repository is " + publishedFilesRepository.getSize());
 	}
+
+    public void handlePutRequest(PutRequest putRequest) {
+                
+           PublishSearchParameter putResults = new PublishSearchParameter();  
+           putResults.add(EnumParamsType.FILEDIGEST, putRequest.getParameter().getParamValue(EnumParamsType.FILENAME));
+           putResults.add(EnumParamsType.FILEDIGEST, putRequest.getParameter().getParamValue(EnumParamsType.FILEDIGEST));
+           putResults.add(EnumParamsType.FILESIZE, putRequest.getParameter().getParamValue(EnumParamsType.FILESIZE));
+	   putResults.add(EnumParamsType.IPADDRESS, putRequest.getParameter().getParamValue(EnumParamsType.IPADDRESS));
+           putResults.add(EnumParamsType.ABSTRACT, putRequest.getParameter().getParamValue(EnumParamsType.ABSTRACT));
+           
+           publishedFilesRepository.add(putResults);
+   		logger.info("Added file into database");
+		logger.info("Total size of repository is " + publishedFilesRepository.getSize()); 
+    }
 
 }

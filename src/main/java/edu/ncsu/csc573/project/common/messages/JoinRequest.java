@@ -46,7 +46,7 @@ public class JoinRequest extends RequestMessage {
 			JoinTypeParams joinparams = joinType.getParams();
 			IParameter param = new Parameter();
 			param.add(EnumParamsType.USERNAME, joinparams.getIpaddress());
-			param.add(EnumParamsType.PASSWORD, joinparams.getPeerid());
+			param.add(EnumParamsType.PEERID, joinparams.getPeerid());
 
 			this.setOperationType(EnumOperationType.JOIN);
 			this.setParameter(param);

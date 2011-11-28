@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
  *
  * @author krishna
  */
-public class JoinResponse extends RequestMessage {
+public class JoinResponse extends ResponseMessage {
      private Logger logger;
 
 	public String getRequestInXML() throws Exception {
@@ -39,7 +39,7 @@ public class JoinResponse extends RequestMessage {
 		Putresponse.setJoinResponse(rt);
 		req.setCommand(Putresponse);
 		
-		return getXML(null);
+		return getXML(req);
 	}
 
 	public void parseXML(String XML) {

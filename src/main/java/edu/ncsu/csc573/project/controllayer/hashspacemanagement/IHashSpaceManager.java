@@ -2,6 +2,7 @@ package edu.ncsu.csc573.project.controllayer.hashspacemanagement;
 
 import edu.ncsu.csc573.project.common.messages.PublishRequestMessage;
 import edu.ncsu.csc573.project.common.messages.PublishSearchParameter;
+import edu.ncsu.csc573.project.common.messages.PutRequest;
 
 /**
  * This acts as an interface for control layer to communicate with
@@ -26,4 +27,11 @@ public interface IHashSpaceManager {
 	 * @param pubRequest
 	 */
 	public void handlePublishRequest(PublishRequestMessage pubRequest);
+        /**
+	 * This method is called every time a put request message is received from
+	 * one of the peers.
+	 * 
+	 * @param putRequest
+	 */
+        public void handlePutRequest(PutRequest putRequest);
 }
