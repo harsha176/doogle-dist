@@ -2,7 +2,9 @@ package edu.ncsu.csc573.project.controllayer;
 
 import edu.ncsu.csc573.project.commlayer.IPoint;
 import edu.ncsu.csc573.project.commlayer.IZone;
+import edu.ncsu.csc573.project.commlayer.Point;
 import edu.ncsu.csc573.project.commlayer.Zone;
+import edu.ncsu.csc573.project.common.ConfigurationManager;
 import edu.ncsu.csc573.project.common.messages.ChangePasswordResponseMessage;
 import java.math.BigInteger;
 import org.apache.log4j.Logger;
@@ -39,7 +41,8 @@ public class RequestProcessor {
 	private IUsersManager usermanager;
 	private IHashSpaceManager hashSpaceManager;
 	private IFilter adminFilter;
-
+        private Zone myZone;
+        
 	public RequestProcessor() {
 		try {
 			usermanager = IUsersManager.getInstance();
@@ -58,12 +61,16 @@ public class RequestProcessor {
 		/*
 		 * Check if its a valid request for this node
 		 */
-		if (!adminFilter.isRequestValid(req.getOperationType())) {
+		/*if (!adminFilter.isRequestValid(req.getOperationType())) {
 			response = new InvalidResponseMessage(1, req.getOperationType()
 					+ "is not a requested operation ");
 			return response;
-		}
-                Zone myZone = new Zone();
+		}*/
+                if(ConfigurationManager.getInstance().isAdminServer()) {
+                    myZone = new Zone();
+                    myZone.create(Point.getHashSpaceStartPoint(), Point.getHashSpaceEndPoint());
+                }
+                
                 //Create zone
 		// sample responses
 		switch (req.getOperationType()) {
@@ -225,6 +232,12 @@ public class RequestProcessor {
 			count++;
                         count = count%15;
                         break;
+                case JOINRESPONSE: 
+                        // initialize myZone
+                        // routing table update
+                        // store shared files
+                        // send ACKRESPONSE
+                    break;
                 case LEAVE:
                         logger.debug("Processing put request"); 
                         //Update routing table of parent ZONE

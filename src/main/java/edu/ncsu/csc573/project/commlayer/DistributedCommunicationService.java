@@ -1,5 +1,6 @@
 package edu.ncsu.csc573.project.commlayer;
 
+import edu.ncsu.csc573.project.common.ByteOperationUtil;
 import org.apache.log4j.Logger;
 
 import edu.ncsu.csc573.project.common.messages.EnumParamsType;
@@ -49,13 +50,15 @@ public class DistributedCommunicationService extends CommunicationService {
 		 * get the destination coordinate in the request
 		 */
 		switch (request.getOperationType()) {
+                case ACKRESPONSE:
+                    return null;
 		case PUT:
 			destPoint = new Point(request.getParameter()
 					.getParamValue(EnumParamsType.FILEDIGEST).toString());
 			break;
 		case GET:
-			destPoint = new Point(request.getParameter()
-					.getParamValue(EnumParamsType.SEARCHKEY).toString());
+			destPoint = new Point(ByteOperationUtil.getCordinates(request.getParameter()
+					.getParamValue(EnumParamsType.SEARCHKEY).toString()));
 			break;
 		case LEAVE:
 		case JOIN:

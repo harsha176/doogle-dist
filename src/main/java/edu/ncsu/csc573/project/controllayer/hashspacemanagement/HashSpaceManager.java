@@ -109,7 +109,7 @@ public class HashSpaceManager implements IHashSpaceManager {
            putResults.add(EnumParamsType.FILESIZE, putRequest.getParameter().getParamValue(EnumParamsType.FILESIZE));
 	   putResults.add(EnumParamsType.IPADDRESS, putRequest.getParameter().getParamValue(EnumParamsType.IPADDRESS));
            putResults.add(EnumParamsType.ABSTRACT, putRequest.getParameter().getParamValue(EnumParamsType.ABSTRACT));
-           
+           putResults.add(EnumParamsType.DELIMITER, null);
            publishedFilesRepository.add(putResults);
    		logger.info("Added file into database");
 		logger.info("Total size of repository is " + publishedFilesRepository.getSize()); 

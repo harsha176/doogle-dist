@@ -53,4 +53,21 @@ public class Point implements IPoint, Cloneable {
 	public void setIntercept(int direction, int value) {
 		co_ordinate[direction] = (byte) value;
 	}
+        
+        public static IPoint getHashSpaceStartPoint() {
+            byte[] coordinates = new byte[ConfigurationManager.getInstance().getDimensions()];
+            for(int i = 0; i < ConfigurationManager.getInstance().getDimensions(); i++) {
+                coordinates[i] = 0;
+            }
+            return new Point(coordinates);
+        }
+        
+        public static IPoint getHashSpaceEndPoint() {
+            byte[] coordinates = new byte[ConfigurationManager.getInstance().getDimensions()];
+            byte maxValue = (byte)(1024/ConfigurationManager.getInstance().getDimensions());
+            for(int i = 0; i < ConfigurationManager.getInstance().getDimensions(); i++) {
+                coordinates[i] = maxValue;
+            }
+            return new Point(coordinates);
+        }
 }

@@ -72,7 +72,7 @@ public class ClientHandler implements Runnable {
 				
 				StringBuffer sb = new StringBuffer();
 				int c;
-				while ((c = br.read()) != -1 && sb.indexOf("</Request>") == -1) {
+				while ((c = br.read()) != -1 && (sb.indexOf("</Request>") == -1 || sb.indexOf("</Response>") == -1)) {
 					//logger.debug(c);
 					sb.append((char) c);
 				}
@@ -101,6 +101,11 @@ public class ClientHandler implements Runnable {
 					/*
 					 * check if the response is an ACK or not
 					 */
+                                        if(response == null) {
+                                            logger.info("Received ACK response");
+                                            logger.info("Service is exiting");
+                                            return;
+                                        }
 					if(response.getOperationType() == EnumOperationType.ACKRESPONSE) {
 						pw.println(response.getRequestInXML());
 						pw.flush();
@@ -166,7 +171,7 @@ public class ClientHandler implements Runnable {
 
 
 	public static String getFileName(StringBuffer sb) {
-		int endIndex = sb.indexOf("</request>")-System.lineSeparator().length();
+		int endIndex = sb.indexOf("</request>")-(System.getProperty("line.separator")).length();
 		int stIndex = sb.indexOf("File:");
 		return sb.substring(stIndex+"File:".length(), endIndex);
 	}
