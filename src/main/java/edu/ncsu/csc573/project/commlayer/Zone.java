@@ -57,6 +57,6 @@ public class Zone implements IZone {
 	}
 	
 	public String toString() {
-		return "Zone -> start : " + start.toString() + " end : " + end.toString();
+		return "Zone -> start : " + start.getAsString() + " end : " + end.getAsString();
 	}
 }

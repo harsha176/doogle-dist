@@ -149,51 +149,67 @@ public class HashSpaceManager implements IHashSpaceManager {
 		return searchResults;
 	}
 
-	public synchronized List<FileParamType> getAllFileDetailsAsList(IZone childZone) {
+	public synchronized List<FileParamType> getAllFileDetailsAsList(
+			IZone childZone) {
 		PublishSearchParameter searchResults = getAllFileDetails(childZone);
-		List<FileParamType> filelist= new ArrayList<FileParamType>();
-		
+		List<FileParamType> filelist = new ArrayList<FileParamType>();
+
 		while (publishedFilesRepository.getParamCount() < publishedFilesRepository
 				.getSize()) {
-				FileParamType fpt = new FileParamType();
-				
-				fpt.setFilename(publishedFilesRepository
-								.getParamValue(EnumParamsType.FILENAME).toString());
-				searchResults.add(EnumParamsType.FILENAME,
-						publishedFilesRepository
-								.getParamValue(EnumParamsType.FILENAME));
-				
-				fpt.setFiledigest(publishedFilesRepository
-						.getParamValue(EnumParamsType.FILEDIGEST).toString());
-				searchResults.add(EnumParamsType.FILEDIGEST,
-						publishedFilesRepository
-								.getParamValue(EnumParamsType.FILEDIGEST));
-				
-				fpt.setFilesize(publishedFilesRepository
-						.getParamValue(EnumParamsType.FILESIZE).toString());	
-				searchResults.add(EnumParamsType.FILESIZE,
-						publishedFilesRepository
-								.getParamValue(EnumParamsType.FILESIZE));
-				
-				fpt.setIpaddress(publishedFilesRepository
-						.getParamValue(EnumParamsType.IPADDRESS).toString());
-				searchResults.add(EnumParamsType.IPADDRESS,
-						publishedFilesRepository
-								.getParamValue(EnumParamsType.IPADDRESS));
-				
-				fpt.setAbstract(publishedFilesRepository
-						.getParamValue(EnumParamsType.ABSTRACT).toString());
-				searchResults.add(EnumParamsType.ABSTRACT,
-						publishedFilesRepository
-								.getParamValue(EnumParamsType.ABSTRACT));
-				
-				searchResults.add(EnumParamsType.DELIMITER, null);
-			
+			FileParamType fpt = new FileParamType();
+
+			fpt.setFilename(publishedFilesRepository.getParamValue(
+					EnumParamsType.FILENAME).toString());
+			searchResults.add(EnumParamsType.FILENAME, publishedFilesRepository
+					.getParamValue(EnumParamsType.FILENAME));
+
+			fpt.setFiledigest(publishedFilesRepository.getParamValue(
+					EnumParamsType.FILEDIGEST).toString());
+			searchResults.add(EnumParamsType.FILEDIGEST,
+					publishedFilesRepository
+							.getParamValue(EnumParamsType.FILEDIGEST));
+
+			fpt.setFilesize(publishedFilesRepository.getParamValue(
+					EnumParamsType.FILESIZE).toString());
+			searchResults.add(EnumParamsType.FILESIZE, publishedFilesRepository
+					.getParamValue(EnumParamsType.FILESIZE));
+
+			fpt.setIpaddress(publishedFilesRepository.getParamValue(
+					EnumParamsType.IPADDRESS).toString());
+			searchResults.add(EnumParamsType.IPADDRESS,
+					publishedFilesRepository
+							.getParamValue(EnumParamsType.IPADDRESS));
+
+			fpt.setAbstract(publishedFilesRepository.getParamValue(
+					EnumParamsType.ABSTRACT).toString());
+			searchResults.add(EnumParamsType.ABSTRACT, publishedFilesRepository
+					.getParamValue(EnumParamsType.ABSTRACT));
+
+			searchResults.add(EnumParamsType.DELIMITER, null);
+
 			publishedFilesRepository.setNextParam();
 		}
 		return filelist;
 	}
-	
+
+	public synchronized void handlePublishRequest(List<FileParamType> list) {
+		for (FileParamType fpt : list) {
+			publishedFilesRepository.add(EnumParamsType.FILEDIGEST,
+					fpt.getFiledigest());
+
+			publishedFilesRepository.add(EnumParamsType.FILESIZE,
+					fpt.getFilesize());
+
+			publishedFilesRepository.add(EnumParamsType.IPADDRESS,
+					fpt.getIpaddress());
+
+			publishedFilesRepository.add(EnumParamsType.ABSTRACT,
+					fpt.getAbstract());
+
+			publishedFilesRepository.add(EnumParamsType.DELIMITER, null);
+		}
+	}
+
 	/**
 	 * This method simply adds all the published files from server to published
 	 * file repository

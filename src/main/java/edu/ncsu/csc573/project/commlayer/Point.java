@@ -64,7 +64,8 @@ public class Point implements IPoint, Cloneable {
 	}
 
 	public String toString() {
-		return "(" + ByteOperationUtil.convertBytesToString(co_ordinate) + ")";
+		String cordinate = ByteOperationUtil.printCoordinates(co_ordinate);
+		return "(" + cordinate.substring(0, cordinate.length() - 1) + ")";
 	}
 
 	public void setIntercept(int direction, int value) {

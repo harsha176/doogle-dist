@@ -15,14 +15,15 @@ public class AdminServerFilter implements IFilter {
 			 	default: 
 			 		return true;
 			 }
-		 } else {
+		 } /*else {
 			 switch (opType) {
 			 case PUBLISH:
 			 case SEARCH:
 				 return true;
 			 }
 		 }
-		return false;
+		return false;*/
+		return !isAdminServer;
 	}
 	
 	public boolean isAdminServer() {

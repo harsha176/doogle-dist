@@ -21,4 +21,6 @@ public interface IRouter {
 	 * @return
 	 */
 	public String[][] getRoutingTable();
+	
+	public boolean isInitialized();
 }

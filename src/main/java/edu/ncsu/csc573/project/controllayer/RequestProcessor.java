@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
-
 import edu.ncsu.csc573.project.commlayer.IPoint;
 import edu.ncsu.csc573.project.commlayer.IZone;
 import edu.ncsu.csc573.project.commlayer.Point;
@@ -21,7 +20,6 @@ import edu.ncsu.csc573.project.common.messages.GetResponse;
 import edu.ncsu.csc573.project.common.messages.IParameter;
 import edu.ncsu.csc573.project.common.messages.IRequest;
 import edu.ncsu.csc573.project.common.messages.IResponse;
-import edu.ncsu.csc573.project.common.messages.InvalidResponseMessage;
 import edu.ncsu.csc573.project.common.messages.JoinResponse;
 import edu.ncsu.csc573.project.common.messages.LeaveResponse;
 import edu.ncsu.csc573.project.common.messages.LoginResponseMessage;
@@ -35,7 +33,6 @@ import edu.ncsu.csc573.project.common.messages.RegisterResponseMessage;
 import edu.ncsu.csc573.project.common.messages.SearchResponseMessage;
 import edu.ncsu.csc573.project.controllayer.hashspacemanagement.HashSpaceManager;
 import edu.ncsu.csc573.project.controllayer.hashspacemanagement.HashSpaceManagerFactory;
-import edu.ncsu.csc573.project.controllayer.hashspacemanagement.IHashSpaceManager;
 import edu.ncsu.csc573.project.controllayer.hashspacemanagement.Query;
 import edu.ncsu.csc573.project.controllayer.usermanagement.IUsersManager;
 import edu.ncsu.csc573.project.controllayer.usermanagement.User;
@@ -265,6 +262,8 @@ public class RequestProcessor {
 			int count = 0;
 			response = new JoinResponse();
 			IZone child = myZone.split(count);
+			
+			
 			JoinResponse joinResponse = new JoinResponse();
 			
 			// send first, last hash and peer id
@@ -283,6 +282,9 @@ public class RequestProcessor {
 			joinParams.add(EnumParamsType.STATUSCODE, 1);
 			joinParams.add(EnumParamsType.MESSAGE, "Successfully executed request");
 			joinResponse.createRequest(EnumOperationType.JOINRESPONSE, joinParams);
+			
+			// update routing table in that direction
+			Router.getInstance().update(count, child.getStart(), req.getParameter().getParamValue(EnumParamsType.IPADDRESS).toString());
 			count++;
 			count = count % 15;
 			break;
@@ -294,8 +296,13 @@ public class RequestProcessor {
 			myZone.setStart(new Point(joinresp.getFirsthash()));
 			myZone.setEnd(new Point(joinresp.getLasthash()));
 			
-			//Router.getInstance().u
+			// update routing table
+			Router.getInstance().setRoutingTable(joinresp.getTable());
 			
+			// update its repository
+			hashSpaceManager.handlePublishRequest(joinresp.getFile());
+			
+			// send ack response
 			response = new ACKResponse();
 			break;
 		case LEAVE:
@@ -352,7 +359,6 @@ public class RequestProcessor {
 	}
 
 	// public void
-
 	public synchronized IZone getMyZone() {
 		if (myZone == null) {
 			myZone = new Zone();

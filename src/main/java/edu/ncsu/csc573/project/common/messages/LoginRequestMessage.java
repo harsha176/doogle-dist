@@ -22,7 +22,7 @@ public class LoginRequestMessage extends RequestMessage {
 		
 		lpt.setUsername((getParameter().getParamValue(EnumParamsType.USERNAME).toString()));
 		lpt.setPassword(getParameter().getParamValue(EnumParamsType.PASSWORD).toString());
-		lpt.setPassword(getParameter().getParamValue(EnumParamsType.IPADDRESS).toString());
+		lpt.setIpaddress(getParameter().getParamValue(EnumParamsType.IPADDRESS).toString());
 		
 		loginType.setParams(lpt);
 		login.setLogin(loginType);

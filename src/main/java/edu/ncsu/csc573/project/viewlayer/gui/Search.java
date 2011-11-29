@@ -17,6 +17,7 @@ import edu.ncsu.csc573.project.common.messages.EnumParamsType;
 import edu.ncsu.csc573.project.common.messages.IParameter;
 import edu.ncsu.csc573.project.common.messages.IRequest;
 import edu.ncsu.csc573.project.common.messages.IResponse;
+import edu.ncsu.csc573.project.common.messages.LeaveRequest;
 import edu.ncsu.csc573.project.common.messages.LogoutRequestMessage;
 import edu.ncsu.csc573.project.common.messages.Parameter;
 import edu.ncsu.csc573.project.common.messages.PublishRequestMessage;
@@ -215,6 +216,9 @@ private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 // TODO add your handling code here:
     Logger logger = Logger.getLogger(Search.class);
     try {
+    	// send leave request
+    	LeaveRequest lr = new LeaveRequest();
+    	
         IRequest logoutRequest = new LogoutRequestMessage();
         IParameter Logoutparams = new Parameter();
         logger.debug(Session.getInstance().getUsername());

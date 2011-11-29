@@ -25,6 +25,7 @@ public class Router implements IRouter {
 	IZone zone;
 	Logger logger;
 	private static Router instance = null;
+	private boolean isInitialized = false;
 	
 	private Router() {
 		logger = Logger.getLogger(Router.class);
@@ -49,6 +50,7 @@ public class Router implements IRouter {
 
 	public void setRoute(String[] route) {
 		routingTable[Integer.parseInt(route[0])] = route;
+		isInitialized = true;
 	}
 
 	public void update(int direction, IPoint p, String add) {
@@ -59,6 +61,7 @@ public class Router implements IRouter {
 				+ " is : "
 				+ ByteOperationUtil.printCoordinates(ByteOperationUtil
 						.convertStringToBytes(p.getAsString())));
+		isInitialized = true;
 	}
 
 	public String getNextHop(IPoint destPoint) {
@@ -94,5 +97,20 @@ public class Router implements IRouter {
 			list.add(tp);
 		}
 		return list;
+	}
+	
+	public void setRoutingTable(List<TableParamType> list) {
+		int i = 0;
+		for(TableParamType tpt : list) {
+			int dir = tpt.getDirection();
+			routingTable[dir][0] = String.valueOf(dir);
+			routingTable[dir][1] = tpt.getPeerid();
+			routingTable[dir][2] = tpt.getNexthop();
+		}
+		isInitialized = true;
+	}
+	
+	public boolean isInitialized() {
+		return isInitialized;
 	}
 }

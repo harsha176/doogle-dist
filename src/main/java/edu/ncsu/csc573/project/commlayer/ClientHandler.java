@@ -118,6 +118,7 @@ public class ClientHandler implements Runnable {
 					
 				} catch (Exception e) {
 					logger.error("Unable to parse request", e);
+					req = null;
 				}
 				//logger.info("Waiting for requests from client :" + clientAddress);
 			} while (req == null || req.getOperationType() != EnumOperationType.LOGOUT);

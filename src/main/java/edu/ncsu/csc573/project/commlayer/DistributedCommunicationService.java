@@ -22,6 +22,7 @@ public class DistributedCommunicationService extends CommunicationService {
 		processor = RequestProcessor.getInstance();
 		adminfilter = new AdminServerFilter();
 		logger = Logger.getLogger(DistributedCommunicationService.class);
+		router = Router.getInstance();
 	}
 
 	/**
@@ -35,6 +36,9 @@ public class DistributedCommunicationService extends CommunicationService {
 		String destPeerIP;
 		IResponse response;
 
+		if(!router.isInitialized()) {
+			return super.executeRequest(request);
+		}
 		/*
 		 * Check if it is a valid request for the node.
 		 */

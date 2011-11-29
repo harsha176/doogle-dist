@@ -10,6 +10,7 @@
  */
 package edu.ncsu.csc573.project.viewlayer.gui;
 
+import edu.ncsu.csc573.project.commlayer.CommunicationService;
 import edu.ncsu.csc573.project.commlayer.CommunicationServiceFactory;
 import edu.ncsu.csc573.project.commlayer.Point;
 import edu.ncsu.csc573.project.common.ConfigurationManager;
@@ -278,7 +279,7 @@ public class Login extends javax.swing.JFrame {
 					LoggedIn.setTitle("Hello " + username.getText()
 							+ " , Welcome!!");
 					String joinPeerIP = response.getParameter()
-							.getParamValue(EnumParamsType.IPADDRESS).toString();
+							.getParamValue(EnumParamsType.MESSAGE).toString();
 					/*
 					 * if this is the first peer set its zone to entire
 					 * Hashspace
