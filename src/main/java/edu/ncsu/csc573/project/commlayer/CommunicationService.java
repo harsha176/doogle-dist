@@ -260,7 +260,7 @@ public class CommunicationService implements ICommunicationService {
 				if (isToBeStopped) {
 					logger.info("No response received for the request with in the specified time");
 					logger.info("returning default response");
-					response = new InvalidResponseMessage(1,
+					response = new InvalidResponseMessage(
 							request.getOperationType() + " request timedout");
 					return;
 				}

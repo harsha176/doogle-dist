@@ -16,4 +16,6 @@ public interface IFilter {
 	 * @return
 	 */
 	public boolean isRequestValid(EnumOperationType opType);
+	
+	public boolean isAdminServer();
 }

@@ -113,7 +113,7 @@ public abstract class ResponseMessage extends RequestMessage implements
 			res = new SearchResponseMessage();
 			res.parseXML(XML);
 		}else if (XML.indexOf("Invalid") != -1) {
-			res = new InvalidResponseMessage(1, "");
+			res = new InvalidResponseMessage("");
 			res.parseXML(XML);
 		}
 		 else {

@@ -10,26 +10,6 @@ package edu.ncsu.csc573.project.common.messages;
  * 
  */
 public enum EnumParamsType {
-	USERNAME, 
-	EMAIL_ID, 
-	PASSWORD, 
-	DESIGNATION, 
-	SEARCHKEY, 
-	IPADDRESS, 
-	FILENAME, 
-	FILESIZE, 
-	ABSTRACT, 
-	FILEDIGEST, 
-	DELIMITER, 
-	CUSTOM, 
-	STATUSCODE, 
-	MESSAGE,
-        FIRSTNAME,
-        LASTNAME,
-        NEWPASSWORD,
-        PEERID,
-        FIRSTHASH,
-        LASTHASH,
-        NEXTHOP     // Used
-																																						// different.// It can be used for other fields as well.
+	USERNAME, EMAIL_ID, PASSWORD, DESIGNATION, SEARCHKEY, IPADDRESS, FILENAME, FILESIZE, ABSTRACT, FILEDIGEST, DELIMITER, CUSTOM, STATUSCODE, MESSAGE, FIRSTNAME, LASTNAME, NEWPASSWORD, PEERID, FIRSTHASH, LASTHASH, NEXTHOP, // Used
+	DIRECTION, MYIPADDRESS// different.// It can be used for other fields as well.
 }

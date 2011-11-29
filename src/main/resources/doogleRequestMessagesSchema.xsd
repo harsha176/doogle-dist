@@ -20,9 +20,9 @@
 			<xs:element name="ForgotPWD" type="ForgotPasswdType"></xs:element>
 			<xs:element name="Search" type="SearchType"></xs:element>
 			<xs:element name="Publish" type="PublishType"></xs:element>
-                        <xs:element name="ChangePassword" type="ChangePasswordType"></xs:element>
-                        <xs:element name="Join" type="JoinType"></xs:element>
-                        <xs:element name="Leave" type="LeaveType"></xs:element>
+             <xs:element name="ChangePassword" type="ChangePasswordType"></xs:element>
+             <xs:element name="Join" type="JoinType"></xs:element>
+             <xs:element name="Leave" type="LeaveType"></xs:element>
                         <xs:element name="Put" type="PutType"></xs:element>
                         <xs:element name="Get" type="GetType"></xs:element>
 		</xs:choice>
@@ -58,6 +58,7 @@
 		<xs:sequence>
 			<xs:element name="username" type="xs:string" />
 			<xs:element name="password" type="xs:string" />
+			<xs:element name="ipaddress" type="xs:string" />
 		</xs:sequence>
 	</xs:complexType>
 
@@ -168,19 +169,18 @@
 	</xs:complexType>
 	<xs:complexType name="LeaveTypeParams">
 		<xs:sequence>
-			<xs:element name="ipaddress" type="xs:string" />
+			<xs:element name="myipaddress" type="xs:string" />
 			<xs:element name="peerid" type="xs:string" />
-                        <xs:element name="firsthash" type="xs:string" />
-                        <xs:element name="lasthash" type="xs:string" />
-                        <xs:element name="File" type="FileParamType" maxOccurs="100" />
-                        <xs:element name="Table" type="TableParamType" maxOccurs="100" />                   
+            <xs:element name="firsthash" type="xs:string" />
+            <xs:element name="lasthash" type="xs:string" />
+            <xs:element name="File" type="FileParamType" maxOccurs="100" />
+            <xs:element name="Table" type="TableParamType" maxOccurs="100" />                   
 		</xs:sequence>
 	</xs:complexType>
-        
-        	<xs:complexType name="TableParamType">
+        <xs:complexType name="TableParamType">
 		<xs:sequence>
-			<xs:element name="firsthash" type="xs:string" />
-			<xs:element name="lasthash" type="xs:string" />
+			<xs:element name="direction" type="xs:int" />
+			<xs:element name="peerid" type="xs:string" />
 			<xs:element name="nexthop" type="xs:string" />
 		</xs:sequence>
 		<xs:attribute name="entry" type="xs:int" use="required"></xs:attribute>

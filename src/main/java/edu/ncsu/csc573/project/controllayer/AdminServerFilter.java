@@ -24,4 +24,8 @@ public class AdminServerFilter implements IFilter {
 		 }
 		return false;
 	}
+	
+	public boolean isAdminServer() {
+		return isAdminServer;
+	}
 }

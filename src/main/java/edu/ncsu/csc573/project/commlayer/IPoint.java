@@ -8,4 +8,6 @@ public interface IPoint {
 	public int getIntercept(int direction);
 	
 	public void setIntercept(int direction, int value);
+	
+	public String getAsString();
 }

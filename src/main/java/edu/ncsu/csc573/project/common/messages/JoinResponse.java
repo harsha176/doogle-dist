@@ -5,45 +5,106 @@
 package edu.ncsu.csc573.project.common.messages;
 
 import edu.ncsu.csc573.project.common.schema.CommandResponseType;
+import edu.ncsu.csc573.project.common.schema.FileParamType;
 import edu.ncsu.csc573.project.common.schema.JoinResponseType;
 import edu.ncsu.csc573.project.common.schema.JoinResponseTypeParams;
 import edu.ncsu.csc573.project.common.schema.Response;
+import edu.ncsu.csc573.project.common.schema.TableParamType;
+
 import java.math.BigInteger;
-import org.apache.log4j.Logger;
+import java.util.List;
+import javax.xml.bind.JAXBException;
 
 /**
- *
+ * 
  * @author krishna
  */
 public class JoinResponse extends ResponseMessage {
-     private Logger logger;
+	// private Logger logger;
+	private JoinResponseTypeParams joinResponseTypeParams;
+
+	public JoinResponse() {
+		super();
+		joinResponseTypeParams = new JoinResponseTypeParams();
+	}
+	public List<FileParamType> getFile() {
+		return joinResponseTypeParams.getFile();
+	}
+
+	public String getMyipaddress() {
+		return joinResponseTypeParams.getMyipaddress();
+	}
+
+	public String getFirsthash() {
+		return joinResponseTypeParams.getFirsthash();
+	}
+
+	public String getLasthash() {
+		return joinResponseTypeParams.getLasthash();
+	}
+
+	public String getPeerid() {
+		return joinResponseTypeParams.getPeerid();
+	}
+
+	public void setLasthash(String lasthash) {
+		joinResponseTypeParams.setLasthash(lasthash);
+	}
+
+	public List<TableParamType> getTable() {
+		return joinResponseTypeParams.getTable();
+	}
+
+	public void setMyipaddress(String myipaddress) {
+		joinResponseTypeParams.setMyipaddress(myipaddress);
+	}
+
+	public void setPeerid(String peerid) {
+		joinResponseTypeParams.setPeerid(peerid);
+	}
+
+	public void setFirsthash(String firsthash) {
+		joinResponseTypeParams.setFirsthash(firsthash);
+	}
 
 	public String getRequestInXML() throws Exception {
-	logger = Logger.getLogger(LoginRequestMessage.class);
+		// logger = Logger.getLogger(LoginRequestMessage.class);
 
 		Response req = new Response();
 		req.setId(BigInteger.valueOf(System.currentTimeMillis()));
 		CommandResponseType Putresponse = new CommandResponseType();
 		JoinResponseType rt = new JoinResponseType();
-		JoinResponseTypeParams rpt = new JoinResponseTypeParams();
-		
-		rpt.setStatuscode((BigInteger)(getParameter().getParamValue(EnumParamsType.STATUSCODE)));
-		rpt.setMessage(getParameter().getParamValue(EnumParamsType.MESSAGE).toString());
-                rpt.setIpaddress((getParameter().getParamValue(EnumParamsType.IPADDRESS).toString()));
-		rpt.setPeerid(getParameter().getParamValue(EnumParamsType.PEERID).toString());
-                rpt.setFirsthash(getParameter().getParamValue(EnumParamsType.FIRSTHASH).toString());
-                rpt.setLasthash(getParameter().getParamValue(EnumParamsType.LASTHASH).toString());
-                //
-                
-		rt.setParams(rpt);
+
+		joinResponseTypeParams.setStatuscode((BigInteger) (getParameter()
+				.getParamValue(EnumParamsType.STATUSCODE)));
+		joinResponseTypeParams.setMessage(getParameter().getParamValue(
+				EnumParamsType.MESSAGE).toString());
+		rt.setParams(joinResponseTypeParams);
 		Putresponse.setJoinResponse(rt);
 		req.setCommand(Putresponse);
-		
+
 		return getXML(req);
 	}
 
 	public void parseXML(String XML) {
-		
+		Response req;
+		try {
+			req = getResponse(XML);
+			CommandResponseType command = req.getCommand();
+			JoinResponseType joinResponse = command.getJoinResponse();
+			joinResponseTypeParams = joinResponse.getParams();
+			IParameter param = new Parameter();
+			param.add(EnumParamsType.STATUSCODE,
+					joinResponseTypeParams.getStatuscode());
+			param.add(EnumParamsType.MESSAGE,
+					joinResponseTypeParams.getMessage());
+
+			this.setOperationType(EnumOperationType.JOINRESPONSE);
+			this.setParameter(param);
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-    
+
 }

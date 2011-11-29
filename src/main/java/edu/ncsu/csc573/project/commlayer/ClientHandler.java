@@ -44,7 +44,7 @@ public class ClientHandler implements Runnable {
 	
 	public void run() {
 		SocketAddress clientAddress = conncetedSocket.getRemoteSocketAddress();
-		RequestProcessor reqProcessor = new RequestProcessor();
+		RequestProcessor reqProcessor = RequestProcessor.getInstance();
 		logger.info("Handling client " + clientAddress);
 		
 		boolean isFileTransfer = false;

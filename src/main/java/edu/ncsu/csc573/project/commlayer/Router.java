@@ -1,11 +1,15 @@
 package edu.ncsu.csc573.project.commlayer;
 
 import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import edu.ncsu.csc573.project.common.ByteOperationUtil;
 import edu.ncsu.csc573.project.common.ConfigurationManager;
+import edu.ncsu.csc573.project.common.messages.TableParam;
+import edu.ncsu.csc573.project.common.schema.TableParamType;
 
 /**
  * 
@@ -20,8 +24,9 @@ public class Router implements IRouter {
 			.getDimensions()][3];
 	IZone zone;
 	Logger logger;
-
-	public Router() {
+	private static Router instance = null;
+	
+	private Router() {
 		logger = Logger.getLogger(Router.class);
 		for (int i = 0; i < ConfigurationManager.getInstance().getDimensions(); i++) {
 			routingTable[i] = new String[3];
@@ -31,6 +36,13 @@ public class Router implements IRouter {
 		}
 	}
 
+	public static Router getInstance() {
+		if(instance == null) {
+			instance  = new Router();
+		}
+		return instance;
+	}
+	
 	public String[] getRoute(int direction) {
 		return routingTable[direction];
 	}
@@ -46,7 +58,7 @@ public class Router implements IRouter {
 				+ direction
 				+ " is : "
 				+ ByteOperationUtil.printCoordinates(ByteOperationUtil
-						.convertStringToBytes(p.toString())));
+						.convertStringToBytes(p.getAsString())));
 	}
 
 	public String getNextHop(IPoint destPoint) {
@@ -57,7 +69,7 @@ public class Router implements IRouter {
 
 		logger.info("Destination point co-ordinates : "
 				+ ByteOperationUtil.printCoordinates(ByteOperationUtil
-						.convertStringToBytes(destPoint.toString())));
+						.convertStringToBytes(destPoint.getAsString())));
 		for (int i = 0; i < ConfigurationManager.getInstance().getDimensions(); i++) {
 			IPoint currPoint = new Point(routingTable[i][1]);
 			if (currPoint.isPointGreater(destPoint, i)) {
@@ -72,4 +84,15 @@ public class Router implements IRouter {
 		return routingTable;
 	}
 
+	public List<TableParamType> getRoutingTableAsList() {
+		List<TableParamType> list = new ArrayList<TableParamType>();
+		for(int i = 0; i < ConfigurationManager.getInstance().getDimensions(); i++) {
+			TableParamType tp = new TableParamType();
+			tp.setDirection(i);
+			tp.setPeerid(routingTable[i][1]);
+			tp.setNexthop(routingTable[i][2]);
+			list.add(tp);
+		}
+		return list;
+	}
 }

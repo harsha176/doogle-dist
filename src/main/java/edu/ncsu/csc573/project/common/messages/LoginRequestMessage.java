@@ -22,7 +22,8 @@ public class LoginRequestMessage extends RequestMessage {
 		
 		lpt.setUsername((getParameter().getParamValue(EnumParamsType.USERNAME).toString()));
 		lpt.setPassword(getParameter().getParamValue(EnumParamsType.PASSWORD).toString());
-
+		lpt.setPassword(getParameter().getParamValue(EnumParamsType.IPADDRESS).toString());
+		
 		loginType.setParams(lpt);
 		login.setLogin(loginType);
 		req.setCommand(login);
@@ -40,7 +41,7 @@ public class LoginRequestMessage extends RequestMessage {
 			IParameter param = new Parameter();
 			param.add(EnumParamsType.USERNAME, loginparams.getUsername());
 			param.add(EnumParamsType.PASSWORD, loginparams.getPassword());
-
+			param.add(EnumParamsType.IPADDRESS, loginparams.getIpaddress());
 			this.setOperationType(EnumOperationType.LOGIN);
 			this.setParameter(param);
 		} catch(Exception e) {

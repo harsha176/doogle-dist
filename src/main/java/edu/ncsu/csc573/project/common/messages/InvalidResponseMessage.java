@@ -55,7 +55,7 @@ public class InvalidResponseMessage extends ResponseMessage {
 		} 
 	} 
 	
-	public InvalidResponseMessage(int status, String message) {
+	public InvalidResponseMessage(BigInteger status, String message) {
 		super();
 		IParameter param = new Parameter();
 		param.add(EnumParamsType.STATUSCODE, status);
@@ -66,6 +66,6 @@ public class InvalidResponseMessage extends ResponseMessage {
 	}
 	
 	public InvalidResponseMessage(String message) {
-		this(1, message);
+		this(new BigInteger(String.valueOf(1)), message);
 	}
 }

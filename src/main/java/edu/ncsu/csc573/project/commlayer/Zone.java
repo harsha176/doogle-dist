@@ -55,4 +55,8 @@ public class Zone implements IZone {
 	public void setEnd(IPoint end) {
 		this.end = end;
 	}
+	
+	public String toString() {
+		return "Zone -> start : " + start.toString() + " end : " + end.toString();
+	}
 }
