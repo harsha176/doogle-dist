@@ -227,7 +227,7 @@ public class UsersManager extends IUsersManager {
 			message.setRecipients(Message.RecipientType.TO,
 					InternetAddress.parse(aUser.getEmailID()));
 			message.setSubject(SUBJECT);
-			message.setText(ENDEARMENTS + aUser.getFirstName() + " " + aUser.getLastName() + ","+ System.lineSeparator()+
+			message.setText(ENDEARMENTS + aUser.getFirstName() + " " + aUser.getLastName() + ","+ System.getProperty("line.separator")+
 					EMAIL_BODY + EncDecUtil.decryptMessage(aUser.getPassword()));
  
 			Transport.send(message);
