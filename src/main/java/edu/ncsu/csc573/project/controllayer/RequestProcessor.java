@@ -149,7 +149,7 @@ public class RequestProcessor {
 					 * choose random peer
 					 */
 					Random r = new Random();
-					joinIp = peers.get(r.nextInt(peers.size() - 1));
+					joinIp = peers.get(r.nextInt(peers.size()));
 					logger.debug("Selected peer is " + joinIp);
 				}
 				/*

@@ -72,7 +72,7 @@ public class ClientHandler implements Runnable {
 				
 				StringBuffer sb = new StringBuffer();
 				int c;
-				while ((c = br.read()) != -1 && (sb.indexOf("</Request>") == -1 || sb.indexOf("</Response>") == -1)) {
+				while ((c = br.read()) != -1 && sb.indexOf("</Request>") == -1 && sb.indexOf("</Response>") == -1) {
 					//logger.debug(c);
 					sb.append((char) c);
 				}
@@ -82,7 +82,6 @@ public class ClientHandler implements Runnable {
 				/*
 				 * Handle file requests 
 				 */
-
 				if(sb.indexOf("File:") != -1) {
 					File toBeUploadedFile = new File(ConfigurationManager.getInstance().getPublishDirectory(),getFileName(sb));
 					transferFile(conncetedSocket.getOutputStream(), toBeUploadedFile);
@@ -114,11 +113,22 @@ public class ClientHandler implements Runnable {
 					/*
 					 * send response to destination host
 					 */
-					req.getParameter().getParamValue(EnumParamsType.IPADDRESS);
-					
+					//String destIPAddress = req.getParameter().getParamValue(EnumParamsType.IPADDRESS).toString();
+					//Socket destSoc = new Socket(destIPAddress, ConfigurationManager.getInstance().getServerPort());
+					/*PrintWriter pw1 = new PrintWriter(new BufferedWriter(
+							new OutputStreamWriter(
+									destSoc.getOutputStream())));
+					*/
+					pw.println(response.getRequestInXML());
+					pw.flush();
+					logger.debug("Successfully sent response: " + response.getRequestInXML());
+					//logger.info("Sending response to peer");
+					//distCommService.executeRequest(response, destIPAddress);
+					//logger.info();
 				} catch (Exception e) {
 					logger.error("Unable to parse request", e);
-					req = null;
+					//req = null;
+					break;
 				}
 				//logger.info("Waiting for requests from client :" + clientAddress);
 			} while (req == null || req.getOperationType() != EnumOperationType.LOGOUT);

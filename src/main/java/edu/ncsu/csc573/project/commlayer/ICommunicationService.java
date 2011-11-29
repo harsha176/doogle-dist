@@ -54,6 +54,8 @@ public interface ICommunicationService {
 	 * @see IResponse
 	 */
 	public IResponse executeRequest(IRequest request) throws Exception;
+	
+	public IResponse executeRequest(IRequest request, String ipaddress) throws Exception;
 
 	/**
 	 * This method allows peer to send a request to BootStrap server and call

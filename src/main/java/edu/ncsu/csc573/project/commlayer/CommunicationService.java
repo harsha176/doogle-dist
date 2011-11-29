@@ -171,6 +171,30 @@ public class CommunicationService implements ICommunicationService {
 		return bt.getResponse();
 	}
 
+	public IResponse executeRequest(IRequest request, String ipaddress) throws Exception {
+		BlockingThread bt = new BlockingThread(new Socket(ipaddress, ConfigurationManager.getInstance().getServerPort()), request, "Op: "
+				+ request.getOperationType() + " req thread ");
+		bt.start();
+		try {
+			bt.join(ConfigurationManager.getInstance().getCLITimeOut());
+			bt.stopListener();
+			if (!bt.isResponseReady()) {
+				logger.info("Failed to get response for the request : "
+						+ request.getOperationType());
+				throw new Exception();
+			} else {
+				logger.info("Received response : " + bt.getResponse());
+			}
+		} catch (InterruptedException e) {
+
+		} finally {
+			// CHANGE IT: this comment will not work for centralized system.
+			//if (bt.getResponse().getOperationType() == EnumOperationType.LOGOUTRESPONSE) {
+				clientSocket.close();
+			//}
+		}
+		return bt.getResponse();
+	}
 	/*
 	 * (non-Javadoc)
 	 * 

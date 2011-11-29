@@ -36,7 +36,7 @@ public class DistributedCommunicationService extends CommunicationService {
 		String destPeerIP;
 		IResponse response;
 
-		if(!router.isInitialized()) {
+		if(!adminfilter.isAdminServer() && !router.isInitialized()) {
 			return super.executeRequest(request);
 		}
 		/*
