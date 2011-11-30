@@ -270,7 +270,12 @@ public class Login extends javax.swing.JFrame {
 				BigInteger statusCode = response.getStatus().getErrorId();
 				if (statusCode.intValue() == 0) {
 					logger.info("Closing bootstrap server connect");
-					CommunicationServiceFactory.getInstance().close();
+					CommunicationServiceFactory.getInstance().closeClientSocket();
+                                        /*while(CommunicationServiceFactory.getInstance().isPeerServerRunning()) {
+                                            logger.debug("Server is still running");
+                                            Thread.sleep(1000);
+                                        }*/
+                                        logger.debug("Server status : " + CommunicationServiceFactory.getInstance().isPeerServerRunning());
 					Session.createInstance(username.getText());
 					Search LoggedIn = new Search();
 					this.setVisible(false);
@@ -280,6 +285,7 @@ public class Login extends javax.swing.JFrame {
 							+ " , Welcome!!");
 					String joinPeerIP = response.getParameter()
 							.getParamValue(EnumParamsType.MESSAGE).toString();
+                                        logger.debug("Join peer ip is : " + joinPeerIP);
 					/*
 					 * if this is the first peer set its zone to entire
 					 * Hashspace
@@ -299,7 +305,7 @@ public class Login extends javax.swing.JFrame {
 					} else {
 						// connect to join peer
 						CommunicationServiceFactory.getInstance().initialize(
-								joinPeerIP, null);
+								joinPeerIP.trim(), null);
 						// send join request
 						IRequest joinRequest = new JoinRequest();
 						IParameter params = new Parameter();
@@ -310,7 +316,8 @@ public class Login extends javax.swing.JFrame {
 								Point.generateRandomPoint());
 						joinRequest.createRequest(EnumOperationType.JOIN,
 								params);
-
+                                                logger.info("Join request: " + joinRequest.getRequestInXML());
+                                                        
 						response = CommunicationServiceFactory.getInstance()
 								.executeRequest(joinRequest);
 						// update zone and file repository based on response
@@ -362,10 +369,10 @@ public class Login extends javax.swing.JFrame {
 
 	/*
 	 * private void forgotpwdlinkActionPerformed(java.awt.event.ActionEvent evt)
-	 * {//GEN-FIRST:event_forgotpwdlinkActionPerformed // TODO add your handling
+	 * {                                                                        
 	 * code here: Forgotpwd Forgotpassword = new Forgotpwd();
 	 * this.setVisible(false); Forgotpassword.setVisible(true);
-	 * }//GEN-LAST:event_forgotpwdlinkActionPerformed
+	 * }                                             
 	 */
 
 	private void forgotPwdActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_forgotPwdActionPerformed

@@ -240,6 +240,7 @@ private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     String emailUsers = emailUser.getText();
     String username = usernameData.getText();
     String des = null;
+    String EmailRegEx = ".*"+"@"+".*"+".com$";
     if (faculty.isSelected())
     {
        des = faculty.getText(); 
@@ -260,7 +261,7 @@ private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     {
       UsernameErrors();
     }
-    String EmailRegEx = ".*"+"@"+".*"+".com$";
+
     try {
         boolean isValid = Pattern.matches(EmailRegEx,emailUsers);
          if(!isValid) {

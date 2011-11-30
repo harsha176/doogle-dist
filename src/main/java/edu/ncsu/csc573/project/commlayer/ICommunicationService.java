@@ -114,4 +114,6 @@ public interface ICommunicationService {
 	 * 
 	 */
 	public void close()throws Exception;
+        
+        public void closeClientSocket() throws Exception;
 }

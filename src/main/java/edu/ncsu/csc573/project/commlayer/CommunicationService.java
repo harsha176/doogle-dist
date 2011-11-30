@@ -91,6 +91,7 @@ public class CommunicationService implements ICommunicationService {
 		logger.debug("Enabled Keepalive socket option");
 		try {
 			clientSocket.connect(serverSocket, timeOut);
+                        logger.debug("Connected to " + clientSocket);
 		} catch (SocketTimeoutException e) {
 			logger.error("Connection timed out", e);
 			cleanUp();
@@ -239,6 +240,17 @@ public class CommunicationService implements ICommunicationService {
 		server.stop();
 	}
 
+        public void closeClientSocket() throws Exception {
+		if (clientSocket == null) {
+			throw new Exception("Communication Layer is not initialized");
+		}
+		try {
+			clientSocket.close();
+		} catch (Exception e) {
+			logger.error("Failed to close socket. Trying again");
+		}
+	}
+        
 	public boolean isConnected() {
 		if (clientSocket == null) {
 			logger.info("Communication Layer is not initialized");
