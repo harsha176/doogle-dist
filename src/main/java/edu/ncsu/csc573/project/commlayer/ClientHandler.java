@@ -143,14 +143,14 @@ public class ClientHandler implements Runnable {
 					try {
 						req = RequestMessage.createRequest(sb.toString().trim());
 					} catch (Exception e) {
-						logger.error("Received invalid request or response " + sb.toString());
+						logger.error("Received invalid request or response " + sb.toString(), e);
 						return ;
 					}
 					try {
 						logger.info("Resquest from peer is : "
 								+ req.getRequestInXML());
 					} catch (Exception e) {
-						logger.error("Unable to parse request");
+						logger.error("Unable to parse request", e);
 						return ;
 					}
 					
@@ -163,7 +163,7 @@ public class ClientHandler implements Runnable {
 					try {
 						pw.println(forwardReqOrResp.getRequestInXML());
 					} catch (Exception e) {
-						logger.error("Received invalid response or request from Request processor " + forwardReqOrResp.getOperationType());
+						logger.error("Received invalid response or request from Request processor " + forwardReqOrResp.getOperationType(),e);
 					}
 					pw.flush();
 					try {

@@ -69,7 +69,7 @@ public class ResponseProcessor {
 						ConfigurationManager.getInstance()
 								.getHostInterface());
 				params.add(EnumParamsType.PEERID,
-						Point.generateRandomPoint());
+						Point.generateRandomPoint().getAsString());
 				joinRequest.createRequest(EnumOperationType.JOIN,
 						params);
                 try {
