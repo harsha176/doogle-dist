@@ -19,6 +19,7 @@ import edu.ncsu.csc573.project.common.messages.IParameter;
 import edu.ncsu.csc573.project.common.messages.IRequest;
 import edu.ncsu.csc573.project.common.messages.IResponse;
 import edu.ncsu.csc573.project.common.messages.Parameter;
+import edu.ncsu.csc573.project.controllayer.Controller;
 import edu.ncsu.csc573.project.controllayer.Session;
 import java.io.File;
 import java.math.BigInteger;
@@ -233,23 +234,8 @@ private void changepwdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
    //Communication handler instance
    else {
             try {
-                //Comm layer instance
-              IRequest changeRequest = new ChangePasswordRequestMessage();
-              IParameter Changeparams = new Parameter();
-              Changeparams.add(EnumParamsType.USERNAME, Session.getInstance().getUsername());
-              Changeparams.add(EnumParamsType.PASSWORD, oldpasswd.getText());
-              Changeparams.add(EnumParamsType.NEWPASSWORD, newpasswd.getText());
-              changeRequest.createRequest(EnumOperationType.CHANGEPASSWORD, Changeparams);
-              IResponse response = CommunicationServiceFactory.getInstance().executeRequest(changeRequest);
-              BigInteger statusCode = response.getStatus().getErrorId();
-              (Logger.getLogger(SettingsFrame.class)).debug(statusCode);
-              if(statusCode.intValue() == 0)
-              {
+              Controller.getInstance().changePasswd(newpasswd.getText(), oldpasswd.getText());
               PasswdChangeSuccess();
-              }
-              else{
-                  PasswdChangeFail();
-              }
             }
             //Comm instance to change password
             catch (Exception ex) {

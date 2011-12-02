@@ -24,6 +24,7 @@ import java.math.BigInteger;
 public abstract class ResponseMessage extends RequestMessage implements
 		IResponse {
 	private static Logger logger;
+	private String id;
 
 	// @Override
 	public IStatus getStatus() {
@@ -84,36 +85,36 @@ public abstract class ResponseMessage extends RequestMessage implements
 		return req;
 	}
 
-	public static IResponse createResponse(String XML) throws Exception {
+	public static IResponse createResponse(String XML, String id) throws Exception {
 		logger = Logger.getLogger(RequestMessage.class);
 		IResponse res = null;
 
 		if (XML.indexOf("Register") != -1) {
-			res = new RegisterResponseMessage();
+			res = new RegisterResponseMessage(id);
 			res.parseXML(XML);
 		} else if (XML.indexOf("Login") != -1) {
-			res = new LoginResponseMessage();
+			res = new LoginResponseMessage(id);
 			res.parseXML(XML);
 		} else if (XML.indexOf("Logout") != -1) {
-			res = new LogoutResponseMessage();
+			res = new LogoutResponseMessage(id);
 			res.parseXML(XML);
 		} else if (XML.indexOf("Publish") != -1) {
-			res = new PublishResponseMessage();
+			res = new PublishResponseMessage(id);
 			res.parseXML(XML);
 		} /*
 		 * else if(XML.indexOf("Search") != -1) { res = new
 		 * SearchResponseType(); res.parseXML(XML); }
 		 */else if (XML.indexOf("ForgotPWD") != -1) {
-			res = new ForgotPWDResponseMessage();
+			res = new ForgotPWDResponseMessage(id);
 			res.parseXML(XML);
 		} else if (XML.indexOf("ChangePassword") != -1) {
-			res = new ChangePasswordResponseMessage();
+			res = new ChangePasswordResponseMessage(id);
 			res.parseXML(XML);
 		} else if (XML.indexOf("Search") != -1) {
-			res = new SearchResponseMessage();
+			res = new SearchResponseMessage(id);
 			res.parseXML(XML);
 		}else if (XML.indexOf("Invalid") != -1) {
-			res = new InvalidResponseMessage("");
+			res = new InvalidResponseMessage(id, "");
 			res.parseXML(XML);
 		}
 		 else {

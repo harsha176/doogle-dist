@@ -36,14 +36,19 @@ public class TestRequestMessages {
 	 * @throws Exception
 	 * @throws JAXBException
 	 */
-	/*
+	
 	@Test
 	public void testRegisterRequestMessageToXML() throws Exception {
 		IRequest regRequest = getRegisterRequest();
 
 		try {
-			System.out.println(regRequest.getRequestInXML());
-			Assert.assertTrue("Successfully parsed xml", true);
+			String requestInXML = regRequest.getRequestInXML();
+			System.out.println(requestInXML);
+			String id = regRequest.getId();
+			Assert.assertNotSame("", regRequest.getId());
+			regRequest.parseXML(requestInXML);
+			Assert.assertEquals(id, regRequest.getId());
+			//Assert.assertTrue("Successfully parsed xml", true);
 		} catch (Exception e) {
 			Assert.fail();
 			// e.printStackTrace();
@@ -52,6 +57,7 @@ public class TestRequestMessages {
 
 	public static IRequest getRegisterRequest() throws Exception {
 		IRequest regRequest = new RegisterRequestMessage();
+		regRequest.setId(""+System.currentTimeMillis());
 		IParameter Regparams = new Parameter();
 		Regparams.add(EnumParamsType.USERNAME, "krishna");
 		Regparams.add(EnumParamsType.PASSWORD, "abcdef");
@@ -64,7 +70,7 @@ public class TestRequestMessages {
 		return regRequest;
 	}
 
-	@Test
+	/*@Test
 	public void testLoginRequestMessageToXML() throws Exception {
 		IRequest loginRequest = getLoginRequest();
 
@@ -75,19 +81,21 @@ public class TestRequestMessages {
 			Assert.fail();
 			// e.printStackTrace();
 		}
-	}
+	}*/
 
 	public static IRequest getLoginRequest() throws Exception {
 		IRequest loginRequest = new LoginRequestMessage();
+		loginRequest.setId(""+System.currentTimeMillis());
 		IParameter Loginparams = new Parameter();
 		Loginparams.add(EnumParamsType.USERNAME, "harsha176");
 		Loginparams.add(EnumParamsType.PASSWORD, "abcdef");
+		Loginparams.add(EnumParamsType.IPADDRESS, "127.0.0.1");
 		loginRequest.createRequest(EnumOperationType.LOGIN, Loginparams);
 		// System.out.println(regRequest.getRequestInXML());
 		return loginRequest;
 	}
 
-	@Test
+	/*@Test
 	public void testLogoutRequestMessageToXML() throws Exception {
 		IRequest logoutRequest = getLogoutRequest();
 

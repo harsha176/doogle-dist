@@ -18,12 +18,13 @@ import edu.ncsu.csc573.project.common.schema.Request;
  */
 public class LogoutRequestMessage extends RequestMessage {
     private Logger logger;
+	private String id;
 
 	public String getRequestInXML() throws Exception {
 	logger = Logger.getLogger(LogoutRequestMessage.class);
 
 		Request req = new Request();
-		req.setId(BigInteger.valueOf(System.currentTimeMillis()));
+		req.setId(id);
 		CommandRequestType logout = new CommandRequestType();
 		LogoutType logoutType = new LogoutType();
 		LogoutParamsType lpt = new LogoutParamsType();
@@ -41,7 +42,7 @@ public class LogoutRequestMessage extends RequestMessage {
 	public void parseXML(String XML) {
 		try {
 			Request req = getRequest(XML);
-			
+			id = req.getId();
 			CommandRequestType command = req.getCommand();
 			LogoutType logoutType = command.getLogout();
 			LogoutParamsType logoutparams = logoutType.getParams();
@@ -55,5 +56,15 @@ public class LogoutRequestMessage extends RequestMessage {
 			logger.error("Unable to parse request from string", e);
 		}
 	}
+	public String getId() {
+		return id;
+	}
 
+	public void setId(String id) {
+		this.id = String.valueOf(id);
+	}
+	
+	public LogoutRequestMessage() {
+		id = ""+System.currentTimeMillis();
+	}
 }

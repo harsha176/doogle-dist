@@ -18,6 +18,7 @@ import edu.ncsu.csc573.project.common.messages.IParameter;
 import edu.ncsu.csc573.project.common.messages.IRequest;
 import edu.ncsu.csc573.project.common.messages.IResponse;
 import edu.ncsu.csc573.project.common.messages.Parameter;
+import edu.ncsu.csc573.project.controllayer.Controller;
 
 /**
  *
@@ -100,16 +101,12 @@ private void enterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
 // TODO add your handling code here:
     //Comm Instance..Send data to server and mail success
     String username = userName.getText();
-    IRequest forgotPwd = new ForgotPwdRequestMessage();
-    IParameter forgotPwdparams = new Parameter();
-    forgotPwdparams.add(EnumParamsType.USERNAME, username);
-    forgotPwd.createRequest(EnumOperationType.FORGOTPASSWORD, forgotPwdparams);
-    try {
-         IResponse response = CommunicationServiceFactory.getInstance().executeRequest(forgotPwd);
-         ForgotpwdSuccessFailure SuccessFrame = new ForgotpwdSuccessFailure();
-         this.setVisible(false);
-         SuccessFrame.setVisible(true);
-         SuccessFrame.SuccessFrameTrue();    
+    try{
+    	Controller.getInstance().forgotPasswd(username);
+    	ForgotpwdSuccessFailure SuccessFrame = new ForgotpwdSuccessFailure();
+        this.setVisible(false);
+        SuccessFrame.setVisible(true);
+        SuccessFrame.SuccessFrameTrue();    
     }catch (Exception e)
     {
      ForgotpwdSuccessFailure SuccessFrame = new ForgotpwdSuccessFailure();

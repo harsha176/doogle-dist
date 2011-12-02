@@ -20,6 +20,7 @@ public abstract class RequestMessage implements IRequest {
 	private EnumOperationType operationType;
 	private IParameter params;
 	private static Logger logger;
+	private String id;
 	
 	/*
 	 * (non-Javadoc)
@@ -59,6 +60,7 @@ public abstract class RequestMessage implements IRequest {
 	public String getXML(Request req) throws Exception{
 		logger = Logger.getLogger(RequestMessage.class);
 		StringWriter reqXMLWriter = new StringWriter();
+		//req.setId(String.valueOf(System.currentTimeMillis()));
 		try {
 			JAXBContext context = JAXBContext.newInstance(Request.class);
 			Marshaller m = context.createMarshaller();

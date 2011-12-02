@@ -27,6 +27,7 @@ import edu.ncsu.csc573.project.controllayer.hashspacemanagement.IDigest;
 public class PublishRequestMessage extends RequestMessage {
 	private PublishSearchParameter pubParam;
 	private Logger logger;
+	private String id;
 
 	public IParameter getParameter() {
 		return pubParam;
@@ -50,7 +51,7 @@ public class PublishRequestMessage extends RequestMessage {
 
 	public String getRequestInXML() throws Exception {
 		Request req = new Request();
-		req.setId(BigInteger.valueOf(System.currentTimeMillis()));
+		req.setId(id);
 		CommandRequestType publish = new CommandRequestType();
 		PublishType publishType = new PublishType();
 		PublishTypeParams lpt = new PublishTypeParams();
@@ -135,6 +136,7 @@ public class PublishRequestMessage extends RequestMessage {
 
 		List<File> files = Arrays.asList(pubDir.listFiles(textFilter));
 		IRequest PublishRequest = new PublishRequestMessage();
+		//PublishRequest.setId();
 		PublishSearchParameter publishParams = new PublishSearchParameter();
 		String localIPAddress = ConfigurationManager.getInstance()
 				.getHostInterface();
@@ -178,5 +180,17 @@ public class PublishRequestMessage extends RequestMessage {
 			e.printStackTrace();
 		}
 		return sb.toString();
+	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = String.valueOf(id);
+	}
+	
+	public PublishRequestMessage()  {
+		id = ""+System.currentTimeMillis();
 	}
 }

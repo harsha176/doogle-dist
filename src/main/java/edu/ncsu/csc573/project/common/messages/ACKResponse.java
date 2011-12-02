@@ -17,13 +17,17 @@ import org.apache.log4j.Logger;
  */
 public class ACKResponse extends ResponseMessage {
     	private Logger logger;
+		private String id;
         
+		public ACKResponse(String id) {
+			this.id = id;
+		}
 	public String getRequestInXML() throws Exception {
 
 		logger = Logger.getLogger(ACKResponse.class);
 
 		Response req = new Response();
-		req.setId(BigInteger.valueOf(System.currentTimeMillis()));
+		req.setId(id);
 		CommandResponseType ACKresponse = new CommandResponseType();
 		ACKType rt = new ACKType();
 		ACKTypeParams rpt = new ACKTypeParams();
@@ -42,7 +46,7 @@ public class ACKResponse extends ResponseMessage {
 		logger = Logger.getLogger(ForgotPWDResponseMessage.class);
 		try {
 			Response req = getResponse(XML);
-			
+			id = req.getId();
 			CommandResponseType command = req.getCommand();
 			ACKType ackType = command.getACK();
 			ACKTypeParams regparams = ackType.getParams();
@@ -56,4 +60,11 @@ public class ACKResponse extends ResponseMessage {
 			logger.error("Unable to parse request from string", e);
 		} 
 	} 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = String.valueOf(id);
+	}
 }

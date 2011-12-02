@@ -2,6 +2,8 @@ package edu.ncsu.csc573.project.viewlayer.gui;
 
 import edu.ncsu.csc573.project.commlayer.CommunicationServiceFactory;
 import edu.ncsu.csc573.project.commlayer.ICommunicationService;
+import edu.ncsu.csc573.project.controllayer.Controller;
+
 import java.awt.event.KeyEvent;
 import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
@@ -36,7 +38,8 @@ public class connect extends javax.swing.JFrame {
             } else {
                 try {
                 // initialize communication handler
-                 commService.initialize(ipAddress, null);
+                 //commService.initialize(ipAddress, null);
+                Controller.getInstance().connect(ipAddress);
                 this.setVisible(false);
                 Login loginFrame = new Login();
                 loginFrame.setVisible(true);

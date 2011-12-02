@@ -17,12 +17,13 @@ import edu.ncsu.csc573.project.common.schema.Request;
  */
 public class ForgotPwdRequestMessage extends RequestMessage {
     private Logger logger;
+	private String id;
 
 	public String getRequestInXML() throws Exception {
 	logger = Logger.getLogger(ForgotPwdRequestMessage.class);
 
 		Request req = new Request();
-		req.setId(BigInteger.valueOf(System.currentTimeMillis()));
+		req.setId(id);
 		CommandRequestType forgotPwd = new CommandRequestType();
 		ForgotPasswdType forgotPwdType = new ForgotPasswdType();
 		ForgotPasswdParamsType lpt = new ForgotPasswdParamsType();
@@ -40,6 +41,7 @@ public class ForgotPwdRequestMessage extends RequestMessage {
 	public void parseXML(String XML) {
 		try {
 			Request req = getRequest(XML);
+			id = req.getId();
 			CommandRequestType command = req.getCommand();
 			ForgotPasswdType forgotPasswdType = command.getForgotPWD();
 			ForgotPasswdParamsType forgoPasswdparams = forgotPasswdType.getParams();
@@ -55,4 +57,15 @@ public class ForgotPwdRequestMessage extends RequestMessage {
 			logger.error("Unable to parse request from string", e);
 		}
 	}  
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = String.valueOf(id);
+	}
+	
+	public ForgotPwdRequestMessage() {
+		id = ""+System.currentTimeMillis();
+	}
 }

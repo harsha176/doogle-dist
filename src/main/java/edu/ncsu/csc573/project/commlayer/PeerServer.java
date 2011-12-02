@@ -65,6 +65,7 @@ class PeerServer {
 	public void stop() {
 		logger.info("Server is going to stop");
 		isToBeStopped = true;
+		serverThread.interrupt();
 	}
 
 	public boolean isServerRunning() {

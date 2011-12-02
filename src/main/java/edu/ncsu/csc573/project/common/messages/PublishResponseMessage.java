@@ -14,13 +14,14 @@ import edu.ncsu.csc573.project.common.schema.Response;
  */
 public class PublishResponseMessage extends ResponseMessage {
     	private Logger logger;
+		private String id;
         
 	public String getRequestInXML() throws Exception {
 
 		logger = Logger.getLogger(PublishResponseMessage.class);
 
 		Response req = new Response();
-		req.setId(BigInteger.valueOf(System.currentTimeMillis()));
+		req.setId(id);
 		CommandResponseType Publishresponse = new CommandResponseType();
 		PublishResponseType rt = new PublishResponseType();
 		PublishResponseTypeParams rpt = new PublishResponseTypeParams();
@@ -53,6 +54,17 @@ public class PublishResponseMessage extends ResponseMessage {
 			logger.error("Unable to parse request from string", e);
 		} 
 	} 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = String.valueOf(id);
+	}
+	public PublishResponseMessage(String id) {
+		this.id = id;
+	}
+	
 }
 
 

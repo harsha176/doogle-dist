@@ -40,4 +40,8 @@ public interface IRequest {
 	 * This method parses XML and creates a request object out of it. 
 	 */
 	public void parseXML(String XML);
+	
+	public void setId(String id);
+	
+	public String getId();
 }

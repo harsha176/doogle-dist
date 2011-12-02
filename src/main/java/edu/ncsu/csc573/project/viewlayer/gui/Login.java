@@ -22,6 +22,7 @@ import edu.ncsu.csc573.project.common.messages.IResponse;
 import edu.ncsu.csc573.project.common.messages.JoinRequest;
 import edu.ncsu.csc573.project.common.messages.LoginRequestMessage;
 import edu.ncsu.csc573.project.common.messages.Parameter;
+import edu.ncsu.csc573.project.controllayer.Controller;
 import edu.ncsu.csc573.project.controllayer.RequestProcessor;
 import edu.ncsu.csc573.project.controllayer.Session;
 import java.math.BigInteger;
@@ -246,8 +247,6 @@ public class Login extends javax.swing.JFrame {
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_loginButtonActionPerformed
-		// TODO add your handling code here:
-		// Invoke Comm layer
 		Logger logger = Logger.getLogger(Login.class);
 
 		if (username.getText().isEmpty()) {
@@ -255,75 +254,16 @@ public class Login extends javax.swing.JFrame {
 		} else if (password.getPassword().toString().isEmpty()) {
 			inValidPWDScreen();
 		} else {
-			IRequest loginRequest = new LoginRequestMessage();
-			IParameter Loginparams = new Parameter();
-
-			Loginparams.add(EnumParamsType.USERNAME, username.getText());
-			Loginparams.add(EnumParamsType.PASSWORD, password.getText());
-			Loginparams.add(EnumParamsType.IPADDRESS, ConfigurationManager
-					.getInstance().getHostInterface());
-
-			loginRequest.createRequest(EnumOperationType.LOGIN, Loginparams);
 			try {
-				IResponse response = CommunicationServiceFactory.getInstance()
-						.executeRequest(loginRequest);
-				BigInteger statusCode = response.getStatus().getErrorId();
-				if (statusCode.intValue() == 0) {
-					logger.info("Closing bootstrap server connect");
-					CommunicationServiceFactory.getInstance().close();
-					Session.createInstance(username.getText());
-					Search LoggedIn = new Search();
-					this.setVisible(false);
-					LoggedIn.setVisible(true);
-					LoggedIn.setLocationRelativeTo(this);
-					LoggedIn.setTitle("Hello " + username.getText()
-							+ " , Welcome!!");
-					String joinPeerIP = response.getParameter()
-							.getParamValue(EnumParamsType.MESSAGE).toString();
-					/*
-					 * if this is the first peer set its zone to entire
-					 * Hashspace
-					 */
-					if (joinPeerIP.equalsIgnoreCase("0.0.0.0")) {
-						logger.info("I am the first peeer");
-						CommunicationServiceFactory.getInstance().initialize(
-								"127.0.0.1", null);
-						RequestProcessor
-								.getInstance()
-								.getMyZone()
-								.create(Point.getHashSpaceStartPoint(),
-										Point.getHashSpaceEndPoint());
-						logger.info("My zone detais "
-								+ RequestProcessor.getInstance().getMyZone()
-										.toString());
-					} else {
-						// connect to join peer
-						CommunicationServiceFactory.getInstance().initialize(
-								joinPeerIP, null);
-						// send join request
-						IRequest joinRequest = new JoinRequest();
-						IParameter params = new Parameter();
-						params.add(EnumParamsType.IPADDRESS,
-								ConfigurationManager.getInstance()
-										.getHostInterface());
-						params.add(EnumParamsType.PEERID,
-								Point.generateRandomPoint());
-						joinRequest.createRequest(EnumOperationType.JOIN,
-								params);
-
-						response = CommunicationServiceFactory.getInstance()
-								.executeRequest(joinRequest);
-						// update zone and file repository based on response
-					}
-
-					// logger.info("Status of response is  : "
-					// +response.getStatus().getErrorId().toString());
-					// logger.info("Message is " + response.getMessage());
-				} else {
-					inValidComboScreen();
-				}
+			Session.createInstance(username.getText());
+			Controller.getInstance().login(username.getText(), password.getText());
+			Search LoggedIn = new Search();
+			this.setVisible(false);
+			LoggedIn.setVisible(true);
+			LoggedIn.setLocationRelativeTo(this);
 			} catch (Exception e) {
 				// inValidComboScreen();
+				inValidComboScreen();
 				logger.error("Failed to perform login ", e);
 			}
 		}

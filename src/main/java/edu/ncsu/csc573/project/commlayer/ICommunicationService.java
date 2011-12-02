@@ -2,7 +2,6 @@ package edu.ncsu.csc573.project.commlayer;
 
 import java.io.File;
 
-import edu.ncsu.csc573.project.common.messages.EnumOperationType;
 import edu.ncsu.csc573.project.common.messages.IRequest;
 import edu.ncsu.csc573.project.common.messages.IResponse;
 
@@ -26,8 +25,7 @@ public interface ICommunicationService {
 	 * @param RequestQueue
 	 * @param ResponseQueue
 	 */
-	public void initialize(String BootStrapServer,
-			IPublishHandler aPublishHandler) throws Exception;
+	public void initialize(IPublishHandler aPublishHandler) throws Exception;
 
 	/**
 	 * Checks if the communication server is connected to bootstrap server.
@@ -48,41 +46,13 @@ public interface ICommunicationService {
 	 * @param request
 	 *            object to be sent
 	 * @return response object from BootStrapServer
-	 * @throws Exception 
+	 * @throws Exception
 	 * 
 	 * @see IRequest
 	 * @see IResponse
 	 */
-	public IResponse executeRequest(IRequest request) throws Exception;
-	
-	public IResponse executeRequest(IRequest request, String ipaddress) throws Exception;
-
-	/**
-	 * This method allows peer to send a request to BootStrap server and call
-	 * back ResponseListener once it receives response for the requested
-	 * message.
-	 * 
-	 * This is an asynchronous call and used by peers where it takes
-	 * considerable response time.
-	 * 
-	 * @param request
-	 * @param listener
-	 */
-	public void publishRequest(IRequest request, IResponseListener listener);
-
-	/**
-	 * This method allows bootstrap server to register for request topics and
-	 * listener will be called whenever bootstrap server receives a request.
-	 * 
-	 * @param operationType
-	 *            bootstrap server interested request topic.
-	 * @param reqListener
-	 *            listener class called when it receives request.
-	 * 
-	 * @see EnumOperationType
-	 */
-	public void subscribeRequestTopic(EnumOperationType operationType,
-			IRequestListener reqListener);
+	public IResponse executeRequest(IRequest request, String ipaddress)
+			throws Exception;
 
 	/**
 	 * This method retrieves the file from the remote server
@@ -92,16 +62,17 @@ public interface ICommunicationService {
 	 * @return
 	 */
 	public File getFile(String IPAddress, String fileName);
-	
+
 	/**
 	 * This method checks if the peer server is running.
 	 * 
 	 * @return true if it is running otherwise false
 	 */
 	public boolean isPeerServerRunning();
-	
+
 	/**
 	 * This method fetches file from the server
+	 * 
 	 * @param fileName
 	 * @return
 	 */
@@ -113,5 +84,5 @@ public interface ICommunicationService {
 	 * 
 	 * 
 	 */
-	public void close()throws Exception;
+	public void close() throws Exception;
 }

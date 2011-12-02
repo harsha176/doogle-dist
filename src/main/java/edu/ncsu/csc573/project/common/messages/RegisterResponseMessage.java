@@ -14,13 +14,14 @@ import edu.ncsu.csc573.project.common.schema.Response;
  */
 public class RegisterResponseMessage extends ResponseMessage {
     	private Logger logger;
+		private String id;
         
 	public String getRequestInXML() throws Exception {
 
 		logger = Logger.getLogger(RegisterResponseMessage.class);
 
 		Response req = new Response();
-		req.setId(BigInteger.valueOf(System.currentTimeMillis()));
+		req.setId(id);
 		CommandResponseType regresponse = new CommandResponseType();
 		RegisterResponseType rt = new RegisterResponseType();
 		RegisterResponseParamsType rpt = new RegisterResponseParamsType();
@@ -39,7 +40,7 @@ public class RegisterResponseMessage extends ResponseMessage {
 		logger = Logger.getLogger(RegisterResponseMessage.class);
 		try {
 			Response req = getResponse(XML);
-			
+			id = req.getId();
 			CommandResponseType command = req.getCommand();
 			RegisterResponseType regType = command.getRegisterResponse();
 			RegisterResponseParamsType regparams = regType.getParams();
@@ -53,6 +54,15 @@ public class RegisterResponseMessage extends ResponseMessage {
 			logger.error("Unable to parse request from string", e);
 		} 
 	} 
-        
-        
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = String.valueOf(id);
+	}    
+	public RegisterResponseMessage(String id) {
+		this.id = id;
+	}
+	
 }

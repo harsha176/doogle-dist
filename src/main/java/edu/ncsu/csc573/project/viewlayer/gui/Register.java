@@ -18,6 +18,8 @@ import edu.ncsu.csc573.project.common.messages.IRequest;
 import edu.ncsu.csc573.project.common.messages.IResponse;
 import edu.ncsu.csc573.project.common.messages.Parameter;
 import edu.ncsu.csc573.project.common.messages.RegisterRequestMessage;
+import edu.ncsu.csc573.project.controllayer.Controller;
+
 import java.awt.event.ItemEvent;
 import java.math.BigInteger;
 import java.util.regex.Pattern;
@@ -284,30 +286,13 @@ private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
    }
    //Communication handler instance
    else {
-    IRequest regRequest = new RegisterRequestMessage();
-    IParameter Regparams = new Parameter();
-    Regparams.add(EnumParamsType.USERNAME, usernameData.getText());
-    Regparams.add(EnumParamsType.PASSWORD, passwordUser.getText());
-    Regparams.add(EnumParamsType.FIRSTNAME, firstname);
-    Regparams.add(EnumParamsType.LASTNAME, lastname);
-    Regparams.add(EnumParamsType.EMAIL_ID, emailUsers);
-    Regparams.add(EnumParamsType.DESIGNATION, des);
-       
-    regRequest.createRequest(EnumOperationType.REGISTER, Regparams);
-    try{
-      IResponse response = CommunicationServiceFactory.getInstance().executeRequest(regRequest);
-      BigInteger statusCode = response.getStatus().getErrorId();
-      if (statusCode.intValue() == 0)
-      {
-          this.setVisible(false);
-      
+	   try{
+      Controller.getInstance().register(firstname, lastname, usernameData.getText(), passwordUser.getText(), emailUsers, des);
       Login loginFrame = new Login();
+      this.setVisible(false);
       loginFrame.setVisible(true);
-      }
-      else {
-          UserErrors();
-      }
-      }
+      //UserErrors();      
+    }
     catch (Exception e){
         ServerErrors();
     }

@@ -22,9 +22,11 @@ import javax.xml.bind.JAXBException;
 public class JoinResponse extends ResponseMessage {
 	// private Logger logger;
 	private JoinResponseTypeParams joinResponseTypeParams;
+	private String id;
 
-	public JoinResponse() {
+	public JoinResponse(String id) {
 		super();
+		this.id = id;
 		joinResponseTypeParams = new JoinResponseTypeParams();
 	}
 	public List<FileParamType> getFile() {
@@ -71,7 +73,7 @@ public class JoinResponse extends ResponseMessage {
 		// logger = Logger.getLogger(LoginRequestMessage.class);
 
 		Response req = new Response();
-		req.setId(BigInteger.valueOf(System.currentTimeMillis()));
+		req.setId(id);
 		CommandResponseType Putresponse = new CommandResponseType();
 		JoinResponseType rt = new JoinResponseType();
 
@@ -90,6 +92,7 @@ public class JoinResponse extends ResponseMessage {
 		Response req;
 		try {
 			req = getResponse(XML);
+			id = req.getId();
 			CommandResponseType command = req.getCommand();
 			JoinResponseType joinResponse = command.getJoinResponse();
 			joinResponseTypeParams = joinResponse.getParams();
@@ -105,6 +108,13 @@ public class JoinResponse extends ResponseMessage {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = String.valueOf(id);
 	}
 
 }

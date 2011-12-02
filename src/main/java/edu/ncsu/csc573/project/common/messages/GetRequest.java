@@ -17,13 +17,14 @@ import org.apache.log4j.Logger;
  */
 public class GetRequest extends RequestMessage {
     	private Logger logger;
+		private String id;
 
 	public String getRequestInXML() throws Exception {
 
 		logger = Logger.getLogger(SearchRequestMessage.class);
 
 		Request req = new Request();
-		req.setId(BigInteger.valueOf(System.currentTimeMillis()));
+		req.setId(id);
 		CommandRequestType search = new CommandRequestType();
 		GetType s = new GetType();
 		GetTypeParams rpt = new GetTypeParams();
@@ -42,7 +43,7 @@ public class GetRequest extends RequestMessage {
 		logger = Logger.getLogger(RegisterRequestMessage.class);
 		try {
 			Request req = getRequest(XML);
-			
+			id = req.getId();
 			CommandRequestType command = req.getCommand();
 			GetType searchType = command.getGet();
 			GetTypeParams searchparams = searchType.getParams();
@@ -56,6 +57,15 @@ public class GetRequest extends RequestMessage {
 			logger.error("Unable to parse request from string", e);
 		}
 	}
-    
-    
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = String.valueOf(id);
+	}
+	
+	public GetRequest() {
+		id = ""+System.currentTimeMillis();
+	}
 }

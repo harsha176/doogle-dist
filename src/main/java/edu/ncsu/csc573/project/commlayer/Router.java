@@ -1,6 +1,5 @@
 package edu.ncsu.csc573.project.commlayer;
 
-import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +7,6 @@ import org.apache.log4j.Logger;
 
 import edu.ncsu.csc573.project.common.ByteOperationUtil;
 import edu.ncsu.csc573.project.common.ConfigurationManager;
-import edu.ncsu.csc573.project.common.messages.TableParam;
 import edu.ncsu.csc573.project.common.schema.TableParamType;
 
 /**
@@ -100,7 +98,6 @@ public class Router implements IRouter {
 	}
 	
 	public void setRoutingTable(List<TableParamType> list) {
-		int i = 0;
 		for(TableParamType tpt : list) {
 			int dir = tpt.getDirection();
 			routingTable[dir][0] = String.valueOf(dir);

@@ -25,6 +25,6 @@ public class BootStrap {
 		 */
 		EncDecUtil.initialize();
 		ICommunicationService service = CommunicationServiceFactory.getInstance();
-		service.initialize("localhost", null);
+		service.initialize(null);
 	}
 }

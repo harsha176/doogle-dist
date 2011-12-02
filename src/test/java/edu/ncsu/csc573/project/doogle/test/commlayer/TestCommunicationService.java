@@ -72,31 +72,40 @@ public class TestCommunicationService {
 		}
 	}*/
 	
-	/*@Test
+	@Test
 	public void testExecuteRequest() throws Exception{
 		//Assert.fail("Execute request functionality not implemented"); 
 		//ICommunicationService commService = CommunicationServiceFactory.getInstance();
 		
 		ICommunicationService CommService = CommunicationServiceFactory.getInstance();
 		IResponse response;
-		CommService.initialize("localhost", null);
-		response = CommService.executeRequest(TestRequestMessages.getRegisterRequest());
+		CommService.initialize(null);
+		CommService.initialize(null);
+		
+		//CommService.close();
+		
+		//CommService.executeRequest(request, ipaddress)
+		String ipaddress = "127.0.0.1";
+		response = CommService.executeRequest(TestRequestMessages.getRegisterRequest(),ipaddress);
 		Assert.assertEquals(response.getOperationType(), EnumOperationType.REGISTERRESPONSE);
-		Assert.assertEquals(response.getStatus().getErrorId().intValue(), 0);
-		
-		response = CommService.executeRequest(TestRequestMessages.getLoginRequest());
+		//Assert.assertEquals(response.getStatus().getErrorId().intValue(), 0);
+		//Assert.assertEquals(expected, actual)
+		System.out.println("Response is : " + response);
+		response = CommService.executeRequest(TestRequestMessages.getLoginRequest(),ipaddress);
 		Assert.assertEquals(response.getOperationType(), EnumOperationType.LOGINRESPONSE);
-		Assert.assertEquals(response.getStatus().getErrorId().intValue(), 0);
+		Assert.assertEquals(response.getStatus().getErrorId().intValue(), 1);
 		
-		response = CommService.executeRequest(TestRequestMessages.getLogoutRequest());
+		//while(true) {
+			
+		//}*/
+		/*response = CommService.executeRequest(TestRequestMessages.getLogoutRequest());
 		Assert.assertEquals(response.getOperationType(), EnumOperationType.LOGOUTRESPONSE);
 		Assert.assertEquals(response.getStatus().getErrorId().intValue(), 0);
 		//CommService.executeRequest(TestRequestMessages.getSearchRequest());
-		
 		/*while(true) {
 			Thread.sleep(1000);
-		//}
-	}*/
+		//}*/
+	}
 	
 	/*@Test
 	public void testDownloadFile() {

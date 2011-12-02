@@ -15,6 +15,11 @@ import edu.ncsu.csc573.project.common.schema.SearchResponseTypeParams;
 public class SearchResponseMessage extends ResponseMessage {
 	private PublishSearchParameter searchParam;
 	private Logger logger;
+	private String id;
+	
+	public SearchResponseMessage(String id) {
+		this.id = id;
+	}
 	
 	public IParameter getParameter() {
 	    	return searchParam;
@@ -37,7 +42,7 @@ public class SearchResponseMessage extends ResponseMessage {
 	}
 	public String getRequestInXML() throws Exception {
 		Response req = new Response();
-		req.setId(BigInteger.valueOf(System.currentTimeMillis()));
+		req.setId(id);
 		CommandResponseType publish = new CommandResponseType();
 		SearchResponseType publishType = new SearchResponseType();
 		SearchResponseTypeParams lpt = new SearchResponseTypeParams();
@@ -90,5 +95,11 @@ public class SearchResponseMessage extends ResponseMessage {
 			logger.error("Unable to parse request from string", e);
 		}
 	}
+	public String getId() {
+		return id;
+	}
 
+	public void setId(String id) {
+		this.id = String.valueOf(id);
+	}
 }

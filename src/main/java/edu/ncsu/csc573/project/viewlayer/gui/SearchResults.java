@@ -22,6 +22,7 @@ import edu.ncsu.csc573.project.common.messages.Parameter;
 import edu.ncsu.csc573.project.common.messages.PublishRequestMessage;
 import edu.ncsu.csc573.project.common.messages.PublishSearchParameter;
 import edu.ncsu.csc573.project.common.messages.SearchRequestMessage;
+import edu.ncsu.csc573.project.controllayer.Controller;
 import edu.ncsu.csc573.project.controllayer.Session;
 import edu.ncsu.csc573.project.controllayer.hashspacemanagement.DigestAdaptor;
 import java.io.IOException;
@@ -460,10 +461,9 @@ private void SettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 private void PublishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PublishActionPerformed
     try {
         Logger logger = Logger.getLogger(Search.class);
-        IRequest pubRequest = PublishRequestMessage.getPublishRequest();
-        IResponse response = CommunicationServiceFactory.getInstance().executeRequest(pubRequest);
-        logger.info("Status of response is  : " + response.getStatus().getErrorId().toString());
-        logger.info("Message is " + response.getMessage());
+        //IRequest pubRequest = PublishRequestMessage.getPublishRequest();
+        String message = Controller.getInstance().publish(); 
+        logger.info("Message is " + message);
         PublishFrame Publish = new PublishFrame();
         Publish.setVisible(true);
         Publish.setLocationRelativeTo(this);
@@ -486,13 +486,8 @@ private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 // TODO add your handling code here:
     Logger logger = Logger.getLogger(Search.class);
     try {
-        IRequest logoutRequest = new LogoutRequestMessage();
-        IParameter Logoutparams = new Parameter();
-        logger.debug(Session.getInstance().getUsername());
-        Logoutparams.add(EnumParamsType.USERNAME, Session.getInstance().getUsername());
-        logoutRequest.createRequest(EnumOperationType.LOGOUT, Logoutparams);
-        IResponse response = CommunicationServiceFactory.getInstance().executeRequest(logoutRequest);
-        loggedOut logout = new loggedOut();
+        Controller.getInstance().logout(Session.getInstance().getUsername());
+    	loggedOut logout = new loggedOut();
         this.setVisible(false);
         logout.setVisible(true);
     } catch (Exception e) {
@@ -522,20 +517,16 @@ private void PreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
 // TODO add your handling code here:
    try {
-        IRequest searchRequest = new SearchRequestMessage();
-        IParameter searchParams = new Parameter();
-        searchParams.add(EnumParamsType.USERNAME, Session.getInstance().getUsername());
-        searchParams.add(EnumParamsType.SEARCHKEY, ByteOperationUtil.convertBytesToString(DigestAdaptor.getInstance().getDigest(newSearch.getText())));
-        searchRequest.createRequest(EnumOperationType.SEARCH, searchParams);
-        IResponse response = CommunicationServiceFactory.getInstance().executeRequest(searchRequest);
-        PublishSearchParameter searchResults = (PublishSearchParameter)response.getParameter();
-        searchResults.resetCounter();
+       
+	   Controller.getInstance().search(newSearch.getText());
+	   //PublishSearchParameter searchResults = (PublishSearchParameter)response.getParameter();
+        //searchResults.resetCounter();
         
-        SearchResults newResults = new SearchResults();
-        newResults.setMessage(searchResults);
-        this.setVisible(false);
-        newResults.setVisible(true);
-        newResults.setLocationRelativeTo(this);
+        //SearchResults newResults = new SearchResults();
+        //newResults.setMessage(searchResults);
+        //this.setVisible(false);
+        //newResults.setVisible(true);
+        //newResults.setLocationRelativeTo(this);
         
         
     } catch (IOException ex) {

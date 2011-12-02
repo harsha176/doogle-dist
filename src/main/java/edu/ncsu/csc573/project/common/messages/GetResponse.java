@@ -21,6 +21,11 @@ import org.apache.log4j.Logger;
 public class GetResponse extends ResponseMessage {
 	private PublishSearchParameter searchParam;
 	private Logger logger;
+	private String id;
+	
+	public GetResponse(String id) {
+		this.id = id;
+	}
 	
 	public IParameter getParameter() {
 	    	return searchParam;
@@ -43,7 +48,7 @@ public class GetResponse extends ResponseMessage {
 	}
 	public String getRequestInXML() throws Exception {
 		Response req = new Response();
-		req.setId(BigInteger.valueOf(System.currentTimeMillis()));
+		req.setId(id);
 		CommandResponseType publish = new CommandResponseType();
 		GetResponseType publishType = new GetResponseType();
 		GetResponseTypeParams lpt = new GetResponseTypeParams();
@@ -74,7 +79,7 @@ public class GetResponse extends ResponseMessage {
 		logger = Logger.getLogger(RegisterRequestMessage.class);
 		try {
 			Response req = getResponse(XML);
-			
+			id = req.getId();
 			CommandResponseType command = req.getCommand();
 			GetResponseType regType = command.getGetResponse();
 			GetResponseTypeParams regparams = regType.getParams();
@@ -95,6 +100,14 @@ public class GetResponse extends ResponseMessage {
 		} catch(Exception e) {
 			logger.error("Unable to parse request from string", e);
 		}
+	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = String.valueOf(id);
 	}
 
 }

@@ -1,6 +1,5 @@
 package edu.ncsu.csc573.project.commlayer;
 
-import java.net.InetAddress;
 
 /**
  * This class abstracts the implementation of Router.

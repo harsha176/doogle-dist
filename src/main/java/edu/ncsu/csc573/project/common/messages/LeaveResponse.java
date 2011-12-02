@@ -17,13 +17,18 @@ import org.apache.log4j.Logger;
  */
 public class LeaveResponse extends ResponseMessage {
     	private Logger logger;
+		private String id;
         
+		public LeaveResponse(String id) {
+			this.id = id;
+		}
+		
 	public String getRequestInXML() throws Exception {
 
 		logger = Logger.getLogger(LoginResponseMessage.class);
 
 		Response req = new Response();
-		req.setId(BigInteger.valueOf(System.currentTimeMillis()));
+		req.setId(id);
 		CommandResponseType Leaveresponse = new CommandResponseType();
 		LeaveResponseType rt = new LeaveResponseType();
 		LeaveResponseTypeParams rpt = new LeaveResponseTypeParams();
@@ -56,5 +61,11 @@ public class LeaveResponse extends ResponseMessage {
 			logger.error("Unable to parse request from string", e);
 		} 
 	}   
-    
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = String.valueOf(id);
+	}
 }

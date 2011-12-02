@@ -1,8 +1,11 @@
 package edu.ncsu.csc573.project.controllayer.hashspacemanagement;
 
+import java.util.List;
+
 import edu.ncsu.csc573.project.common.messages.PublishRequestMessage;
 import edu.ncsu.csc573.project.common.messages.PublishSearchParameter;
 import edu.ncsu.csc573.project.common.messages.PutRequest;
+import edu.ncsu.csc573.project.common.schema.FileParamType;
 
 /**
  * This acts as an interface for control layer to communicate with
@@ -27,7 +30,14 @@ public interface IHashSpaceManager {
 	 * @param pubRequest
 	 */
 	public void handlePublishRequest(PublishRequestMessage pubRequest);
-        /**
+	
+	/**
+	 * 
+	 * @param fileList
+	 */
+	public void handlePublishRequest(List<FileParamType> fileList);
+    
+	/**
 	 * This method is called every time a put request message is received from
 	 * one of the peers.
 	 * 

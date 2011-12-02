@@ -23,9 +23,11 @@ import org.apache.log4j.Logger;
  */
 public class PutRequest extends RequestMessage {
 
+	private String id;
+
 	public String getRequestInXML() throws Exception {
 		Request req = new Request();
-		req.setId(BigInteger.valueOf(System.currentTimeMillis()));
+		req.setId(id);
 		CommandRequestType publish = new CommandRequestType();
 		PutType publishType = new PutType();
 		PutTypeParams lpt = new PutTypeParams();
@@ -73,6 +75,18 @@ public class PutRequest extends RequestMessage {
 		}
 	}
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = String.valueOf(id);
+	}
+	
+	public PutRequest() {
+		id = ""+System.currentTimeMillis();
+	}
+	
 /*	public static IRequest getPublishRequest() throws Exception {
 
 		Logger logger = Logger.getLogger(PublishRequestMessage.class);

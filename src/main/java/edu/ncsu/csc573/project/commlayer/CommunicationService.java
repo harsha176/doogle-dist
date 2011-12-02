@@ -21,11 +21,10 @@ import java.net.UnknownHostException;
 import org.apache.log4j.Logger;
 
 import edu.ncsu.csc573.project.common.ConfigurationManager;
-import edu.ncsu.csc573.project.common.messages.EnumOperationType;
 import edu.ncsu.csc573.project.common.messages.IRequest;
 import edu.ncsu.csc573.project.common.messages.IResponse;
-import edu.ncsu.csc573.project.common.messages.InvalidResponseMessage;
-import edu.ncsu.csc573.project.common.messages.ResponseMessage;
+import edu.ncsu.csc573.project.controllayer.ConcurrentQueueManagement;
+import edu.ncsu.csc573.project.controllayer.ResponseProcessor;
 
 /**
  * @author doogle-dev
@@ -33,8 +32,8 @@ import edu.ncsu.csc573.project.common.messages.ResponseMessage;
  */
 public class CommunicationService implements ICommunicationService {
 
-	private Socket clientSocket;
-	private InetAddress BSSAddress;
+	// private Socket clientSocket;
+	//private InetAddress BSSAddress;
 	private static Logger logger;
 	private PeerServer server;
 	private IPublishHandler publishHandler;
@@ -46,7 +45,7 @@ public class CommunicationService implements ICommunicationService {
 	 * edu.ncsu.csc573.project.commlayer.ICommunicationService#initialize(java
 	 * .lang.String, edu.ncsu.csc573.project.commlayer.IPublishHandler)
 	 */
-	public void initialize(String BootStrapServer,
+	public void initialize(/*String BootStrapServer,*/
 			IPublishHandler aPublishHandler) throws Exception {
 		// get a logger instance for this class
 		logger = Logger.getLogger(this.getClass());
@@ -59,38 +58,36 @@ public class CommunicationService implements ICommunicationService {
 		 * done and so simply exiting.
 		 */
 		synchronized (CommunicationService.class) {
-			if (clientSocket != null && !clientSocket.isClosed()
-					&& server != null && server.isServerRunning()) {
+			if (server != null && server.isServerRunning()) {
 				logger.debug("Already connected to bootstrapserver");
 				logger.info("Already initialized");
 				return;
-			}
-			if (server == null || !server.isServerRunning()) {
+			} else {
 				logger.info("Start server");
 				server = new PeerServer();
 			}
-			initializeConnectedSocket(BootStrapServer);
 		}
 
 	}
 
-	protected void initializeConnectedSocket(String BootStrapServer)
+	protected Socket initializeConnectedSocket(String peerAddress)
 			throws Exception, UnknownHostException, SocketException,
 			SocketTimeoutException, IOException {
-		BSSAddress = getInetAddress(BootStrapServer);
+		Socket socket = new Socket();
+		InetAddress BSSAddress = getInetAddress(peerAddress);
 
 		int BSSport = ConfigurationManager.getInstance().getServerPort();
 		int timeOut = ConfigurationManager.getInstance().getTimeOut();
 
-		clientSocket = new Socket();
+		socket = new Socket();
 		InetSocketAddress serverSocket = new InetSocketAddress(BSSAddress,
 				BSSport);
-		clientSocket.setKeepAlive(true);
-		clientSocket.setTcpNoDelay(true);
+		socket.setKeepAlive(true);
+		socket.setTcpNoDelay(true);
 
 		logger.debug("Enabled Keepalive socket option");
 		try {
-			clientSocket.connect(serverSocket, timeOut);
+			socket.connect(serverSocket, timeOut);
 		} catch (SocketTimeoutException e) {
 			logger.error("Connection timed out", e);
 			cleanUp();
@@ -100,23 +97,23 @@ public class CommunicationService implements ICommunicationService {
 			cleanUp();
 			throw exp;
 		}
+		return socket;
 	}
 
-	private InetAddress getInetAddress(String BootStrapServer)
-			throws Exception, UnknownHostException {
+	private InetAddress getInetAddress(String peerIP) throws Exception,
+			UnknownHostException {
 		InetAddress address = null;
 		try {
-			address = InetAddress.getByName(BootStrapServer);
+			address = InetAddress.getByName(peerIP);
 		} catch (UnknownHostException excpByHostName) {
 			try {
-				logger.info("Unable to find the address of the host: "
-						+ BootStrapServer + " by name");
+				logger.info("Unable to find the address of the host: " + peerIP
+						+ " by name");
 				logger.info("Trying by ip address");
-				address = InetAddress.getByAddress(BootStrapServer.trim()
-						.getBytes());
+				address = InetAddress.getByAddress(peerIP.trim().getBytes());
 			} catch (UnknownHostException excpByIpAddress) {
-				logger.info("Unable to find the address of host: "
-						+ BootStrapServer + " even by ip address");
+				logger.info("Unable to find the address of host: " + peerIP
+						+ " even by ip address");
 				cleanUp();
 				throw excpByIpAddress;
 			}
@@ -133,9 +130,6 @@ public class CommunicationService implements ICommunicationService {
 			logger.info("Waiting for peer server to close");
 			Thread.sleep(100);
 		}
-		if (clientSocket != null) {
-			clientSocket.close();
-		}
 		logger.error("Unable to initialize Communication layer. Exiting from Application");
 	}
 
@@ -146,7 +140,9 @@ public class CommunicationService implements ICommunicationService {
 	 * edu.ncsu.csc573.project.commlayer.ICommunicationService#executeRequest
 	 * (edu.ncsu.csc573.project.common.messages.IRequest)
 	 */
-	public IResponse executeRequest(IRequest request) throws Exception {
+	public IResponse executeRequest(IRequest request, String peerIP)
+			throws Exception {
+		Socket clientSocket = initializeConnectedSocket(peerIP);
 		BlockingThread bt = new BlockingThread(clientSocket, request, "Op: "
 				+ request.getOperationType() + " req thread ");
 		bt.start();
@@ -164,62 +160,12 @@ public class CommunicationService implements ICommunicationService {
 
 		} finally {
 			// CHANGE IT: this comment will not work for centralized system.
-			//if (bt.getResponse().getOperationType() == EnumOperationType.LOGOUTRESPONSE) {
-				clientSocket.close();
-			//}
+			// if (bt.getResponse().getOperationType() ==
+			// EnumOperationType.LOGOUTRESPONSE) {
+			clientSocket.close();
+			// }
 		}
 		return bt.getResponse();
-	}
-
-	public IResponse executeRequest(IRequest request, String ipaddress) throws Exception {
-		BlockingThread bt = new BlockingThread(new Socket(ipaddress, ConfigurationManager.getInstance().getServerPort()), request, "Op: "
-				+ request.getOperationType() + " req thread ");
-		bt.start();
-		try {
-			bt.join(ConfigurationManager.getInstance().getCLITimeOut());
-			bt.stopListener();
-			if (!bt.isResponseReady()) {
-				logger.info("Failed to get response for the request : "
-						+ request.getOperationType());
-				throw new Exception();
-			} else {
-				logger.info("Received response : " + bt.getResponse());
-			}
-		} catch (InterruptedException e) {
-
-		} finally {
-			// CHANGE IT: this comment will not work for centralized system.
-			//if (bt.getResponse().getOperationType() == EnumOperationType.LOGOUTRESPONSE) {
-				clientSocket.close();
-			//}
-		}
-		return bt.getResponse();
-	}
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * edu.ncsu.csc573.project.commlayer.ICommunicationService#publishRequest
-	 * (edu.ncsu.csc573.project.common.messages.IRequest,
-	 * edu.ncsu.csc573.project.commlayer.IResponseListener)
-	 */
-	public void publishRequest(IRequest request, IResponseListener listener) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * edu.ncsu.csc573.project.commlayer.ICommunicationService#subscribeRequestTopic
-	 * (edu.ncsu.csc573.project.common.messages.EnumOperationType,
-	 * edu.ncsu.csc573.project.commlayer.IRequestListener)
-	 */
-	public void subscribeRequestTopic(EnumOperationType operationType,
-			IRequestListener reqListener) {
-		// TODO Auto-generated method stub
-
 	}
 
 	/*
@@ -228,23 +174,15 @@ public class CommunicationService implements ICommunicationService {
 	 * @see edu.ncsu.csc573.project.commlayer.ICommunicationService#close()
 	 */
 	public void close() throws Exception {
-		if (clientSocket == null) {
-			throw new Exception("Communication Layer is not initialized");
-		}
-		try {
-			clientSocket.close();
-		} catch (Exception e) {
-			logger.error("Failed to close socket. Trying again");
-		}
 		server.stop();
+		while (server.isServerRunning()) {
+			Thread.sleep(100);
+		}
 	}
 
+	@Deprecated
 	public boolean isConnected() {
-		if (clientSocket == null) {
-			logger.info("Communication Layer is not initialized");
-			return false;
-		}
-		return clientSocket.isClosed();
+		return this.isPeerServerRunning();
 	}
 
 	class BlockingThread extends Thread {
@@ -252,11 +190,18 @@ public class CommunicationService implements ICommunicationService {
 		private IRequest request;
 		private IResponse response = null;
 		private boolean isToBeStopped = false;
-
+		private ResponseProcessor respProcessor = null;
+		private String remoteIP;
+		
 		BlockingThread(Socket clientSocket, IRequest request, String name) {
 			super(name);
 			this.clientSocket = clientSocket;
 			this.request = request;
+			respProcessor = ResponseProcessor.getInstance();
+			if(clientSocket.getRemoteSocketAddress() instanceof InetSocketAddress) {
+				 remoteIP = ((InetSocketAddress)clientSocket.getRemoteSocketAddress()).getAddress().getHostAddress();
+				 logger.debug("Remote peer ip is : " + remoteIP);
+			}
 		}
 
 		public void run() {
@@ -271,34 +216,21 @@ public class CommunicationService implements ICommunicationService {
 				// pw.println(System.);
 				pw.flush();
 
-				BufferedReader br = new BufferedReader(new InputStreamReader(
-						clientSocket.getInputStream()));
-				StringBuffer sb = new StringBuffer();
-				// String temp;
+				logger.info("Sent resquest to server " + clientSocket);
+				ConcurrentQueueManagement queueManager = ConcurrentQueueManagement
+						.getInstance();
+				String requestId = request.getId();
+				queueManager.putRequest(requestId, request);
 
-				while (!br.ready() && !isToBeStopped) {
-					logger.info("No data received from server. Trying again...");
-					Thread.sleep(1000); // to be removed
+				logger.info("Waiting for response...");
+				while (!queueManager.isResponseReceived(requestId) && !isToBeStopped) {
+					Thread.sleep(100);
 				}
 
-				if (isToBeStopped) {
-					logger.info("No response received for the request with in the specified time");
-					logger.info("returning default response");
-					response = new InvalidResponseMessage(
-							request.getOperationType() + " request timedout");
-					return;
-				}
-
-				int ch;
-				while ((ch = br.read()) != -1
-						&& sb.indexOf("</Response>") == -1) {
-					sb.append((char) ch);
-				}
-
-				response = ResponseMessage.createResponse(sb.toString());
+				logger.info("Received response ");
+				response = queueManager.getResponse(requestId);
 				logger.info("Response is : " + response.getRequestInXML());
-				logger.info(response);
-
+				respProcessor.processResponse(response, remoteIP);
 			} catch (Exception e) {
 				logger.error("Unable to parse response ", e);
 			}

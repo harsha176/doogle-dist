@@ -10,7 +10,7 @@
 			<!--<xs:element name="Status" type="StatusType"></xs:element> -->
 			<xs:element name="Command" type="CommandResponseType"></xs:element>
 		</xs:sequence>
-		<xs:attribute name="id" type="xs:integer" use="required">
+		<xs:attribute name="id" type="xs:string" use="required">
 		</xs:attribute>
 	</xs:complexType>
 	</xs:element>

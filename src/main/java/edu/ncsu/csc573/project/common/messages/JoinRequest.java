@@ -17,12 +17,13 @@ import org.apache.log4j.Logger;
  */
 public class JoinRequest extends RequestMessage {
      private Logger logger;
+	private String id;
 
 	public String getRequestInXML() throws Exception {
 	logger = Logger.getLogger(LoginRequestMessage.class);
 
 		Request req = new Request();
-		req.setId(BigInteger.valueOf(System.currentTimeMillis()));
+		req.setId(id);
 		CommandRequestType join = new CommandRequestType();
 		JoinType joinType = new JoinType();
 		JoinTypeParams lpt = new JoinTypeParams();
@@ -40,7 +41,7 @@ public class JoinRequest extends RequestMessage {
 	public void parseXML(String XML) {
 		try {
 			Request req = getRequest(XML);
-			
+			id = req.getId();
 			CommandRequestType command = req.getCommand();
 			JoinType joinType = command.getJoin();
 			JoinTypeParams joinparams = joinType.getParams();
@@ -54,6 +55,16 @@ public class JoinRequest extends RequestMessage {
 			logger.error("Unable to parse request from string", e);
 		}
 	}
+	public String getId() {
+		return id;
+	}
 
+	public void setId(String id) {
+		this.id = String.valueOf(id);
+	}
+	
+	public JoinRequest() {
+		id = ""+System.currentTimeMillis();
+	}
     
 }

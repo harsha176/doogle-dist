@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
+
 import edu.ncsu.csc573.project.commlayer.IPoint;
 import edu.ncsu.csc573.project.commlayer.IZone;
-import edu.ncsu.csc573.project.commlayer.Point;
+import edu.ncsu.csc573.project.commlayer.MessageDetails;
 import edu.ncsu.csc573.project.commlayer.Router;
 import edu.ncsu.csc573.project.commlayer.Zone;
 import edu.ncsu.csc573.project.common.ConfigurationManager;
-import edu.ncsu.csc573.project.common.messages.ACKResponse;
 import edu.ncsu.csc573.project.common.messages.ChangePasswordResponseMessage;
 import edu.ncsu.csc573.project.common.messages.EnumOperationType;
 import edu.ncsu.csc573.project.common.messages.EnumParamsType;
@@ -46,6 +46,7 @@ public class RequestProcessor {
 	private IFilter adminFilter;
 	private static Zone myZone;
 	private ArrayList<String> peers;
+	private String destPeerIP;
 	private static RequestProcessor instance = null;
 
 	private RequestProcessor() {
@@ -67,7 +68,7 @@ public class RequestProcessor {
 		return instance;
 	}
 
-	public synchronized IResponse processRequest(IRequest req) {
+	public synchronized MessageDetails processRequest(IRequest req, String peerIp) {
 		logger = Logger.getLogger(RequestProcessor.class);
 		IResponse response = null;
 		IParameter params = null;
@@ -106,7 +107,8 @@ public class RequestProcessor {
 					.getParamValue(EnumParamsType.EMAIL_ID).toString());
 
 			try {
-				response = new RegisterResponseMessage();
+				response = new RegisterResponseMessage(req.getId());
+				response.setId(req.getId());
 				params = new Parameter();
 				usermanager.addUser(newUser);
 				params.add(EnumParamsType.STATUSCODE,
@@ -119,11 +121,11 @@ public class RequestProcessor {
 						new BigInteger(String.valueOf(e1.getStatus())));
 				params.add(EnumParamsType.MESSAGE, e1.getMessage());
 			}
-
 			response.createResponse(EnumOperationType.REGISTERRESPONSE, params);
+			destPeerIP = peerIp;
 			break;
 		case LOGIN:
-			response = new LoginResponseMessage();
+			response = new LoginResponseMessage(req.getId());
 			params = new Parameter();
 			String joinIp;
 
@@ -155,8 +157,7 @@ public class RequestProcessor {
 				/*
 				 * adding peer to the list
 				 */
-				peers.add(req.getParameter()
-						.getParamValue(EnumParamsType.IPADDRESS).toString());
+				peers.add(peerIp);
 				params.add(EnumParamsType.MESSAGE, joinIp);
 
 			} catch (UserManagementException e1) {
@@ -165,9 +166,10 @@ public class RequestProcessor {
 				params.add(EnumParamsType.MESSAGE, e1.getMessage());
 			}
 			response.createResponse(EnumOperationType.LOGINRESPONSE, params);
+			destPeerIP = peerIp;
 			break;
 		case LOGOUT:
-			response = new LogoutResponseMessage();
+			response = new LogoutResponseMessage(req.getId());
 			params = new Parameter();
 			try {
 				usermanager.userLogout(req.getParameter()
@@ -182,9 +184,10 @@ public class RequestProcessor {
 
 			}
 			response.createResponse(EnumOperationType.LOGOUTRESPONSE, params);
+			destPeerIP = peerIp;
 			break;
 		case CHANGEPASSWORD:
-			response = new ChangePasswordResponseMessage();
+			response = new ChangePasswordResponseMessage(req.getId());
 			params = new Parameter();
 
 			try {
@@ -210,9 +213,10 @@ public class RequestProcessor {
 				params.add(EnumParamsType.MESSAGE, e1.getMessage());
 			}
 			response.createResponse(EnumOperationType.FORGOTPASSWORD, params);
+			destPeerIP = peerIp;
 			break;
 		case FORGOTPASSWORD:
-			response = new ForgotPWDResponseMessage();
+			response = new ForgotPWDResponseMessage(req.getId());
 			params = new Parameter();
 
 			try {
@@ -230,22 +234,26 @@ public class RequestProcessor {
 				params.add(EnumParamsType.MESSAGE, e1.getMessage());
 			}
 			response.createResponse(EnumOperationType.FORGOTPASSWORD, params);
+			destPeerIP = peerIp;
 			break;
 		case PUBLISH:
 			logger.debug("Processing publish request");
 			hashSpaceManager.handlePublishRequest((PublishRequestMessage) req);
-			response = new PublishResponseMessage();
+			response = new PublishResponseMessage(req.getId());
 			params = new Parameter();
 			params.add(EnumParamsType.STATUSCODE,
 					new BigInteger(String.valueOf(0)));
 			params.add(EnumParamsType.MESSAGE,
 					"Successfully published folder on server");
 			response.createResponse(EnumOperationType.PUBLISHRESPONSE, params);
+			/*
+			 * TODO choose destination ip and return it inform of messageDetail object 
+			 */
+			destPeerIP = peerIp;
 			break;
-
 		case SEARCH:
 			logger.debug("Processing search request");
-			response = new SearchResponseMessage();
+			response = new SearchResponseMessage(req.getId());
 			IParameter searchResponseparams;
 			String query_string = req.getParameter()
 					.getParamValue(EnumParamsType.SEARCHKEY).toString();
@@ -256,15 +264,19 @@ public class RequestProcessor {
 
 			response.createResponse(EnumOperationType.SEARCHRESPONSE,
 					searchResponseparams);
+			/*
+			 * TODO choose destination ip and return it inform of messageDetail object 
+			 */
+			destPeerIP = peerIp;
 			break;
 		case JOIN:
 			logger.debug("Processing join request");
 			int count = 0;
-			response = new JoinResponse();
+			response = new JoinResponse(req.getId());
 			IZone child = myZone.split(count);
 			
 			
-			JoinResponse joinResponse = new JoinResponse();
+			JoinResponse joinResponse = new JoinResponse(req.getId());
 			
 			// send first, last hash and peer id
 			joinResponse.setFirsthash(child.getStart().getAsString());
@@ -283,27 +295,16 @@ public class RequestProcessor {
 			joinParams.add(EnumParamsType.MESSAGE, "Successfully executed request");
 			joinResponse.createRequest(EnumOperationType.JOINRESPONSE, joinParams);
 			
+			response = joinResponse;
 			// update routing table in that direction
 			Router.getInstance().update(count, child.getStart(), req.getParameter().getParamValue(EnumParamsType.IPADDRESS).toString());
 			count++;
 			count = count % 15;
-			break;
-		case JOINRESPONSE:
-			logger.info("Processing join response");
-			JoinResponse joinresp = (JoinResponse)req;
 			
-			// set zone limits
-			myZone.setStart(new Point(joinresp.getFirsthash()));
-			myZone.setEnd(new Point(joinresp.getLasthash()));
-			
-			// update routing table
-			Router.getInstance().setRoutingTable(joinresp.getTable());
-			
-			// update its repository
-			hashSpaceManager.handlePublishRequest(joinresp.getFile());
-			
-			// send ack response
-			response = new ACKResponse();
+			/*
+			 * TODO choose destination ip and return it inform of messageDetail object 
+			 */
+			destPeerIP = peerIp;
 			break;
 		case LEAVE:
 			logger.debug("Processing put request");
@@ -317,7 +318,7 @@ public class RequestProcessor {
 							EnumParamsType.LASTHASH));
 			// Parent zone
 			myZone.mergeZone(mer, counter);
-			response = new LeaveResponse();
+			response = new LeaveResponse(req.getId());
 			params = new Parameter();
 			params.add(EnumParamsType.STATUSCODE,
 					new BigInteger(String.valueOf(0)));
@@ -325,21 +326,29 @@ public class RequestProcessor {
 			response.createResponse(EnumOperationType.PUTRESPONSE, params);
 			counter++;
 			counter = counter % 15;
+			/*
+			 * TODO choose destination ip and return it inform of messageDetail object 
+			 */
+			destPeerIP = peerIp;
 			break;
 		case PUT:
 			logger.debug("Processing put request");
 			hashSpaceManager.handlePutRequest((PutRequest) req);
-			response = new PutResponse();
+			response = new PutResponse(req.getId());
 			params = new Parameter();
 			params.add(EnumParamsType.STATUSCODE,
 					new BigInteger(String.valueOf(0)));
 			params.add(EnumParamsType.MESSAGE,
 					"Successfully published file on peer");
 			response.createResponse(EnumOperationType.PUTRESPONSE, params);
+			/*
+			 * TODO choose destination ip and return it inform of messageDetail object 
+			 */
+			destPeerIP = peerIp;
 			break;
 		case GET:
 			logger.debug("Processing get request");
-			response = new GetResponse();
+			response = new GetResponse(req.getId());
 			IParameter getResponseparams;
 			String query_string_get = req.getParameter()
 					.getParamValue(EnumParamsType.SEARCHKEY).toString();
@@ -347,6 +356,10 @@ public class RequestProcessor {
 					query_string_get));
 			response.createResponse(EnumOperationType.GETRESPONSE,
 					getResponseparams);
+			/*
+			 * TODO choose destination ip and return it inform of messageDetail object 
+			 */
+			destPeerIP = peerIp;
 			break;
 		default:
 			try {
@@ -355,11 +368,13 @@ public class RequestProcessor {
 				logger.error(" Invalid request: unable to create xml ");
 			}
 		}
-		return response;
+		logger.error("sending it to default peer");
+		//response.setId(req.getId());
+		return new MessageDetails(peerIp, response);
 	}
 
 	// public void
-	public synchronized IZone getMyZone() {
+	public synchronized Zone getMyZone() {
 		if (myZone == null) {
 			myZone = new Zone();
 		}

@@ -14,13 +14,14 @@ import edu.ncsu.csc573.project.common.schema.Request;
  */
 public class SearchRequestMessage extends RequestMessage {
     	private Logger logger;
+		private String id;
 
 	public String getRequestInXML() throws Exception {
 
 		logger = Logger.getLogger(SearchRequestMessage.class);
 
 		Request req = new Request();
-		req.setId(BigInteger.valueOf(System.currentTimeMillis()));
+		req.setId(id);
 		CommandRequestType search = new CommandRequestType();
 		SearchType s = new SearchType();
 		SearchTypeParams rpt = new SearchTypeParams();
@@ -39,7 +40,7 @@ public class SearchRequestMessage extends RequestMessage {
 		logger = Logger.getLogger(RegisterRequestMessage.class);
 		try {
 			Request req = getRequest(XML);
-			
+			id = req.getId();
 			CommandRequestType command = req.getCommand();
 			SearchType searchType = command.getSearch();
 			SearchTypeParams searchparams = searchType.getParams();
@@ -53,5 +54,14 @@ public class SearchRequestMessage extends RequestMessage {
 			logger.error("Unable to parse request from string", e);
 		}
 	}
-    
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = String.valueOf(id);
+	}
+	public SearchRequestMessage() {
+		id = ""+System.currentTimeMillis();
+	}
 }

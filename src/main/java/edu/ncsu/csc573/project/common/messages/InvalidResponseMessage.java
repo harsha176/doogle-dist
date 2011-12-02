@@ -15,13 +15,19 @@ import edu.ncsu.csc573.project.common.schema.Response;
 */
 public class InvalidResponseMessage extends ResponseMessage {
    	private Logger logger;
+	private String id;
        
+	public InvalidResponseMessage(String id, String message) {
+		this(new BigInteger(String.valueOf(1)), message);
+		this.id = id;
+	}
+	
 	public String getRequestInXML() throws Exception {
 
 		logger = Logger.getLogger(InvalidResponseMessage.class);
 
 		Response req = new Response();
-		req.setId(BigInteger.valueOf(System.currentTimeMillis()));
+		req.setId(id);
 		CommandResponseType Logoutresponse = new CommandResponseType();
 		InvalidResponseType rt = new InvalidResponseType();
 		InvalidResponseTypeParams rpt = new InvalidResponseTypeParams();
@@ -40,7 +46,7 @@ public class InvalidResponseMessage extends ResponseMessage {
 		logger = Logger.getLogger(LogoutResponseMessage.class);
 		try {
 			Response req = getResponse(XML);
-			
+			id = req.getId();
 			CommandResponseType command = req.getCommand();
 			InvalidResponseType logoutType = command.getInvalidResponse();
 			InvalidResponseTypeParams regparams = logoutType.getParams();
@@ -65,7 +71,11 @@ public class InvalidResponseMessage extends ResponseMessage {
 		this.setParameter(param);
 	}
 	
-	public InvalidResponseMessage(String message) {
-		this(new BigInteger(String.valueOf(1)), message);
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = String.valueOf(id);
 	}
 }

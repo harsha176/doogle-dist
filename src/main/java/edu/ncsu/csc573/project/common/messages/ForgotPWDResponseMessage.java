@@ -14,13 +14,17 @@ import edu.ncsu.csc573.project.common.schema.Response;
 */ 
 public class ForgotPWDResponseMessage extends ResponseMessage {
     	private Logger logger;
+		private String id;
         
+		public ForgotPWDResponseMessage(String id) {
+			this.id = id;
+		}
 	public String getRequestInXML() throws Exception {
 
 		logger = Logger.getLogger(ForgotPWDResponseMessage.class);
 
 		Response req = new Response();
-		req.setId(BigInteger.valueOf(System.currentTimeMillis()));
+		req.setId(id);
 		CommandResponseType ForgotPWDresponse = new CommandResponseType();
 		ForgotPWDResponseType rt = new ForgotPWDResponseType();
 		ForgotPWDResponseParamsType rpt = new ForgotPWDResponseParamsType();
@@ -39,7 +43,7 @@ public class ForgotPWDResponseMessage extends ResponseMessage {
 		logger = Logger.getLogger(ForgotPWDResponseMessage.class);
 		try {
 			Response req = getResponse(XML);
-			
+			id = req.getId();
 			CommandResponseType command = req.getCommand();
 			ForgotPWDResponseType forgotPwdType = command.getForgotPWDResponse();
 			ForgotPWDResponseParamsType regparams = forgotPwdType.getParams();
@@ -53,4 +57,12 @@ public class ForgotPWDResponseMessage extends ResponseMessage {
 			logger.error("Unable to parse request from string", e);
 		} 
 	} 
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = String.valueOf(id);
+	}
 }

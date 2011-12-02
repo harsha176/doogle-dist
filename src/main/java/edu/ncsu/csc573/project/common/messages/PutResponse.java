@@ -17,13 +17,14 @@ import org.apache.log4j.Logger;
  */
 public class PutResponse extends ResponseMessage {
     	private Logger logger;
+		private String id;
         
 	public String getRequestInXML() throws Exception {
 
 		logger = Logger.getLogger(LoginResponseMessage.class);
 
 		Response req = new Response();
-		req.setId(BigInteger.valueOf(System.currentTimeMillis()));
+		req.setId(id);
 		CommandResponseType Putresponse = new CommandResponseType();
 		PutResponseType rt = new PutResponseType();
 		PutResponseTypeParams rpt = new PutResponseTypeParams();
@@ -56,6 +57,15 @@ public class PutResponse extends ResponseMessage {
 			logger.error("Unable to parse request from string", e);
 		} 
 	}   
-    
-    
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = String.valueOf(id);
+	}
+	public PutResponse(String id) {
+		this.id = id;
+	}
+	
 }

@@ -13,15 +13,15 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.SocketAddress;
 import org.apache.log4j.Logger;
 import edu.ncsu.csc573.project.common.ConfigurationManager;
-import edu.ncsu.csc573.project.common.messages.EnumOperationType;
-import edu.ncsu.csc573.project.common.messages.EnumParamsType;
 import edu.ncsu.csc573.project.common.messages.IRequest;
 import edu.ncsu.csc573.project.common.messages.IResponse;
 import edu.ncsu.csc573.project.common.messages.RequestMessage;
+import edu.ncsu.csc573.project.common.messages.ResponseMessage;
+import edu.ncsu.csc573.project.controllayer.ConcurrentQueueManagement;
 import edu.ncsu.csc573.project.controllayer.RequestProcessor;
 
 /**
@@ -33,19 +33,26 @@ import edu.ncsu.csc573.project.controllayer.RequestProcessor;
 public class ClientHandler implements Runnable {
 	private Socket conncetedSocket;
 	private Logger logger;
-	private ICommunicationService distCommService;
+	//private ICommunicationService distCommService;
+	private String remoteIP;
 	
 	public ClientHandler(Socket connSock) {
 		logger = Logger.getLogger(ClientHandler.class);
 		conncetedSocket = connSock;
-		distCommService = CommunicationServiceFactory.getInstance();
+		if(conncetedSocket.getRemoteSocketAddress() instanceof InetSocketAddress) {
+			 remoteIP = ((InetSocketAddress)conncetedSocket.getRemoteSocketAddress()).getAddress().getHostAddress();
+			 logger.debug("Remote peer ip is : " + remoteIP);
+		} else {
+			logger.error("Failed to get remote peer ip address of " + conncetedSocket);
+		}
+		//distCommService = CommunicationServiceFactory.getInstance();
 	}
 
 	
 	public void run() {
-		SocketAddress clientAddress = conncetedSocket.getRemoteSocketAddress();
-		RequestProcessor reqProcessor = RequestProcessor.getInstance();
-		logger.info("Handling client " + clientAddress);
+		//SocketAddress clientAddress = remoteSocketAddress;
+		//RequestProcessor reqProcessor = RequestProcessor.getInstance();
+		logger.info("Handling client ");
 		
 		boolean isFileTransfer = false;
 		// Expect register or login request from the client
@@ -57,15 +64,16 @@ public class ClientHandler implements Runnable {
 			// sleep till the data is ready from the client
 			IRequest req = null;
 			IResponse response = null;
-			do {
-				logger.debug("Waiting for request from client " + conncetedSocket.getRemoteSocketAddress());
+			IRequest forwardReqOrResp = null;
+			
+			logger.debug("Waiting for requests... ");
 				while (!br.ready()) {
 					//logger.debug("Waiting for request from client "
 					//		+ conncetedSocket.getRemoteSocketAddress());
 					try {
 						Thread.sleep(100);
 					} catch (Exception e) {
-						logger.error("Unexpected error from client" + conncetedSocket.getRemoteSocketAddress(), e);
+						logger.error("Unexpected error from client ");
 					}
 				}
 				logger.debug("Receiving request from client");
@@ -79,6 +87,11 @@ public class ClientHandler implements Runnable {
 
 				logger.debug("received data from client " + sb.toString());
 				
+				if( c == -1) {
+					logger.info("Remote peer closed connection");
+					return ;
+				}
+				
 				/*
 				 * Handle file requests 
 				 */
@@ -88,53 +101,79 @@ public class ClientHandler implements Runnable {
 					//br.read();
 					return ;
 				}
-				PrintWriter pw = new PrintWriter(new BufferedWriter(
-						new OutputStreamWriter(
-								conncetedSocket.getOutputStream())));
 				
-				try {
-					req = RequestMessage.createRequest(sb.toString().trim());
-					logger.info("Request from client " + conncetedSocket.getRemoteSocketAddress() + " is : "
-							+ req.getRequestInXML());
-					response = distCommService.executeRequest(req);
-					/*
-					 * check if the response is an ACK or not
-					 */
-                                        if(response == null) {
-                                            logger.info("Received ACK response");
-                                            logger.info("Service is exiting");
-                                            return;
-                                        }
-					if(response.getOperationType() == EnumOperationType.ACKRESPONSE) {
-						pw.println(response.getRequestInXML());
-						pw.flush();
+				
+				
+				
+				/*
+				 * Handle response 
+				 */
+				if(sb.indexOf("</Response>") != -1) {
+					IResponse resp;
+					try {
+						resp = ResponseMessage.createResponse(sb.toString().trim(), String.valueOf(100));
+					} catch (Exception e) {
+						logger.error("Received invalid request or response " + sb.toString());
 						return ;
-					} 
+					}
+					try {
+						logger.info("Response from peer is : "
+								+ resp.getRequestInXML());
+					} catch (Exception e1) {
+						logger.error("Unable to parse response : " + resp.getOperationType());
+						return ;
+					}
 					/*
-					 * send response to destination host
+					 * update response
 					 */
-					//String destIPAddress = req.getParameter().getParamValue(EnumParamsType.IPADDRESS).toString();
-					//Socket destSoc = new Socket(destIPAddress, ConfigurationManager.getInstance().getServerPort());
-					/*PrintWriter pw1 = new PrintWriter(new BufferedWriter(
-							new OutputStreamWriter(
-									destSoc.getOutputStream())));
-					*/
-					pw.println(response.getRequestInXML());
-					pw.flush();
-					logger.debug("Successfully sent response: " + response.getRequestInXML());
-					//logger.info("Sending response to peer");
-					//distCommService.executeRequest(response, destIPAddress);
-					//logger.info();
-				} catch (Exception e) {
-					logger.error("Unable to parse request", e);
-					//req = null;
-					break;
+					try {
+						ConcurrentQueueManagement.getInstance().updateResponse(resp.getId(), resp);
+					} catch (Exception e) {
+						logger.error("Received response is not appropriate for this client ",e);
+						return ;
+					}
+					logger.info("Successfully updated response");
+					return ;
 				}
-				//logger.info("Waiting for requests from client :" + clientAddress);
-			} while (req == null || req.getOperationType() != EnumOperationType.LOGOUT);
-			logger.info("Client" + conncetedSocket +" successfully logged out.");
+				
+				/*
+				 * Handle request
+				 */
+				if(sb.indexOf("</Request>") != -1) {
+					try {
+						req = RequestMessage.createRequest(sb.toString().trim());
+					} catch (Exception e) {
+						logger.error("Received invalid request or response " + sb.toString());
+						return ;
+					}
+					try {
+						logger.info("Resquest from peer is : "
+								+ req.getRequestInXML());
+					} catch (Exception e) {
+						logger.error("Unable to parse request");
+						return ;
+					}
+					
+					
+					MessageDetails md = RequestProcessor.getInstance().processRequest(req, remoteIP);
+					PrintWriter pw = new PrintWriter(new BufferedWriter(
+							new OutputStreamWriter(
+									new Socket(md.getIPAddress(), ConfigurationManager.getInstance().getServerPort()).getOutputStream())));
+					forwardReqOrResp = md.getRequest();
+					try {
+						pw.println(forwardReqOrResp.getRequestInXML());
+					} catch (Exception e) {
+						logger.error("Received invalid response or request from Request processor " + forwardReqOrResp.getOperationType());
+					}
+					pw.flush();
+					try {
+						logger.debug("Successfully sent response: " + forwardReqOrResp.getRequestInXML());
+					} catch (Exception e) {
+						logger.error("Failed to parse response " + forwardReqOrResp.getOperationType(), e);
+					}
+				} 
 		} catch (IOException e) {
-			logger.error("Failed to read data from the client " + conncetedSocket.getRemoteSocketAddress());
+			logger.error("Failed to read data from the client ",e);
 		} finally {
 			String connSockAddr = conncetedSocket.toString();
 			if(conncetedSocket != null && !isFileTransfer) {
@@ -142,7 +181,7 @@ public class ClientHandler implements Runnable {
 					conncetedSocket.close();
 					logger.info("Successfully closed connection for client " + connSockAddr);
 				} catch (IOException e) {
-					logger.error("Failed to close " + conncetedSocket.getRemoteSocketAddress(), e);
+					logger.error("Failed to close ", e);
 				}
 			}
 		}

@@ -17,13 +17,18 @@ import org.apache.log4j.Logger;
  */
 public class ChangePasswordResponseMessage extends ResponseMessage {
     	private Logger logger;
+		private String id;
+		
+		public ChangePasswordResponseMessage(String id) {
+			this.id = id;
+		}
         
 	public String getRequestInXML() throws Exception {
 
 		logger = Logger.getLogger(ForgotPWDResponseMessage.class);
 
 		Response req = new Response();
-		req.setId(BigInteger.valueOf(System.currentTimeMillis()));
+		req.setId(id);
 		CommandResponseType Changeresponse = new CommandResponseType();
 		ChangePasswordResponseType rt = new ChangePasswordResponseType();
 		ChangePasswordResponseParamsType rpt = new ChangePasswordResponseParamsType();
@@ -42,7 +47,7 @@ public class ChangePasswordResponseMessage extends ResponseMessage {
 		logger = Logger.getLogger(ForgotPWDResponseMessage.class);
 		try {
 			Response req = getResponse(XML);
-			
+			id = req.getId();
 			CommandResponseType command = req.getCommand();
 			ChangePasswordResponseType changeType = command.getChangePasswordResponse();
 			ChangePasswordResponseParamsType regparams = changeType.getParams();
@@ -56,4 +61,11 @@ public class ChangePasswordResponseMessage extends ResponseMessage {
 			logger.error("Unable to parse request from string", e);
 		} 
 	} 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = String.valueOf(id);
+	}
 }

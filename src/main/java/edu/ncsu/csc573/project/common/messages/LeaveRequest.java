@@ -11,6 +11,8 @@ package edu.ncsu.csc573.project.common.messages;
 public class LeaveRequest extends RequestMessage{
 
 	
+	private String id;
+
 	public String getRequestInXML() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
@@ -20,5 +22,14 @@ public class LeaveRequest extends RequestMessage{
 		// TODO Auto-generated method stub
 		
 	}
-    
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = String.valueOf(id);
+	}
+	public LeaveRequest() {
+		id = ""+System.currentTimeMillis();
+	}
 }

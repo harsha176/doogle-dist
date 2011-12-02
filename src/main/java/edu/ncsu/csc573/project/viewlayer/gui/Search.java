@@ -22,6 +22,7 @@ import edu.ncsu.csc573.project.common.messages.LogoutRequestMessage;
 import edu.ncsu.csc573.project.common.messages.Parameter;
 import edu.ncsu.csc573.project.common.messages.PublishRequestMessage;
 import edu.ncsu.csc573.project.common.messages.SearchRequestMessage;
+import edu.ncsu.csc573.project.controllayer.Controller;
 import edu.ncsu.csc573.project.controllayer.Session;
 import edu.ncsu.csc573.project.controllayer.hashspacemanagement.DigestAdaptor;
 
@@ -157,17 +158,7 @@ private void logoutlinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
 
 	try {
-        Logger logger = Logger.getLogger(Search.class);
-
-        IRequest searchRequest = new SearchRequestMessage();
-        IParameter searchParams = new Parameter();
-        searchParams.add(EnumParamsType.USERNAME, "DUMMY");
-        searchParams.add(EnumParamsType.SEARCHKEY, ByteOperationUtil.convertBytesToString(DigestAdaptor.getInstance().getDigest(searchText.getText())));
-        searchRequest.createRequest(EnumOperationType.SEARCH, searchParams);
-        
-        IResponse response = CommunicationServiceFactory.getInstance().executeRequest(searchRequest);
-        //logger.info("Status of response is  : " + response.getStatus().getErrorId().toString());
-        //logger.info("Message is " + response.getMessage());
+		Controller.getInstance().search(searchText.getText());
     } catch (IOException ex) {
         Logger.getLogger(Search.class.getName()).error("Failed to create publish request", ex);
     } catch (Exception e) {
@@ -181,12 +172,7 @@ private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 
 private void PublishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PublishActionPerformed
     try {
-        Logger logger = Logger.getLogger(Search.class);
-
-        IRequest pubRequest = PublishRequestMessage.getPublishRequest();
-        IResponse response = CommunicationServiceFactory.getInstance().executeRequest(pubRequest);
-        logger.info("Status of response is  : " + response.getStatus().getErrorId().toString());
-        logger.info("Message is " + response.getMessage());
+    	Controller.getInstance().publish();
     } catch (IOException ex) {
         Logger.getLogger(Search.class.getName()).error("Failed to create publish request", ex);
     } catch (Exception e) {
@@ -216,15 +202,8 @@ private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 // TODO add your handling code here:
     Logger logger = Logger.getLogger(Search.class);
     try {
+    	Controller.getInstance().logout(Session.getInstance().getUsername());
     	// send leave request
-    	LeaveRequest lr = new LeaveRequest();
-    	
-        IRequest logoutRequest = new LogoutRequestMessage();
-        IParameter Logoutparams = new Parameter();
-        logger.debug(Session.getInstance().getUsername());
-        Logoutparams.add(EnumParamsType.USERNAME, Session.getInstance().getUsername());
-        logoutRequest.createRequest(EnumOperationType.LOGOUT, Logoutparams);
-        IResponse response = CommunicationServiceFactory.getInstance().executeRequest(logoutRequest);
         loggedOut logout = new loggedOut();
         this.setVisible(false);
         logout.setVisible(true);

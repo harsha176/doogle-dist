@@ -18,7 +18,7 @@ import edu.ncsu.csc573.project.common.schema.FileParamType;
 public class TestJoinResponse {
 	@Test
 	public void testJoinResponse() {
-		JoinResponse resp = new JoinResponse();
+		JoinResponse resp = new JoinResponse(System.currentTimeMillis()+"");
 		IParameter param = new Parameter();
 		param.add(EnumParamsType.STATUSCODE, new BigInteger(String.valueOf(1)));
 		param.add(EnumParamsType.MESSAGE, "Bye");
