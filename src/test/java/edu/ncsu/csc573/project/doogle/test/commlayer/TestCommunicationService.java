@@ -85,15 +85,15 @@ public class TestCommunicationService {
 		//CommService.close();
 		
 		//CommService.executeRequest(request, ipaddress)
-		String ipaddress = "127.0.0.1";
-		response = CommService.executeRequest(TestRequestMessages.getRegisterRequest(),ipaddress);
-		Assert.assertEquals(response.getOperationType(), EnumOperationType.REGISTERRESPONSE);
+		//String ipaddress = "127.0.0.1";
+		//response = CommService.executeRequest(TestRequestMessages.getRegisterRequest(),ipaddress);
+		//Assert.assertEquals(response.getOperationType(), EnumOperationType.REGISTERRESPONSE);
 		//Assert.assertEquals(response.getStatus().getErrorId().intValue(), 0);
 		//Assert.assertEquals(expected, actual)
-		System.out.println("Response is : " + response);
-		response = CommService.executeRequest(TestRequestMessages.getLoginRequest(),ipaddress);
-		Assert.assertEquals(response.getOperationType(), EnumOperationType.LOGINRESPONSE);
-		Assert.assertEquals(response.getStatus().getErrorId().intValue(), 1);
+		//System.out.println("Response is : " + response);
+		//response = CommService.executeRequest(TestRequestMessages.getLoginRequest(),ipaddress);
+		//Assert.assertEquals(response.getOperationType(), EnumOperationType.LOGINRESPONSE);
+		//Assert.assertEquals(response.getStatus().getErrorId().intValue(), 1);
 		
 		//while(true) {
 			

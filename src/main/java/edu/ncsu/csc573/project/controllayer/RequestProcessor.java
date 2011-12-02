@@ -20,6 +20,7 @@ import edu.ncsu.csc573.project.common.messages.GetResponse;
 import edu.ncsu.csc573.project.common.messages.IParameter;
 import edu.ncsu.csc573.project.common.messages.IRequest;
 import edu.ncsu.csc573.project.common.messages.IResponse;
+import edu.ncsu.csc573.project.common.messages.InvalidResponseMessage;
 import edu.ncsu.csc573.project.common.messages.JoinResponse;
 import edu.ncsu.csc573.project.common.messages.LeaveResponse;
 import edu.ncsu.csc573.project.common.messages.LoginResponseMessage;
@@ -76,11 +77,13 @@ public class RequestProcessor {
 		/*
 		 * Check if its a valid request for this node
 		 */
-		/*
-		 * if (!adminFilter.isRequestValid(req.getOperationType())) { response =
-		 * new InvalidResponseMessage(1, req.getOperationType() +
-		 * "is not a requested operation "); return response; }
-		 */
+		
+		 if (!adminFilter.isRequestValid(req.getOperationType())) { response =
+				 new InvalidResponseMessage(req.getId(), req.getOperationType() +
+						 "is not a requested operation "); 
+		 return new MessageDetails(peerIp, response); 
+		 }
+		
 		/*
 		 * if(ConfigurationManager.getInstance().isAdminServer()) { myZone = new
 		 * Zone(); myZone.create(Point.getHashSpaceStartPoint(),
