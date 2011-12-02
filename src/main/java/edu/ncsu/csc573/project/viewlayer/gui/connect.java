@@ -2,8 +2,8 @@ package edu.ncsu.csc573.project.viewlayer.gui;
 
 import edu.ncsu.csc573.project.commlayer.CommunicationServiceFactory;
 import edu.ncsu.csc573.project.commlayer.ICommunicationService;
-import edu.ncsu.csc573.project.controllayer.Controller;
 
+import edu.ncsu.csc573.project.controllayer.Controller;
 import java.awt.event.KeyEvent;
 import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
