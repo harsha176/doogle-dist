@@ -179,7 +179,7 @@ public class RequestProcessor {
 						.getParamValue(EnumParamsType.USERNAME).toString());
 				params.add(EnumParamsType.STATUSCODE,
 						new BigInteger(String.valueOf(0)));
-
+				peers.remove(peerIp);
 			} catch (UserManagementException e1) {
 				params.add(EnumParamsType.STATUSCODE,
 						new BigInteger(String.valueOf(e1.getStatus())));
