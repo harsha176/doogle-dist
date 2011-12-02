@@ -45,6 +45,11 @@ public class ResponseProcessor {
 			/*
 			 * send join request
 			 */
+			try {
+				validateResponse(response);
+			} catch(Exception e) {
+				logger.error("Login failed ", e);
+			}
 			String joinPeerIP = response.getParameter()
 			.getParamValue(EnumParamsType.MESSAGE).toString();
                         logger.debug("Join peer ip is : " + joinPeerIP);
@@ -129,6 +134,9 @@ public class ResponseProcessor {
 	private String validateResponse(IResponse response) throws Exception {
 		if ((response.getStatus().getErrorId().intValue() != BigInteger.ZERO.intValue())) {
 			throw new Exception(response.getMessage());
+		}
+		if(response.getOperationType() == EnumOperationType.LOGOUTRESPONSE) {
+			return "Successfully logged out";
 		}
 		return response.getMessage();
 	}

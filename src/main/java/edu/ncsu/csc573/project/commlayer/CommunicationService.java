@@ -89,12 +89,12 @@ public class CommunicationService implements ICommunicationService {
 		try {
 			socket.connect(serverSocket, timeOut);
 		} catch (SocketTimeoutException e) {
-			logger.error("Connection timed out", e);
-			cleanUp();
+			logger.error("Connection timed out: " + peerAddress, e);
+			//cleanUp();
 			throw e;
 		} catch (IOException exp) {
-			logger.error("Connection refused", exp);
-			cleanUp();
+			logger.error("Connection refused: " + peerAddress, exp);
+			//cleanUp();
 			throw exp;
 		}
 		return socket;
@@ -114,23 +114,11 @@ public class CommunicationService implements ICommunicationService {
 			} catch (UnknownHostException excpByIpAddress) {
 				logger.info("Unable to find the address of host: " + peerIP
 						+ " even by ip address");
-				cleanUp();
+				//cleanUp();
 				throw excpByIpAddress;
 			}
 		}
 		return address;
-	}
-
-	private void cleanUp() throws Exception {
-
-		if (server != null) {
-			server.stop();
-		}
-		while (!server.isServerRunning()) {
-			logger.info("Waiting for peer server to close");
-			Thread.sleep(100);
-		}
-		logger.error("Unable to initialize Communication layer. Exiting from Application");
 	}
 
 	/*
