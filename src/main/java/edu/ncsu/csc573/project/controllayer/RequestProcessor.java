@@ -2,6 +2,7 @@ package edu.ncsu.csc573.project.controllayer;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
@@ -32,6 +33,8 @@ import edu.ncsu.csc573.project.common.messages.PutRequest;
 import edu.ncsu.csc573.project.common.messages.PutResponse;
 import edu.ncsu.csc573.project.common.messages.RegisterResponseMessage;
 import edu.ncsu.csc573.project.common.messages.SearchResponseMessage;
+import edu.ncsu.csc573.project.common.schema.FileParamType;
+import edu.ncsu.csc573.project.common.schema.TableParamType;
 import edu.ncsu.csc573.project.controllayer.hashspacemanagement.HashSpaceManager;
 import edu.ncsu.csc573.project.controllayer.hashspacemanagement.HashSpaceManagerFactory;
 import edu.ncsu.csc573.project.controllayer.hashspacemanagement.Query;
@@ -278,7 +281,7 @@ public class RequestProcessor {
 			response = new JoinResponse(req.getId());
 			IZone child = myZone.split(count);
 			
-			
+			logger.info("Created new child zone : " + child.toString());
 			JoinResponse joinResponse = new JoinResponse(req.getId());
 			
 			// send first, last hash and peer id
@@ -287,18 +290,34 @@ public class RequestProcessor {
 			joinResponse.setPeerid(child.getStart().getAsString());
 			joinResponse.setMyipaddress(ConfigurationManager.getInstance().getHostInterface());
 			// send routing table
-			joinResponse.getTable().addAll(Router.getInstance().getRoutingTableAsList());
-			joinResponse.getFile().addAll(hashSpaceManager.getAllFileDetailsAsList(child));
+			List<TableParamType> routingTableAsList = Router.getInstance().getRoutingTableAsList();
+			joinResponse.getTable().addAll(routingTableAsList);
+			logger.info("Published routing table");
+			for(TableParamType table:routingTableAsList) {
+				logger.info(table.getDirection() + ":" + table.getNexthop() + ":" + table.getPeerid());
+			}
+			
+			List<FileParamType> allFileDetailsAsList = hashSpaceManager.getAllFileDetailsAsList(child);
+			joinResponse.getFile().addAll(allFileDetailsAsList);
+			for(FileParamType table:allFileDetailsAsList) {
+				logger.info(table.getFilename() + ":" + table.getIpaddress());
+			}
+			
 			// Send routing table and file entries
 			// response.createResponse(EnumOperationType.JOINRESPONSE,
 			// joinResponseparams);
 			
 			IParameter joinParams = new Parameter();
-			joinParams.add(EnumParamsType.STATUSCODE, 1);
+			joinParams.add(EnumParamsType.STATUSCODE, new BigInteger(String.valueOf(1)));
 			joinParams.add(EnumParamsType.MESSAGE, "Successfully executed request");
-			joinResponse.createRequest(EnumOperationType.JOINRESPONSE, joinParams);
+			joinResponse.createResponse(EnumOperationType.JOINRESPONSE, joinParams);
 			
 			response = joinResponse;
+			try {
+				logger.info("Successfull created response " + response.getRequestInXML());
+			} catch (Exception e1) {
+				logger.error("Failed to create join response", e1);
+			}
 			// update routing table in that direction
 			Router.getInstance().update(count, child.getStart(), req.getParameter().getParamValue(EnumParamsType.IPADDRESS).toString());
 			count++;
