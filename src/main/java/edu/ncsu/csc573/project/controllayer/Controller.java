@@ -72,7 +72,7 @@ public class Controller implements IController {
 	}
 
 	private String validateResponse(IResponse response) throws Exception {
-		if (!(response.getStatus().getErrorId() == BigInteger.ZERO)) {
+		if ((response.getStatus().getErrorId().intValue() != BigInteger.ZERO.intValue())) {
 			throw new Exception(response.getMessage());
 		}
 		return response.getMessage();

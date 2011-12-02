@@ -180,7 +180,7 @@ public class CommunicationService implements ICommunicationService {
 		}
 	}
 
-	@Deprecated
+        
 	public boolean isConnected() {
 		return this.isPeerServerRunning();
 	}

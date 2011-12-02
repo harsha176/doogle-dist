@@ -261,6 +261,68 @@ public class Login extends javax.swing.JFrame {
 			this.setVisible(false);
 			LoggedIn.setVisible(true);
 			LoggedIn.setLocationRelativeTo(this);
+				/*IResponse response = CommunicationServiceFactory.getInstance()
+						.executeRequest(loginRequest);
+				BigInteger statusCode = response.getStatus().getErrorId();
+				if (statusCode.intValue() == 0) {
+					logger.info("Closing bootstrap server connect");
+					CommunicationServiceFactory.getInstance().closeClientSocket();
+                                        /*while(CommunicationServiceFactory.getInstance().isPeerServerRunning()) {
+                                            logger.debug("Server is still running");
+                                            Thread.sleep(1000);
+                                        }
+                                        logger.debug("Server status : " + CommunicationServiceFactory.getInstance().isPeerServerRunning());
+					Session.createInstance(username.getText());
+					Search LoggedIn = new Search();
+					this.setVisible(false);
+					LoggedIn.setVisible(true);
+					LoggedIn.setLocationRelativeTo(this);
+					LoggedIn.setTitle("Hello " + username.getText()
+							+ " , Welcome!!");
+					String joinPeerIP = response.getParameter()
+							.getParamValue(EnumParamsType.MESSAGE).toString();
+                                        logger.debug("Join peer ip is : " + joinPeerIP);
+					/*
+					 * if this is the first peer set its zone to entire
+					 * Hashspace
+					
+					if (joinPeerIP.equalsIgnoreCase("0.0.0.0")) {
+						logger.info("I am the first peeer");
+						CommunicationServiceFactory.getInstance().initialize(
+								"127.0.0.1", null);
+						RequestProcessor
+								.getInstance()
+								.getMyZone()
+								.create(Point.getHashSpaceStartPoint(),
+										Point.getHashSpaceEndPoint());
+						logger.info("My zone detais "
+								+ RequestProcessor.getInstance().getMyZone()
+										.toString());
+					} else {
+						// connect to join peer
+						CommunicationServiceFactory.getInstance().initialize(
+								joinPeerIP.trim(), null);
+						// send join request
+						IRequest joinRequest = new JoinRequest();
+						IParameter params = new Parameter();
+						params.add(EnumParamsType.IPADDRESS,
+								ConfigurationManager.getInstance()
+										.getHostInterface());
+						params.add(EnumParamsType.PEERID,
+								Point.generateRandomPoint());
+						joinRequest.createRequest(EnumOperationType.JOIN,
+								params);
+                                                logger.info("Join request: " + joinRequest.getRequestInXML());
+                                                        
+						response = CommunicationServiceFactory.getInstance()
+								.executeRequest(joinRequest);
+						// update zone and file repository based on response
+					}*/
+
+					// logger.info("Status of response is  : "
+					// +response.getStatus().getErrorId().toString());
+					// logger.info("Message is " + response.getMessage());
+				 //}
 			} catch (Exception e) {
 				// inValidComboScreen();
 				inValidComboScreen();
@@ -302,10 +364,10 @@ public class Login extends javax.swing.JFrame {
 
 	/*
 	 * private void forgotpwdlinkActionPerformed(java.awt.event.ActionEvent evt)
-	 * {//GEN-FIRST:event_forgotpwdlinkActionPerformed // TODO add your handling
+	 * {                                                                        
 	 * code here: Forgotpwd Forgotpassword = new Forgotpwd();
 	 * this.setVisible(false); Forgotpassword.setVisible(true);
-	 * }//GEN-LAST:event_forgotpwdlinkActionPerformed
+	 * }                                             
 	 */
 
 	private void forgotPwdActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_forgotPwdActionPerformed
