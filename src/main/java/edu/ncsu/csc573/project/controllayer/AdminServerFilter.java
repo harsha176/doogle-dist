@@ -24,6 +24,8 @@ public class AdminServerFilter implements IFilter {
 			case GET:
 			case PUBLISH:
 			case SEARCH:
+			case JOIN:
+			case LEAVE:
 				return true;
 			default:
 				return false;
