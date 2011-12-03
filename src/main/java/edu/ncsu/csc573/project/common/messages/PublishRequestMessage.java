@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -15,7 +14,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import edu.ncsu.csc573.project.commlayer.CommunicationService;
 import edu.ncsu.csc573.project.commlayer.CommunicationServiceFactory;
 import edu.ncsu.csc573.project.commlayer.ICommunicationService;
 import edu.ncsu.csc573.project.commlayer.Point;
@@ -147,11 +145,11 @@ public class PublishRequestMessage extends RequestMessage {
 		String localIPAddress = ConfigurationManager.getInstance()
 				.getHostInterface();
 		
-		try {
+		/*(try {
 			localIPAddress = InetAddress.getLocalHost().getHostAddress();
 		} catch (UnknownHostException e) {
 			logger.error("Unable to get IPAddress of the host interface", e);
-		}
+		}*/
 		
 		ICommunicationService commService = CommunicationServiceFactory.getInstance();
 		

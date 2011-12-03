@@ -23,11 +23,24 @@
              <xs:element name="ChangePassword" type="ChangePasswordType"></xs:element>
              <xs:element name="Join" type="JoinType"></xs:element>
              <xs:element name="Leave" type="LeaveType"></xs:element>
-                        <xs:element name="Put" type="PutType"></xs:element>
-                        <xs:element name="Get" type="GetType"></xs:element>
+             <xs:element name="Put" type="PutType"></xs:element>
+             <xs:element name="Get" type="GetType"></xs:element>
+             <xs:element name="FileDownload" type="FileDownloadType"></xs:element>
 		</xs:choice>
 	</xs:complexType>
 
+	<xs:complexType name="FileDownloadType">
+		<xs:sequence>
+			<xs:element name="Operation" type="xs:string" fixed="FileDownload:" />
+			<xs:element name="params" type="FileDownloadParams"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="FileDownloadParams">
+		<xs:sequence>
+			<xs:element name="FileName" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
 
 	<xs:complexType name="RegisterType">
 		<xs:sequence>
