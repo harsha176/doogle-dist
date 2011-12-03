@@ -113,6 +113,18 @@ public abstract class ResponseMessage extends RequestMessage implements
 		} else if (XML.indexOf("Search") != -1) {
 			res = new SearchResponseMessage(id);
 			res.parseXML(XML);
+		}else if (XML.indexOf("Join") != -1) {
+			res = new JoinResponse(id);
+			res.parseXML(XML);
+		}else if (XML.indexOf("Leave") != -1) {
+			res = new LeaveResponse(id);
+			res.parseXML(XML);
+		}else if (XML.indexOf("Put") != -1) {
+			res = new PutResponse(id);
+			res.parseXML(XML);
+		}else if (XML.indexOf("Get") != -1) {
+			res = new GetResponse(id);
+			res.parseXML(XML);
 		}else if (XML.indexOf("Invalid") != -1) {
 			res = new InvalidResponseMessage(id, "");
 			res.parseXML(XML);

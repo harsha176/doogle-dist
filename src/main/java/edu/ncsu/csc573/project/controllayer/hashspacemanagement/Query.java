@@ -25,4 +25,9 @@ public class Query implements IQuery{
 	public Query(String encDigest) {
 		digest = ByteOperationUtil.convertStringToBytes(encDigest);
 	}
+
+	public byte[] getCordinates() {
+		return ByteOperationUtil.getCordinates(digest);
+	}
+	
 }

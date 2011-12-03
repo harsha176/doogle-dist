@@ -9,11 +9,17 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import edu.ncsu.csc573.project.commlayer.CommunicationService;
+import edu.ncsu.csc573.project.commlayer.CommunicationServiceFactory;
+import edu.ncsu.csc573.project.commlayer.ICommunicationService;
+import edu.ncsu.csc573.project.commlayer.Point;
+import edu.ncsu.csc573.project.commlayer.Router;
 import edu.ncsu.csc573.project.common.ByteOperationUtil;
 import edu.ncsu.csc573.project.common.ConfigurationManager;
 import edu.ncsu.csc573.project.common.schema.CommandRequestType;
@@ -111,8 +117,9 @@ public class PublishRequestMessage extends RequestMessage {
 		}
 	}
 
-	public static IRequest getPublishRequest() throws Exception {
-
+	public static void sendPublishRequest() throws Exception {
+		List<IRequest> pubreqs = new ArrayList<IRequest>(0);
+		
 		Logger logger = Logger.getLogger(PublishRequestMessage.class);
 		File pubDir = ConfigurationManager.getInstance().getPublishDirectory();
 
@@ -131,35 +138,41 @@ public class PublishRequestMessage extends RequestMessage {
 			digestUtil = DigestAdaptor.getInstance();
 		} catch (Exception e) {
 			logger.error("Unable to initialize digest utility", e);
-			return null;
+			return ;
 		}
 
 		List<File> files = Arrays.asList(pubDir.listFiles(textFilter));
-		IRequest PublishRequest = new PublishRequestMessage();
 		//PublishRequest.setId();
-		PublishSearchParameter publishParams = new PublishSearchParameter();
+		
 		String localIPAddress = ConfigurationManager.getInstance()
 				.getHostInterface();
-
+		
 		try {
 			localIPAddress = InetAddress.getLocalHost().getHostAddress();
 		} catch (UnknownHostException e) {
 			logger.error("Unable to get IPAddress of the host interface", e);
 		}
+		
+		ICommunicationService commService = CommunicationServiceFactory.getInstance();
+		
 		for (File file : files) {
-
-			publishParams.add(EnumParamsType.FILENAME, file.getName());
-			publishParams.add(EnumParamsType.FILEDIGEST, ByteOperationUtil
-					.convertBytesToString(digestUtil.getDigest(file)));
-			publishParams.add(EnumParamsType.FILESIZE,
+			IRequest putIRequest = new PutRequest();
+			IParameter putParams = new Parameter();
+			
+			putParams.add(EnumParamsType.FILENAME, file.getName());
+			byte[] filedigest = digestUtil.getDigest(file);
+			putParams.add(EnumParamsType.FILEDIGEST, ByteOperationUtil
+					.convertBytesToString(filedigest));
+			putParams.add(EnumParamsType.FILESIZE,
 					String.valueOf(file.length()));
-			publishParams.add(EnumParamsType.IPADDRESS, localIPAddress);
-			publishParams.add(EnumParamsType.ABSTRACT, getAbstract(file));
-			publishParams.add(EnumParamsType.DELIMITER, null);
-
+			putParams.add(EnumParamsType.IPADDRESS, localIPAddress);
+			putParams.add(EnumParamsType.ABSTRACT, getAbstract(file));
+			
+			putIRequest.createRequest(EnumOperationType.PUT, putParams);
+			//pubreqs.add(putIRequest);
+			commService.executeRequest(putIRequest, Router.getInstance().getNextHop(new Point(ByteOperationUtil.getCordinates(filedigest))));
 		}
-		PublishRequest.createRequest(EnumOperationType.PUBLISH, publishParams);
-		return PublishRequest;
+		
 	}
 
 	private static String getAbstract(File file) throws IOException {

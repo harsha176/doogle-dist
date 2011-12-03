@@ -10,10 +10,13 @@ import org.apache.log4j.Logger;
 import edu.ncsu.csc573.project.commlayer.IPoint;
 import edu.ncsu.csc573.project.commlayer.IZone;
 import edu.ncsu.csc573.project.commlayer.MessageDetails;
+import edu.ncsu.csc573.project.commlayer.Point;
 import edu.ncsu.csc573.project.commlayer.Router;
 import edu.ncsu.csc573.project.commlayer.Zone;
+import edu.ncsu.csc573.project.common.ByteOperationUtil;
 import edu.ncsu.csc573.project.common.ConfigurationManager;
 import edu.ncsu.csc573.project.common.messages.ChangePasswordResponseMessage;
+import edu.ncsu.csc573.project.common.messages.CustomFileParamType;
 import edu.ncsu.csc573.project.common.messages.EnumOperationType;
 import edu.ncsu.csc573.project.common.messages.EnumParamsType;
 import edu.ncsu.csc573.project.common.messages.ForgotPWDResponseMessage;
@@ -33,10 +36,14 @@ import edu.ncsu.csc573.project.common.messages.PutRequest;
 import edu.ncsu.csc573.project.common.messages.PutResponse;
 import edu.ncsu.csc573.project.common.messages.RegisterResponseMessage;
 import edu.ncsu.csc573.project.common.messages.SearchResponseMessage;
+import edu.ncsu.csc573.project.common.schema.DownloadFileParamType;
 import edu.ncsu.csc573.project.common.schema.FileParamType;
+import edu.ncsu.csc573.project.common.schema.GetResponseTypeParams;
+import edu.ncsu.csc573.project.common.schema.MatchFileParamType;
 import edu.ncsu.csc573.project.common.schema.TableParamType;
 import edu.ncsu.csc573.project.controllayer.hashspacemanagement.HashSpaceManager;
 import edu.ncsu.csc573.project.controllayer.hashspacemanagement.HashSpaceManagerFactory;
+import edu.ncsu.csc573.project.controllayer.hashspacemanagement.OrderedHashSpaceManager;
 import edu.ncsu.csc573.project.controllayer.hashspacemanagement.Query;
 import edu.ncsu.csc573.project.controllayer.usermanagement.IUsersManager;
 import edu.ncsu.csc573.project.controllayer.usermanagement.User;
@@ -46,7 +53,7 @@ public class RequestProcessor {
 
 	private Logger logger;
 	private IUsersManager usermanager;
-	private HashSpaceManager hashSpaceManager;
+	private OrderedHashSpaceManager hashSpaceManager;
 	private IFilter adminFilter;
 	private static Zone myZone;
 	private ArrayList<String> peers;
@@ -56,7 +63,7 @@ public class RequestProcessor {
 	private RequestProcessor() {
 		try {
 			usermanager = IUsersManager.getInstance();
-			hashSpaceManager = (HashSpaceManager)HashSpaceManagerFactory.getInstance();
+			hashSpaceManager = OrderedHashSpaceManager.getInstance();
 			adminFilter = new AdminServerFilter();
 			myZone = new Zone();
 			peers = new ArrayList<String>();
@@ -242,7 +249,7 @@ public class RequestProcessor {
 			response.createResponse(EnumOperationType.FORGOTPASSWORD, params);
 			destPeerIP = peerIp;
 			break;
-		case PUBLISH:
+		/*case PUBLISH:
 			logger.debug("Processing publish request");
 			hashSpaceManager.handlePublishRequest((PublishRequestMessage) req);
 			response = new PublishResponseMessage(req.getId());
@@ -253,11 +260,10 @@ public class RequestProcessor {
 					"Successfully published folder on server");
 			response.createResponse(EnumOperationType.PUBLISHRESPONSE, params);
 			/*
-			 * TODO choose destination ip and return it inform of messageDetail object 
-			 */
+			 * choose destination ip and return it inform of messageDetail object 
 			destPeerIP = peerIp;
-			break;
-		case SEARCH:
+			break;*/
+		/*case SEARCH:
 			logger.debug("Processing search request");
 			response = new SearchResponseMessage(req.getId());
 			IParameter searchResponseparams;
@@ -271,10 +277,10 @@ public class RequestProcessor {
 			response.createResponse(EnumOperationType.SEARCHRESPONSE,
 					searchResponseparams);
 			/*
-			 * TODO choose destination ip and return it inform of messageDetail object 
-			 */
+			 * choose destination ip and return it inform of messageDetail object 
 			destPeerIP = peerIp;
 			break;
+			*/
 		case JOIN:
 			logger.debug("Processing join request");
 			int count = 0;
@@ -297,7 +303,7 @@ public class RequestProcessor {
 				logger.info(table.getDirection() + ":" + table.getNexthop() + ":" + table.getPeerid());
 			}
 			
-			List<FileParamType> allFileDetailsAsList = hashSpaceManager.getAllFileDetailsAsList(child);
+			List<DownloadFileParamType> allFileDetailsAsList = hashSpaceManager.getAllFileDetails(child);
 			joinResponse.getFile().addAll(allFileDetailsAsList);
 			for(FileParamType table:allFileDetailsAsList) {
 				logger.info(table.getFilename() + ":" + table.getIpaddress());
@@ -308,7 +314,7 @@ public class RequestProcessor {
 			// joinResponseparams);
 			
 			IParameter joinParams = new Parameter();
-			joinParams.add(EnumParamsType.STATUSCODE, new BigInteger(String.valueOf(1)));
+			joinParams.add(EnumParamsType.STATUSCODE, new BigInteger(String.valueOf(0)));
 			joinParams.add(EnumParamsType.MESSAGE, "Successfully executed request");
 			joinResponse.createResponse(EnumOperationType.JOINRESPONSE, joinParams);
 			
@@ -355,33 +361,49 @@ public class RequestProcessor {
 			break;
 		case PUT:
 			logger.debug("Processing put request");
-			hashSpaceManager.handlePutRequest((PutRequest) req);
-			response = new PutResponse(req.getId());
-			params = new Parameter();
-			params.add(EnumParamsType.STATUSCODE,
-					new BigInteger(String.valueOf(0)));
-			params.add(EnumParamsType.MESSAGE,
-					"Successfully published file on peer");
-			response.createResponse(EnumOperationType.PUTRESPONSE, params);
-			/*
-			 * TODO choose destination ip and return it inform of messageDetail object 
-			 */
-			destPeerIP = peerIp;
+			
+			destPeerIP = Router.getInstance().getNextHop(new Point(ByteOperationUtil.getCordinates(req.getParameter().getParamValue(EnumParamsType.FILEDIGEST).toString())));
+			if(destPeerIP.equalsIgnoreCase("127.0.0.1")) {
+				hashSpaceManager.handlePutRequest((PutRequest) req);
+				response = new PutResponse(req.getId());
+				params = new Parameter();
+				params.add(EnumParamsType.STATUSCODE,
+						new BigInteger(String.valueOf(0)));
+				params.add(EnumParamsType.MESSAGE,
+						"Successfully published file on peer");
+				response.createResponse(EnumOperationType.PUTRESPONSE, params);
+				//return new MessageDetails(ip, req); 
+			} else {
+				return new MessageDetails(destPeerIP, req);
+			}
 			break;
 		case GET:
-			logger.debug("Processing get request");
-			response = new GetResponse(req.getId());
-			IParameter getResponseparams;
-			String query_string_get = req.getParameter()
-					.getParamValue(EnumParamsType.SEARCHKEY).toString();
-			getResponseparams = hashSpaceManager.search(new Query(
-					query_string_get));
-			response.createResponse(EnumOperationType.GETRESPONSE,
-					getResponseparams);
-			/*
-			 * TODO choose destination ip and return it inform of messageDetail object 
-			 */
-			destPeerIP = peerIp;
+			destPeerIP = Router.getInstance().getNextHop(new Point(ByteOperationUtil.getCordinates(req.getParameter().getParamValue(EnumParamsType.FILEDIGEST).toString())));
+			if(destPeerIP.equalsIgnoreCase("127.0.0.1")) {
+				GetResponse getResp = new GetResponse(req.getId());
+				List<MatchFileParamType> getResponseparams;
+				String query_string_get = req.getParameter()
+						.getParamValue(EnumParamsType.SEARCHKEY).toString();
+				getResponseparams = hashSpaceManager.search(new Query(
+						query_string_get));
+				
+				getResp.getGetParams().getFile().addAll(getResponseparams);
+				IParameter getParams = new Parameter();
+				getParams.add(EnumParamsType.STATUSCODE, new BigInteger(String.valueOf(0)));
+				getParams.add(EnumParamsType.MESSAGE, "Successfully executed request");
+				
+				getResp.createResponse(EnumOperationType.GETRESPONSE,
+						getParams); //return new MessageDetails(ip, req); 
+				
+				response = getResp;
+			} else {
+				return new MessageDetails(destPeerIP, req);
+			}
+			break;
+		case UPDATE:
+				/*
+				 * TODO retreive filedigest from request
+				 */
 			break;
 		default:
 			try {
@@ -391,7 +413,6 @@ public class RequestProcessor {
 			}
 		}
 		logger.error("sending it to default peer");
-		//response.setId(req.getId());
 		return new MessageDetails(peerIp, response);
 	}
 

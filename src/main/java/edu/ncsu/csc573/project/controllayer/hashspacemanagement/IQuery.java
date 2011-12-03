@@ -15,4 +15,10 @@ public interface IQuery {
 	 * @return trigram of the request.
 	 */
 	public byte[] getQueryDigest();
+	
+	/**
+	 * This 
+	 * @return
+	 */
+	public byte[] getCordinates();
 }

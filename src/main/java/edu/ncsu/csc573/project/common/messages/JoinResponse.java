@@ -5,6 +5,7 @@
 package edu.ncsu.csc573.project.common.messages;
 
 import edu.ncsu.csc573.project.common.schema.CommandResponseType;
+import edu.ncsu.csc573.project.common.schema.DownloadFileParamType;
 import edu.ncsu.csc573.project.common.schema.FileParamType;
 import edu.ncsu.csc573.project.common.schema.JoinResponseType;
 import edu.ncsu.csc573.project.common.schema.JoinResponseTypeParams;
@@ -14,6 +15,8 @@ import edu.ncsu.csc573.project.common.schema.TableParamType;
 import java.math.BigInteger;
 import java.util.List;
 import javax.xml.bind.JAXBException;
+
+import org.apache.log4j.Logger;
 
 /**
  * 
@@ -29,7 +32,7 @@ public class JoinResponse extends ResponseMessage {
 		this.id = id;
 		joinResponseTypeParams = new JoinResponseTypeParams();
 	}
-	public List<FileParamType> getFile() {
+	public List<DownloadFileParamType> getFile() {
 		return joinResponseTypeParams.getFile();
 	}
 
@@ -105,8 +108,7 @@ public class JoinResponse extends ResponseMessage {
 			this.setOperationType(EnumOperationType.JOINRESPONSE);
 			this.setParameter(param);
 		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getLogger(JoinResponse.class).error("Failed to generate join response xml ",e);
 		}
 	}
 	public String getId() {
@@ -116,5 +118,4 @@ public class JoinResponse extends ResponseMessage {
 	public void setId(String id) {
 		this.id = String.valueOf(id);
 	}
-
 }

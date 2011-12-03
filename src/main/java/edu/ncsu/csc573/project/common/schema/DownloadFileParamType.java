@@ -15,18 +15,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for LogoutParamsType complex type.
+ * <p>Java class for DownloadFileParamType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="LogoutParamsType">
+ * &lt;complexType name="DownloadFileParamType">
  *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *     &lt;extension base="{http://www.doogle.project.csc573.csc.ncsu.edu}FileParamType">
  *       &lt;sequence>
- *         &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="Downloads" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
- *     &lt;/restriction>
+ *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
@@ -34,36 +34,30 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "LogoutParamsType", propOrder = {
-    "username"
+@XmlType(name = "DownloadFileParamType", propOrder = {
+    "downloads"
 })
-public class LogoutParamsType {
+public class DownloadFileParamType
+    extends FileParamType
+{
 
-    @XmlElement(required = true)
-    protected String username;
+    @XmlElement(name = "Downloads")
+    protected int downloads;
 
     /**
-     * Gets the value of the username property.
+     * Gets the value of the downloads property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
      */
-    public String getUsername() {
-        return username;
+    public int getDownloads() {
+        return downloads;
     }
 
     /**
-     * Sets the value of the username property.
+     * Sets the value of the downloads property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
      */
-    public void setUsername(String value) {
-        this.username = value;
+    public void setDownloads(int value) {
+        this.downloads = value;
     }
 
 }

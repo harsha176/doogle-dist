@@ -98,6 +98,9 @@ public class ClientHandler implements Runnable {
 				if(sb.indexOf("File:") != -1) {
 					File toBeUploadedFile = new File(ConfigurationManager.getInstance().getPublishDirectory(),getFileName(sb));
 					transferFile(conncetedSocket.getOutputStream(), toBeUploadedFile);
+					/*
+					 * send update
+					 */
 					//br.read();
 					return ;
 				}

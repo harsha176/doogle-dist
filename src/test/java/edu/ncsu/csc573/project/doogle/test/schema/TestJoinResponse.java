@@ -16,7 +16,7 @@ import edu.ncsu.csc573.project.common.messages.Parameter;
 import edu.ncsu.csc573.project.common.schema.FileParamType;
 
 public class TestJoinResponse {
-	@Test
+	/*@Test
 	public void testJoinResponse() {
 		JoinResponse resp = new JoinResponse(System.currentTimeMillis()+"");
 		IParameter param = new Parameter();
@@ -43,6 +43,6 @@ public class TestJoinResponse {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 }

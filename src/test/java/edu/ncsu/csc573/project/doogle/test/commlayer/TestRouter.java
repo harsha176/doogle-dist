@@ -9,6 +9,7 @@ import edu.ncsu.csc573.project.commlayer.IPoint;
 import edu.ncsu.csc573.project.commlayer.Point;
 import edu.ncsu.csc573.project.commlayer.Router;
 import edu.ncsu.csc573.project.common.ConfigurationManager;
+import edu.ncsu.csc573.project.controllayer.RequestProcessor;
 
 public class TestRouter {
 	
@@ -20,6 +21,8 @@ public class TestRouter {
 		for(int i = 0; i < ConfigurationManager.getInstance().getDimensions(); i++) {
 			rout.update(i, generateRandomPoint(), "192.168.2."+i+1);
 		}
+		RequestProcessor.getInstance().getMyZone().setStart(Point.getHashSpaceStartPoint());
+		RequestProcessor.getInstance().getMyZone().setEnd(Point.getHashSpaceEndPoint());
 		System.out.println("no " + rout.getNextHop(generateRandomPoint()));
 	}
 	
