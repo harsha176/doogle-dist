@@ -111,10 +111,10 @@ public abstract class RequestMessage implements IRequest {
 			req = new LeaveRequest();
 			req.parseXML(XML);
         } else if(XML.indexOf("Put") != -1) {
-			req = new JoinRequest();
+			req = new PutRequest();
 			req.parseXML(XML);
         } else if(XML.indexOf("Get") != -1) {
-			req = new JoinRequest();
+			req = new GetRequest();
 			req.parseXML(XML);
         }
         else {

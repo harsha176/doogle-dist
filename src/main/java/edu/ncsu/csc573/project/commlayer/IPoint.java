@@ -10,4 +10,6 @@ public interface IPoint {
 	public void setIntercept(int direction, int value);
 	
 	public String getAsString();
+	
+	public byte[] getPoint();
 }

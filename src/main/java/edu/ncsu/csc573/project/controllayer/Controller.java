@@ -105,21 +105,12 @@ public class Controller implements IController {
 	}
 
 	public String publish() throws Exception {
-		IRequest publishRequest;
-
-		publishRequest = PublishRequestMessage.getPublishRequest();
-		if (bootstrapServerIP == null) {
-			throw new Exception("Not connected to bootstrap server");
+		try {
+		PublishRequestMessage.sendPublishRequest();
+		} catch(Exception e) {
+			logger.error("Unable to send publish request", e);
 		}
-
-        Logger logger = Logger.getLogger(Search.class);
-
-        IRequest pubRequest = PublishRequestMessage.getPublishRequest();
-    
-		IResponse response = commService.executeRequest(publishRequest,
-				bootstrapServerIP);
-		
-		return validateResponse(response);
+		return "Dummy repsonse";
 	}
 
 	public List<FileParamType> search(String query) throws Exception {

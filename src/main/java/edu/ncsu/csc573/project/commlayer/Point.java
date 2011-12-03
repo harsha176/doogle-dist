@@ -1,5 +1,6 @@
 package edu.ncsu.csc573.project.commlayer;
 
+import java.util.Comparator;
 import java.util.Random;
 
 import edu.ncsu.csc573.project.common.ByteOperationUtil;
@@ -11,7 +12,7 @@ import edu.ncsu.csc573.project.common.ConfigurationManager;
  * @author doogle-dev
  * 
  */
-public class Point implements IPoint, Cloneable {
+public class Point implements IPoint, Cloneable, Comparator<Point> {
 	private byte[] co_ordinate;
 
 	public Point(String encHach) {
@@ -58,6 +59,7 @@ public class Point implements IPoint, Cloneable {
 		}
 		return true;
 	}
+	
 
 	public int getIntercept(int direction) {
 		return co_ordinate[direction];
@@ -102,5 +104,28 @@ public class Point implements IPoint, Cloneable {
 			p[i] = (byte) randInt.nextInt(limit);
 
 		return new Point(p);
+	}
+
+	public int compare(Point o1, Point o2) {
+		for (int i = 0; i < ConfigurationManager.getInstance().getDimensions(); i++) {
+			if (o1.getIntercept(i) < o2.getIntercept(i)) {
+				return -1;
+			} else if(o1.getIntercept(i) == o2.getIntercept(i)) {
+				continue;
+			} else {
+				return 1;
+			}
+		}
+		return 0;
+	}
+	
+	public boolean equals(Object obj) {
+		if(obj != null && obj instanceof Point){
+			Point other = (Point)obj;
+			if(this.compare(this, other) == 0){
+				return true;
+			} 
+		}
+		return false;
 	}
 }

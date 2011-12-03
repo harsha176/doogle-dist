@@ -15,18 +15,17 @@ import edu.ncsu.csc573.project.common.messages.IRequest;
 import edu.ncsu.csc573.project.common.messages.IResponse;
 import edu.ncsu.csc573.project.common.messages.JoinRequest;
 import edu.ncsu.csc573.project.common.messages.JoinResponse;
-import edu.ncsu.csc573.project.controllayer.hashspacemanagement.HashSpaceManagerFactory;
-import edu.ncsu.csc573.project.controllayer.hashspacemanagement.IHashSpaceManager;
+import edu.ncsu.csc573.project.controllayer.hashspacemanagement.OrderedHashSpaceManager;
 
 public class ResponseProcessor {
 	private Logger logger = Logger.getLogger(ResponseProcessor.class);
 	private static ResponseProcessor instance = null;
 	private Zone myZone;
-	private IHashSpaceManager hashSpaceManager;
+	private OrderedHashSpaceManager hashSpaceManager;
 	
 	private ResponseProcessor() {
 		myZone = RequestProcessor.getInstance().getMyZone();
-		hashSpaceManager = HashSpaceManagerFactory.getInstance();
+		hashSpaceManager = OrderedHashSpaceManager.getInstance();
 	}
 	
 	public static ResponseProcessor getInstance() {
@@ -101,6 +100,7 @@ public class ResponseProcessor {
 			logger.info("Processing join response");
 			JoinResponse joinresp = (JoinResponse)response;
 			
+			Router.getInstance().setParentIp(joinresp.getMyipaddress());
 			// set zone limits
 			myZone.setStart(new Point(joinresp.getFirsthash()));
 			myZone.setEnd(new Point(joinresp.getLasthash()));

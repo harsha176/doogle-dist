@@ -8,7 +8,6 @@
 
 package edu.ncsu.csc573.project.common.schema;
 
-import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -16,18 +15,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for LogoutResponseParamsType complex type.
+ * <p>Java class for DownloadFileParamType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="LogoutResponseParamsType">
+ * &lt;complexType name="DownloadFileParamType">
  *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *     &lt;extension base="{http://www.doogle.project.csc573.csc.ncsu.edu}FileParamType">
  *       &lt;sequence>
- *         &lt;element name="statuscode" type="{http://www.w3.org/2001/XMLSchema}integer"/>
+ *         &lt;element name="Downloads" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
- *     &lt;/restriction>
+ *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
@@ -35,36 +34,30 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "LogoutResponseParamsType", propOrder = {
-    "statuscode"
+@XmlType(name = "DownloadFileParamType", propOrder = {
+    "downloads"
 })
-public class LogoutResponseParamsType {
+public class DownloadFileParamType
+    extends FileParamType
+{
 
-    @XmlElement(required = true)
-    protected BigInteger statuscode;
+    @XmlElement(name = "Downloads")
+    protected int downloads;
 
     /**
-     * Gets the value of the statuscode property.
+     * Gets the value of the downloads property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
      */
-    public BigInteger getStatuscode() {
-        return statuscode;
+    public int getDownloads() {
+        return downloads;
     }
 
     /**
-     * Sets the value of the statuscode property.
+     * Sets the value of the downloads property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
      */
-    public void setStatuscode(BigInteger value) {
-        this.statuscode = value;
+    public void setDownloads(int value) {
+        this.downloads = value;
     }
 
 }

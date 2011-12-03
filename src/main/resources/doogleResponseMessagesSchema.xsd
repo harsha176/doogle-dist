@@ -149,11 +149,20 @@
 			<xs:element name="peerid" type="xs:string" />
            <xs:element name="firsthash" type="xs:string" />
            <xs:element name="lasthash" type="xs:string" />
-           <xs:element name="File" type="FileParamType" maxOccurs="100" />
+           <xs:element name="File" type="DownloadFileParamType" maxOccurs="100" />
            <xs:element name="Table" type="TableParamType" maxOccurs="100" />    
 		</xs:sequence>
 	</xs:complexType>
         
+       <xs:complexType name = "DownloadFileParamType">
+       		<xs:complexContent>
+       			<xs:extension base="FileParamType">
+       				<xs:sequence>
+       					<xs:element name="Downloads" type="xs:int"/>
+       				</xs:sequence>
+       			</xs:extension>
+       		</xs:complexContent>
+       </xs:complexType>
        
        	<xs:complexType name="LeaveResponseType">
 		<xs:sequence>
@@ -193,8 +202,20 @@
 	</xs:complexType>
 	<xs:complexType name="GetResponseTypeParams">
 		<xs:sequence>
-			<xs:element name="File" type="FileParamType" maxOccurs="100" />
+			<xs:element name="message" type="xs:string" />
+			<xs:element name="statuscode" type="xs:integer" />
+			<xs:element name="File" type="MatchFileParamType" maxOccurs="100" />
 		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="MatchFileParamType">
+	<xs:complexContent>
+		<xs:extension base="FileParamType">
+			<xs:sequence>
+				<xs:element name="MatchFactor" type="xs:double"/>
+			</xs:sequence>
+		</xs:extension>
+	</xs:complexContent>
 	</xs:complexType>
         
 	<xs:complexType name="InvalidResponseType">

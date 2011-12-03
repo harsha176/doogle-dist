@@ -43,5 +43,5 @@ public interface IHashSpaceManager {
 	 * 
 	 * @param putRequest
 	 */
-        public void handlePutRequest(PutRequest putRequest);
+     public void handlePutRequest(PutRequest putRequest);
 }

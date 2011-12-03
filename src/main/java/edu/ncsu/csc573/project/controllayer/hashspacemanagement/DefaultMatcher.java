@@ -24,17 +24,21 @@ public class DefaultMatcher implements IMatcher {
 	 * 
 	 * return true if it matches
 	 */
-	public boolean isMatches(byte[] query, byte[] other) {
-		
+	public boolean isMatches(byte[] query, byte[] other, Double matchFactor) {
+		matchFactor = new Double(0);
 		byte[] result = ByteOperationUtil.and(query, other);
 		
 		int querySetBits = ByteOperationUtil.countSetBits(query);
 		int resultSetBits = ByteOperationUtil.countSetBits(result);
-		double matchFactor = ((resultSetBits * 1.0) / querySetBits);
+		matchFactor = ((resultSetBits * 1.0) / querySetBits);
 		if (matchFactor >= THRESHOLD) {
 			return true;
 		} else {
 			return false;
 		}
+	}
+
+	public boolean isMatches(byte[] query, byte[] other) {
+		return isMatches(query, other, null);
 	}
 }
