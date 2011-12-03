@@ -2,8 +2,6 @@ package edu.ncsu.csc573.project.commlayer;
 
 import java.util.Comparator;
 import java.util.Random;
-
-import edu.ncsu.csc573.project.common.ByteOperationUtil;
 import edu.ncsu.csc573.project.common.ConfigurationManager;
 
 /**
@@ -12,36 +10,44 @@ import edu.ncsu.csc573.project.common.ConfigurationManager;
  * @author doogle-dev
  * 
  */
-public class Point implements IPoint, Cloneable, Comparator<Point> {
-	private byte[] co_ordinate;
+public class Point implements IPoint, Cloneable, Comparator<Point>, Comparable<Point> {
+	private int[] co_ordinate;
 
 	public Point(String encHach) {
-		co_ordinate = ByteOperationUtil.convertStringToBytes(encHach);
+		if(encHach != null) {
+			String[] intercepts =  encHach.split(":");
+			int i = 0;
+			for(String intercept: intercepts) {
+				co_ordinate[i] = Integer.parseInt(intercept);
+			}
+		}
+		//co_ordinate = ByteOperationUtil.convertStringToBytes(encHach);
 	}
 
 	public String getAsString() {
-		return ByteOperationUtil.convertBytesToString(co_ordinate);
+		StringBuilder sb = new StringBuilder();
+		for(int intercept: co_ordinate) {
+			sb.append(intercept);
+			sb.append(":");
+		}
+		return sb.substring(0, sb.length()-1);
 	}
 
 	public Point(IPoint ip) {
 		Point p = (Point) ip;
-		co_ordinate = new byte[ConfigurationManager.getInstance()
+		co_ordinate = new int[ConfigurationManager.getInstance()
 				.getDimensions()];
 		for (int i = 0; i < ConfigurationManager.getInstance().getDimensions(); i++) {
 			setIntercept(i, p.getIntercept(i));
 		}
 	}
 
-	public Point(byte[] p) {
+	public Point(int[] p) {
 		co_ordinate = p;
 	}
 
-	public byte[] getPoint() {
+	public int[] getPoint() {
 		return co_ordinate;
-	}
-
-	public void createPoint(String p) {
-		co_ordinate = ByteOperationUtil.getCordinates(p);
 	}
 
 	public boolean isPointGreater(IPoint p, int direction) {
@@ -66,16 +72,22 @@ public class Point implements IPoint, Cloneable, Comparator<Point> {
 	}
 
 	public String toString() {
-		String cordinate = ByteOperationUtil.printCoordinates(co_ordinate);
-		return "(" + cordinate.substring(0, cordinate.length() - 1) + ")";
+		StringBuilder sb  = new StringBuilder();
+		sb.append("(");
+		for(int intercept : co_ordinate) {
+			sb.append(intercept);
+			sb.append(",");
+		}
+		
+		return sb.substring(0, sb.length() - 1) + ")";
 	}
 
 	public void setIntercept(int direction, int value) {
-		co_ordinate[direction] = (byte) value;
+		co_ordinate[direction] = (int) value;
 	}
 
 	public static IPoint getHashSpaceStartPoint() {
-		byte[] coordinates = new byte[ConfigurationManager.getInstance()
+		int[] coordinates = new int[ConfigurationManager.getInstance()
 				.getDimensions()];
 		for (int i = 0; i < ConfigurationManager.getInstance().getDimensions(); i++) {
 			coordinates[i] = 0;
@@ -84,10 +96,10 @@ public class Point implements IPoint, Cloneable, Comparator<Point> {
 	}
 
 	public static IPoint getHashSpaceEndPoint() {
-		byte[] coordinates = new byte[ConfigurationManager.getInstance()
+		int[] coordinates = new int[ConfigurationManager.getInstance()
 				.getDimensions()];
-		byte maxValue = (byte) (1024 / ConfigurationManager.getInstance()
-				.getDimensions());
+		int maxValue = (int) ((1024*8 / ConfigurationManager.getInstance()
+				.getDimensions())); 
 		for (int i = 0; i < ConfigurationManager.getInstance().getDimensions(); i++) {
 			coordinates[i] = maxValue;
 		}
@@ -95,13 +107,13 @@ public class Point implements IPoint, Cloneable, Comparator<Point> {
 	}
 
 	public static IPoint generateRandomPoint() {
-		byte[] p = new byte[ConfigurationManager.getInstance().getDimensions()];
+		int[] p = new int[ConfigurationManager.getInstance().getDimensions()];
 		Random randInt = new Random();
 		int limit = (int) 1024
 				/ ConfigurationManager.getInstance().getDimensions();
 
 		for (int i = 0; i < ConfigurationManager.getInstance().getDimensions(); i++)
-			p[i] = (byte) randInt.nextInt(limit);
+			p[i] = (int) randInt.nextInt(limit);
 
 		return new Point(p);
 	}
@@ -127,5 +139,9 @@ public class Point implements IPoint, Cloneable, Comparator<Point> {
 			} 
 		}
 		return false;
+	}
+
+	public int compareTo(Point o) {
+		return compare(this, o);
 	}
 }

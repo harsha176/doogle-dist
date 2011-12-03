@@ -22,11 +22,13 @@ import edu.ncsu.csc573.project.common.messages.LogoutRequestMessage;
 import edu.ncsu.csc573.project.common.messages.Parameter;
 import edu.ncsu.csc573.project.common.messages.PublishRequestMessage;
 import edu.ncsu.csc573.project.common.messages.SearchRequestMessage;
+import edu.ncsu.csc573.project.common.schema.MatchFileParamType;
 import edu.ncsu.csc573.project.controllayer.Controller;
 import edu.ncsu.csc573.project.controllayer.Session;
 import edu.ncsu.csc573.project.controllayer.hashspacemanagement.DigestAdaptor;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import org.apache.log4j.Logger;
 
@@ -158,16 +160,18 @@ private void logoutlinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
 
 	try {
-		Controller.getInstance().search(searchText.getText());
+		List<MatchFileParamType> searchResults = Controller.getInstance().search(searchText.getText());
+		SearchResults sr = new SearchResults();
+		sr.setMessage(searchResults);
+		this.setVisible(false);
+		sr.setVisible(true);
+		sr.setLocationRelativeTo(this);
+		sr.setTitle("Hello " + Session.getInstance().getUsername() + " , Welcome ");
     } catch (IOException ex) {
         Logger.getLogger(Search.class.getName()).error("Failed to create publish request", ex);
     } catch (Exception e) {
         Logger.getLogger(Search.class.getName()).error("Failed to send request to boot strap server", e);
     }
-    this.setVisible(false);
-    
-    Search Results = new Search();
-    Results.setVisible(true);
 }//GEN-LAST:event_searchActionPerformed
 
 private void PublishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PublishActionPerformed

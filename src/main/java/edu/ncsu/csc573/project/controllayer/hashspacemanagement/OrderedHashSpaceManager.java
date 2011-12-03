@@ -42,20 +42,21 @@ public class OrderedHashSpaceManager {
 
 	public List<MatchFileParamType> search(IQuery query) {
 		logger.trace("Inside search method parameter : " + query);
-		
+
 		Set<IPoint> pointSet = hashspace.keySet();
 		logger.debug("Number of points in space : " + pointSet.size());
-		
+
 		Iterator<IPoint> itr = pointSet.iterator();
 		List<MatchFileParamType> searchResults = new ArrayList<MatchFileParamType>();
 		List<DownloadFileParamType> matchResuts;
 		while (itr.hasNext()) {
 			IPoint temp = itr.next();
-			Double matchFactor = null;
-			if (matcher.isMatches(query.getCordinates(), temp.getPoint(),
-					matchFactor)) {
-				matchResuts = hashspace.get(temp.getPoint());
+			Double matchFactor = new Double(0);
+			matchResuts = hashspace.get(temp);			 
+				//matchResuts = hashspace.get(temp.getPoint());
 				for (DownloadFileParamType file : matchResuts) {
+					if (matcher.isMatches(query.getQueryDigest(), ByteOperationUtil.convertStringToBytes(file.getFiledigest()),
+							matchFactor)) {
 					MatchFileParamType aMatch = new MatchFileParamType();
 					aMatch.setAbstract(file.getAbstract());
 					aMatch.setFiledigest(file.getFiledigest());
@@ -69,8 +70,8 @@ public class OrderedHashSpaceManager {
 							+ file.getFilename() + " with match factor : "
 							+ matchCoefficient);
 					searchResults.add(aMatch);
+					}
 				}
-			}
 		}
 		logger.info("Total number of search results : " + searchResults.size());
 		return searchResults;
@@ -90,7 +91,7 @@ public class OrderedHashSpaceManager {
 		Iterator<IPoint> itr = points.iterator();
 		while (itr.hasNext()) {
 			List<DownloadFileParamType> c = hashspace.get(itr.next());
-			if(c == null) {
+			if (c == null) {
 				continue;
 			}
 			fileList.addAll(c);
@@ -100,7 +101,8 @@ public class OrderedHashSpaceManager {
 
 	public void handlePublishRequest(List<DownloadFileParamType> fileList) {
 		for (DownloadFileParamType file : fileList) {
-			Point key = new Point(ByteOperationUtil.getCordinates(file.getFiledigest()));
+			Point key = new Point(ByteOperationUtil.getCordinates(file
+					.getFiledigest()));
 			List<DownloadFileParamType> existingFiles = hashspace.get(key);
 			// check if list exists
 			if (existingFiles == null) {
@@ -113,9 +115,8 @@ public class OrderedHashSpaceManager {
 
 	public void handlePutRequest(PutRequest putRequest) {
 		logger.trace("Inside handlePutRequest : " + putRequest.getParameter().getParamValue(EnumParamsType.FILENAME).toString());
-		Point key = new Point(ByteOperationUtil.getCordinates(putRequest
-				.getParameter().getParamValue(EnumParamsType.FILEDIGEST)
-				.toString()));
+		Point key = new Point(ByteOperationUtil.getCordinates(((byte[])putRequest
+				.getParameter().getParamValue(EnumParamsType.FILEDIGEST))));
 		
 		logger.debug("Search key point is : " + key.toString());
 		List<DownloadFileParamType> existingFiles = hashspace.get(key);
@@ -128,8 +129,8 @@ public class OrderedHashSpaceManager {
 
 		newFileDetails.setAbstract(putRequest.getParameter()
 				.getParamValue(EnumParamsType.ABSTRACT).toString());
-		newFileDetails.setFiledigest(putRequest.getParameter()
-				.getParamValue(EnumParamsType.FILEDIGEST).toString());
+		newFileDetails.setFiledigest(ByteOperationUtil.convertBytesToString((byte[]) putRequest.getParameter()
+				.getParamValue(EnumParamsType.FILEDIGEST)));
 		newFileDetails.setFilename(putRequest.getParameter()
 				.getParamValue(EnumParamsType.FILENAME).toString());
 		newFileDetails.setFilesize(putRequest.getParameter()

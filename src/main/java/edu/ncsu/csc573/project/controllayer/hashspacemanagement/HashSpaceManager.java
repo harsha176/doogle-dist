@@ -73,7 +73,7 @@ public class HashSpaceManager implements IHashSpaceManager {
 			byte[] digest = (byte[]) publishedFilesRepository
 					.getParamValue(EnumParamsType.FILEDIGEST);
 			// check if it matches the query if so add them to search results.
-			if (matcher.isMatches(query.getQueryDigest(), digest)) {
+			//if (matcher.isMatches(query.getQueryDigest(), digest)) {
 				searchResults.add(EnumParamsType.FILENAME,
 						publishedFilesRepository
 								.getParamValue(EnumParamsType.FILENAME));
@@ -90,7 +90,7 @@ public class HashSpaceManager implements IHashSpaceManager {
 						publishedFilesRepository
 								.getParamValue(EnumParamsType.ABSTRACT));
 				searchResults.add(EnumParamsType.DELIMITER, null);
-			}
+			//}
 			// go the next entry in the repository
 			publishedFilesRepository.setNextParam();
 		}

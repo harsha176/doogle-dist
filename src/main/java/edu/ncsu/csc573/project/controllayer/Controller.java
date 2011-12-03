@@ -16,6 +16,8 @@ import edu.ncsu.csc573.project.common.messages.ChangePasswordRequestMessage;
 import edu.ncsu.csc573.project.common.messages.EnumOperationType;
 import edu.ncsu.csc573.project.common.messages.EnumParamsType;
 import edu.ncsu.csc573.project.common.messages.ForgotPwdRequestMessage;
+import edu.ncsu.csc573.project.common.messages.GetRequest;
+import edu.ncsu.csc573.project.common.messages.GetResponse;
 import edu.ncsu.csc573.project.common.messages.IParameter;
 import edu.ncsu.csc573.project.common.messages.IRequest;
 import edu.ncsu.csc573.project.common.messages.IResponse;
@@ -26,6 +28,7 @@ import edu.ncsu.csc573.project.common.messages.PublishRequestMessage;
 import edu.ncsu.csc573.project.common.messages.RegisterRequestMessage;
 import edu.ncsu.csc573.project.common.messages.SearchRequestMessage;
 import edu.ncsu.csc573.project.common.schema.FileParamType;
+import edu.ncsu.csc573.project.common.schema.MatchFileParamType;
 import edu.ncsu.csc573.project.controllayer.hashspacemanagement.DigestAdaptor;
 import edu.ncsu.csc573.project.viewlayer.gui.Search;
 
@@ -113,7 +116,7 @@ public class Controller implements IController {
 		return "Dummy repsonse";
 	}
 
-	public List<FileParamType> search(String query) throws Exception {
+	public List<MatchFileParamType> search(String query) throws Exception {
 		/*Logger logger = Logger.getLogger(Search.class);
 
         IRequest searchRequest = new SearchRequestMessage();
@@ -126,18 +129,18 @@ public class Controller implements IController {
         */
 		Logger logger = Logger.getLogger(Search.class);
 
-        IRequest searchRequest = new SearchRequestMessage();
+        IRequest getRequest = new GetRequest();
         IParameter searchParams = new Parameter();
-        searchParams.add(EnumParamsType.USERNAME, "DUMMY");
+        searchParams.add(EnumParamsType.IPADDRESS, ConfigurationManager.getInstance().getHostInterface());
         String QueryDigest = ByteOperationUtil.convertBytesToString(DigestAdaptor.getInstance().getDigest(query));
 		searchParams.add(EnumParamsType.SEARCHKEY, QueryDigest);
-        searchRequest.createRequest(EnumOperationType.SEARCH, searchParams);
+        getRequest.createRequest(EnumOperationType.GET, searchParams);
         
-        String destPeer = Router.getInstance().getNextHop(new Point(QueryDigest));
-        IResponse response = CommunicationServiceFactory.getInstance().executeRequest(searchRequest, destPeer);
+        String destPeer = Router.getInstance().getNextHop(new Point(ByteOperationUtil.getCordinates(QueryDigest)));
+        IResponse response = CommunicationServiceFactory.getInstance().executeRequest(getRequest, destPeer);
         
         validateResponse(response);
-        return null;
+        return ((GetResponse)response).getGetParams().getFile();
 	}
 
 	public String register(String firstName, String lastName, String username,
