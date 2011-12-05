@@ -3,6 +3,7 @@ package edu.ncsu.csc573.project.common.messages;
 import java.math.BigInteger;
 import org.apache.log4j.Logger;
 
+import edu.ncsu.csc573.project.common.EncDecUtil;
 import edu.ncsu.csc573.project.common.schema.CommandRequestType;
 import edu.ncsu.csc573.project.common.schema.RegisterParamsType;
 import edu.ncsu.csc573.project.common.schema.RegisterType;
@@ -24,8 +25,10 @@ public class RegisterRequestMessage extends RequestMessage {
 
 		rpt.setUsername((getParameter().getParamValue(EnumParamsType.USERNAME)
 				.toString()));
-		rpt.setPassword(getParameter().getParamValue(EnumParamsType.PASSWORD)
-				.toString());
+		String clearTextPasswd = getParameter().getParamValue(EnumParamsType.PASSWORD)
+				.toString();
+		String encryptedPasswd = EncDecUtil.encryptMessage(clearTextPasswd);
+		rpt.setPassword(encryptedPasswd);
 		rpt.setFirstname(getParameter().getParamValue(EnumParamsType.FIRSTNAME)
 				.toString());
 		rpt.setLastname(getParameter().getParamValue(EnumParamsType.LASTNAME)
@@ -52,7 +55,9 @@ public class RegisterRequestMessage extends RequestMessage {
 			RegisterParamsType regparams = regType.getParams();
 			IParameter param = new Parameter();
 			param.add(EnumParamsType.USERNAME, regparams.getUsername());
-			param.add(EnumParamsType.PASSWORD, regparams.getPassword());
+			String encryptedPasswd = regparams.getPassword();
+			String clearTextPasswd = EncDecUtil.decryptMessage(encryptedPasswd);
+			param.add(EnumParamsType.PASSWORD, clearTextPasswd);
 			param.add(EnumParamsType.FIRSTNAME, regparams.getFirstname());
 			param.add(EnumParamsType.LASTNAME, regparams.getLastname());
 			param.add(EnumParamsType.EMAIL_ID, regparams.getEmailId());

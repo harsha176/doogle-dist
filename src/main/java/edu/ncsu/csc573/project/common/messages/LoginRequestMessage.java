@@ -2,6 +2,7 @@ package edu.ncsu.csc573.project.common.messages;
 
 import org.apache.log4j.Logger;
 
+import edu.ncsu.csc573.project.common.EncDecUtil;
 import edu.ncsu.csc573.project.common.schema.CommandRequestType;
 import edu.ncsu.csc573.project.common.schema.LoginParamsType;
 import edu.ncsu.csc573.project.common.schema.LoginType;
@@ -21,7 +22,10 @@ public class LoginRequestMessage extends RequestMessage {
 		LoginParamsType lpt = new LoginParamsType();
 		
 		lpt.setUsername((getParameter().getParamValue(EnumParamsType.USERNAME).toString()));
-		lpt.setPassword(getParameter().getParamValue(EnumParamsType.PASSWORD).toString());
+		String clearTextPasswd = getParameter().getParamValue(EnumParamsType.PASSWORD)
+				.toString();
+		String encryptedPasswd = EncDecUtil.encryptMessage(clearTextPasswd);
+		lpt.setPassword(encryptedPasswd);
 		//lpt.setIpaddress(getParameter().getParamValue(EnumParamsType.IPADDRESS).toString());
 		
 		loginType.setParams(lpt);
@@ -40,7 +44,9 @@ public class LoginRequestMessage extends RequestMessage {
 			LoginParamsType loginparams = loginType.getParams();
 			IParameter param = new Parameter();
 			param.add(EnumParamsType.USERNAME, loginparams.getUsername());
-			param.add(EnumParamsType.PASSWORD, loginparams.getPassword());
+			String encryptedPasswd = loginparams.getPassword();
+			String clearTextPasswd = EncDecUtil.decryptMessage(encryptedPasswd);
+			param.add(EnumParamsType.PASSWORD, clearTextPasswd);
 			//param.add(EnumParamsType.IPADDRESS, loginparams.getIpaddress());
 			this.setOperationType(EnumOperationType.LOGIN);
 			this.setParameter(param);

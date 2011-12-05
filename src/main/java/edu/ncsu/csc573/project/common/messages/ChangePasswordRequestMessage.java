@@ -4,6 +4,7 @@
  */
 package edu.ncsu.csc573.project.common.messages;
 
+import edu.ncsu.csc573.project.common.EncDecUtil;
 import edu.ncsu.csc573.project.common.schema.ChangePasswordParamsType;
 import edu.ncsu.csc573.project.common.schema.ChangePasswordType;
 import edu.ncsu.csc573.project.common.schema.CommandRequestType;
@@ -35,8 +36,13 @@ public class ChangePasswordRequestMessage extends RequestMessage {
 		ChangePasswordParamsType rpt = new ChangePasswordParamsType();
 		
 		rpt.setUsername((getParameter().getParamValue(EnumParamsType.USERNAME).toString()));
-		rpt.setPassword(getParameter().getParamValue(EnumParamsType.PASSWORD).toString());
-        rpt.setNewpassword(getParameter().getParamValue(EnumParamsType.NEWPASSWORD).toString());
+		String clearTextPasswd = getParameter().getParamValue(EnumParamsType.PASSWORD)
+				.toString();
+		String encryptedPasswd = EncDecUtil.encryptMessage(clearTextPasswd);
+		rpt.setPassword(encryptedPasswd);
+        String clearTextNewPasswd = getParameter().getParamValue(EnumParamsType.NEWPASSWORD).toString();
+		String encryptedNewPasswd = EncDecUtil.encryptMessage(clearTextNewPasswd);
+		rpt.setNewpassword(encryptedNewPasswd);
                
 		rt.setParams(rpt);
 		changepassword.setChangePassword(rt);
@@ -55,8 +61,15 @@ public class ChangePasswordRequestMessage extends RequestMessage {
 			ChangePasswordParamsType regparams = changeType.getParams();
 			IParameter param = new Parameter();
 			param.add(EnumParamsType.USERNAME, regparams.getUsername());
-			param.add(EnumParamsType.PASSWORD, regparams.getPassword());
-            param.add(EnumParamsType.NEWPASSWORD, regparams.getNewpassword());
+			String encryptedPasswd = regparams.getPassword();
+			String clearTextPasswd = EncDecUtil.decryptMessage(encryptedPasswd);
+			param.add(EnumParamsType.PASSWORD, clearTextPasswd);
+			String encryptedNewTextPasswd = regparams.getNewpassword(); 
+			String clearTextNewPasswd = EncDecUtil.decryptMessage(encryptedNewTextPasswd);
+			
+			
+			param.add(EnumParamsType.PASSWORD,  clearTextPasswd);
+            param.add(EnumParamsType.NEWPASSWORD, clearTextNewPasswd);
                         
 			this.setOperationType(EnumOperationType.CHANGEPASSWORD);
 			this.setParameter(param);

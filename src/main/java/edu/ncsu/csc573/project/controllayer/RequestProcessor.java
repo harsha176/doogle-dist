@@ -15,6 +15,7 @@ import edu.ncsu.csc573.project.commlayer.Router;
 import edu.ncsu.csc573.project.commlayer.Zone;
 import edu.ncsu.csc573.project.common.ByteOperationUtil;
 import edu.ncsu.csc573.project.common.ConfigurationManager;
+import edu.ncsu.csc573.project.common.messages.ACKResponse;
 import edu.ncsu.csc573.project.common.messages.ChangePasswordResponseMessage;
 import edu.ncsu.csc573.project.common.messages.CustomFileParamType;
 import edu.ncsu.csc573.project.common.messages.EnumOperationType;
@@ -418,10 +419,36 @@ public class RequestProcessor {
 				return new MessageDetails(destPeerIP, req);
 			}
 			break;
-		case UPDATE:
+		case DOWNLOADUPDATE:
 			/*
 			 * TODO retreive filedigest from request
+			 *
 			 */
+			destPeerIP = Router.getInstance().getNextHop(
+					new Point(ByteOperationUtil
+							.getCordinates((byte[])req.getParameter()
+									.getParamValue(EnumParamsType.FILEDIGEST))));
+			if (destPeerIP.equalsIgnoreCase("127.0.0.1")) {
+				ACKResponse ackResp = new ACKResponse(req.getId());
+				/*String fileDigest = ByteOperationUtil.convertBytesToString((byte[])req.getParameter()
+						.getParamValue(EnumParamsType.FILEDIGEST));*/
+				int[] cordinates = ByteOperationUtil.getCordinates((byte[])req.getParameter()
+						.getParamValue(EnumParamsType.FILEDIGEST));
+				String fileName = req.getParameter().getParamValue(EnumParamsType.FILENAME).toString();
+				hashSpaceManager.updateDownloadCount(new Point(cordinates), fileName);
+
+				IParameter getParams = new Parameter();
+				getParams.add(EnumParamsType.STATUSCODE,
+						new BigInteger(String.valueOf(0)));
+				getParams.add(EnumParamsType.MESSAGE,
+						"Successfully updated file download count");
+
+				ackResp.createResponse(EnumOperationType.ACKRESPONSE, getParams); 
+
+				response = ackResp;
+			} else {
+				return new MessageDetails(destPeerIP, req);
+			}
 			break;
 		default:
 			try {
