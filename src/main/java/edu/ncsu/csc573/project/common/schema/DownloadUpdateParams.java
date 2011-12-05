@@ -8,7 +8,6 @@
 
 package edu.ncsu.csc573.project.common.schema;
 
-import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -16,17 +15,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for InvalidResponseTypeParams complex type.
+ * <p>Java class for DownloadUpdateParams complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="InvalidResponseTypeParams">
+ * &lt;complexType name="DownloadUpdateParams">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="statuscode" type="{http://www.w3.org/2001/XMLSchema}integer"/>
- *         &lt;element name="message" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="filedigest" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="filename" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,63 +35,63 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "InvalidResponseTypeParams", propOrder = {
-    "statuscode",
-    "message"
+@XmlType(name = "DownloadUpdateParams", propOrder = {
+    "filedigest",
+    "filename"
 })
-public class InvalidResponseTypeParams {
+public class DownloadUpdateParams {
 
     @XmlElement(required = true)
-    protected BigInteger statuscode;
+    protected String filedigest;
     @XmlElement(required = true)
-    protected String message;
+    protected String filename;
 
     /**
-     * Gets the value of the statuscode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getStatuscode() {
-        return statuscode;
-    }
-
-    /**
-     * Sets the value of the statuscode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setStatuscode(BigInteger value) {
-        this.statuscode = value;
-    }
-
-    /**
-     * Gets the value of the message property.
+     * Gets the value of the filedigest property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getMessage() {
-        return message;
+    public String getFiledigest() {
+        return filedigest;
     }
 
     /**
-     * Sets the value of the message property.
+     * Sets the value of the filedigest property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setMessage(String value) {
-        this.message = value;
+    public void setFiledigest(String value) {
+        this.filedigest = value;
+    }
+
+    /**
+     * Gets the value of the filename property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getFilename() {
+        return filename;
+    }
+
+    /**
+     * Sets the value of the filename property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setFilename(String value) {
+        this.filename = value;
     }
 
 }

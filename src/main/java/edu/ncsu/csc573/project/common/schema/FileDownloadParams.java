@@ -15,18 +15,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for DownloadFileParamType complex type.
+ * <p>Java class for FileDownloadParams complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="DownloadFileParamType">
+ * &lt;complexType name="FileDownloadParams">
  *   &lt;complexContent>
- *     &lt;extension base="{http://www.doogle.project.csc573.csc.ncsu.edu}FileParamType">
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Downloads" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="FileName" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
- *     &lt;/extension>
+ *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
@@ -34,30 +34,36 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "DownloadFileParamType", propOrder = {
-    "downloads"
+@XmlType(name = "FileDownloadParams", propOrder = {
+    "fileName"
 })
-public class DownloadFileParamType
-    extends FileParamType
-{
+public class FileDownloadParams {
 
-    @XmlElement(name = "Downloads")
-    protected int downloads;
+    @XmlElement(name = "FileName", required = true)
+    protected String fileName;
 
     /**
-     * Gets the value of the downloads property.
+     * Gets the value of the fileName property.
      * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public int getDownloads() {
-        return downloads;
+    public String getFileName() {
+        return fileName;
     }
 
     /**
-     * Sets the value of the downloads property.
+     * Sets the value of the fileName property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public void setDownloads(int value) {
-        this.downloads = value;
+    public void setFileName(String value) {
+        this.fileName = value;
     }
 
 }
