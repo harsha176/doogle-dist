@@ -116,6 +116,9 @@ public abstract class RequestMessage implements IRequest {
         } else if(XML.indexOf("Get") != -1) {
 			req = new GetRequest();
 			req.parseXML(XML);
+        } else if(XML.indexOf("DownloadUpdate") != -1) {
+			req = new DownloadUpdateRequest();
+			req.parseXML(XML);
         }
         else {
 			logger.error("Given XML " + XML + " is an invalid request");

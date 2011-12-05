@@ -241,43 +241,46 @@ private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     String lastname = lastnameUser.getText();
     String emailUsers = emailUser.getText();
     String username = usernameData.getText();
-    String des = null;
-    String EmailRegEx = ".*"+"@"+".*"+".com$";
-    if (faculty.isSelected())
-    {
-       des = faculty.getText(); 
-    }   
-    else
-    {
-       des = student.getText();
-    }
-    if(firstname == null)
-    {
-        FirstnameErrors();
-    }
-    else if (lastname == null)
-    {
-        LastnameErrors();
-     }
-    else if(username == null)
-    {
-      UsernameErrors();
-    }
-
-    try {
-        boolean isValid = Pattern.matches(EmailRegEx,emailUsers);
-         if(!isValid) {
-                 EmailErrors();
-            }
-        } catch(NullPointerException excp){
-          EmailErrors();
-          }  
     String password = passwordUser.getText();
     String confpassword = confirmPassword.getText();
     int compare = password.compareTo(confpassword);
     int length = password.length();    
 
-   if (compare !=0)
+    String des = null;
+    if (faculty.isSelected())
+    {
+       des = faculty.getText(); 
+    }   
+    else if (student.isSelected())
+    {
+       des = student.getText();
+    }
+    else 
+    {
+        desErrors();
+    }
+    
+    String EmailRegEx = ".*"+"@"+".*"+".*";
+    
+    
+    if(firstname.isEmpty())
+    {
+        FirstnameErrors();
+    }
+    else if (lastname.isEmpty())
+    {
+        LastnameErrors();
+     }
+    else if(username.isEmpty())
+    {
+      UsernameErrors();
+    }
+    
+    else if (emailUsers.isEmpty() || !Pattern.matches(EmailRegEx,emailUsers))
+    {
+        EmailErrors();
+    }
+    else if (compare !=0)
    {
         PasswdMismatchErrors();
    }
@@ -423,6 +426,13 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
      RegisterErrors ServerErrors = new RegisterErrors();
         ServerErrors.ServerError();
         ServerErrors.setVisible(true);   
+    }
+
+        private void desErrors() {
+        RegisterErrors desError = new RegisterErrors();
+        desError.desError();
+        desError.setVisible(true);  
+    
     }
 
 }

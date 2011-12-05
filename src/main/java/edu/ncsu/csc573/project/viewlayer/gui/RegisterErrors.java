@@ -168,4 +168,9 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JLabel errorMsg;
     private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
+
+    void desError() {
+      errorMsg.setText("Designation not selected");
+        jButton1.setText("Try Again");        
+    }
 }

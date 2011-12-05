@@ -635,7 +635,7 @@ public class SearchResults extends javax.swing.JFrame {
 	// TODO add your handling code here:
 		try {
 
-			Controller.getInstance().search(newSearch.getText());
+			List<MatchFileParamType> searchResults = Controller.getInstance().search(newSearch.getText());
 			// PublishSearchParameter searchResults =
 			// (PublishSearchParameter)response.getParameter();
 			// searchResults.resetCounter();
@@ -646,6 +646,13 @@ public class SearchResults extends javax.swing.JFrame {
 			// newResults.setVisible(true);
 			// newResults.setLocationRelativeTo(this);
 
+                          		SearchResults sr = new SearchResults();
+		sr.setMessage(searchResults);
+		this.setVisible(false);
+		sr.setVisible(true);
+		sr.setLocationRelativeTo(this);
+		sr.setTitle("Hello " + Session.getInstance().getUsername() + " , Welcome ");
+                
 		} catch (IOException ex) {
 			PublishFrame Searchfail = new PublishFrame();
 			Searchfail.setMessage("Failed to create search request");

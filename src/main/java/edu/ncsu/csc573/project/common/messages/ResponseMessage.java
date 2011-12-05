@@ -128,6 +128,9 @@ public abstract class ResponseMessage extends RequestMessage implements
 		}else if (XML.indexOf("Invalid") != -1) {
 			res = new InvalidResponseMessage(id, "");
 			res.parseXML(XML);
+		}else if (XML.indexOf("ACK") != -1) {
+			res = new ACKResponse(id);
+			res.parseXML(XML);
 		}
 		 else {
 			logger.error("Given XML " + XML + " is an invalid request");
