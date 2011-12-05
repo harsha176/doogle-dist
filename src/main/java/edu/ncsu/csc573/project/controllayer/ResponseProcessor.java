@@ -95,6 +95,7 @@ public class ResponseProcessor {
 		case FORGOTPASSWORDRESPONSE:
 		case CHANGEPASSWORDRESPONSE:
 		case ACKRESPONSE:
+			logger.info("Recievied ACK response");
 			break;
 		case JOINRESPONSE:
 			logger.info("Processing join response");

@@ -15,16 +15,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for ForgotPasswdParamsType complex type.
+ * <p>Java class for FileDownloadParams complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="ForgotPasswdParamsType">
+ * &lt;complexType name="FileDownloadParams">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="FileName" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -34,36 +34,36 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ForgotPasswdParamsType", propOrder = {
-    "username"
+@XmlType(name = "FileDownloadParams", propOrder = {
+    "fileName"
 })
-public class ForgotPasswdParamsType {
+public class FileDownloadParams {
 
-    @XmlElement(required = true)
-    protected String username;
+    @XmlElement(name = "FileName", required = true)
+    protected String fileName;
 
     /**
-     * Gets the value of the username property.
+     * Gets the value of the fileName property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getUsername() {
-        return username;
+    public String getFileName() {
+        return fileName;
     }
 
     /**
-     * Sets the value of the username property.
+     * Sets the value of the fileName property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setUsername(String value) {
-        this.username = value;
+    public void setFileName(String value) {
+        this.fileName = value;
     }
 
 }

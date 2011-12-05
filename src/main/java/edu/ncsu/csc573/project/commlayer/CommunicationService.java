@@ -20,9 +20,15 @@ import java.net.UnknownHostException;
 
 import org.apache.log4j.Logger;
 
+import com.sun.media.rtsp.protocol.RequestMessage;
+
 import edu.ncsu.csc573.project.common.ConfigurationManager;
 import edu.ncsu.csc573.project.common.messages.IRequest;
 import edu.ncsu.csc573.project.common.messages.IResponse;
+import edu.ncsu.csc573.project.common.schema.CommandRequestType;
+import edu.ncsu.csc573.project.common.schema.FileDownloadParams;
+import edu.ncsu.csc573.project.common.schema.FileDownloadType;
+import edu.ncsu.csc573.project.common.schema.Request;
 import edu.ncsu.csc573.project.controllayer.ConcurrentQueueManagement;
 import edu.ncsu.csc573.project.controllayer.ResponseProcessor;
 
@@ -255,10 +261,21 @@ public class CommunicationService implements ICommunicationService {
 					ftSoc.getOutputStream())));
 			logger.debug("Successfully opened socket for file transfer");
 
-			pw.println("<Request>");
+			Request fileDownloadRequest = new Request();
+			CommandRequestType cmd = new CommandRequestType();
+			FileDownloadType fd = new FileDownloadType();
+			FileDownloadParams fdp = new FileDownloadParams();
+			fdp.setFileName(fileName);
+			fd.setParams(fdp);
+			cmd.setFileDownload(fd);
+			fileDownloadRequest.setCommand(cmd);
+			
+			pw.println(edu.ncsu.csc573.project.common.messages.RequestMessage.getXML(fileDownloadRequest));
+			pw.flush();
+			/*pw.println("<Request>");
 			pw.println("File:" + fileName);
 			pw.println("</Request>");
-			pw.flush();
+			pw.flush();*/
 			logger.debug("Sent request " + "File:" + fileName);
 			br = new BufferedReader(new InputStreamReader(
 					ftSoc.getInputStream()));

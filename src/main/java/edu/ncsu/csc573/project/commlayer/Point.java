@@ -11,7 +11,7 @@ import edu.ncsu.csc573.project.common.ConfigurationManager;
  * 
  */
 public class Point implements IPoint, Cloneable, Comparator<Point>, Comparable<Point> {
-	private int[] co_ordinate;
+	private int[] co_ordinate = new int[ConfigurationManager.getInstance().getDimensions()];
 
 	public Point(String encHach) {
 		if(encHach != null) {

@@ -15,17 +15,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for SearchType complex type.
+ * <p>Java class for DownloadUpdateParams complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="SearchType">
+ * &lt;complexType name="DownloadUpdateParams">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Operation" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="params" type="{http://www.doogle.project.csc573.csc.ncsu.edu}SearchTypeParams"/>
+ *         &lt;element name="filedigest" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="filename" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,63 +35,63 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "SearchType", propOrder = {
-    "operation",
-    "params"
+@XmlType(name = "DownloadUpdateParams", propOrder = {
+    "filedigest",
+    "filename"
 })
-public class SearchType {
+public class DownloadUpdateParams {
 
-    @XmlElement(name = "Operation", required = true)
-    protected String operation;
     @XmlElement(required = true)
-    protected SearchTypeParams params;
+    protected String filedigest;
+    @XmlElement(required = true)
+    protected String filename;
 
     /**
-     * Gets the value of the operation property.
+     * Gets the value of the filedigest property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getOperation() {
-        return operation;
+    public String getFiledigest() {
+        return filedigest;
     }
 
     /**
-     * Sets the value of the operation property.
+     * Sets the value of the filedigest property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setOperation(String value) {
-        this.operation = value;
+    public void setFiledigest(String value) {
+        this.filedigest = value;
     }
 
     /**
-     * Gets the value of the params property.
+     * Gets the value of the filename property.
      * 
      * @return
      *     possible object is
-     *     {@link SearchTypeParams }
+     *     {@link String }
      *     
      */
-    public SearchTypeParams getParams() {
-        return params;
+    public String getFilename() {
+        return filename;
     }
 
     /**
-     * Sets the value of the params property.
+     * Sets the value of the filename property.
      * 
      * @param value
      *     allowed object is
-     *     {@link SearchTypeParams }
+     *     {@link String }
      *     
      */
-    public void setParams(SearchTypeParams value) {
-        this.params = value;
+    public void setFilename(String value) {
+        this.filename = value;
     }
 
 }

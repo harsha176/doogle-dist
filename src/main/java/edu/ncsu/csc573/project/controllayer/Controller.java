@@ -2,6 +2,8 @@ package edu.ncsu.csc573.project.controllayer;
 
 import java.math.BigInteger;
 import java.net.Socket;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -26,8 +28,6 @@ import edu.ncsu.csc573.project.common.messages.LogoutRequestMessage;
 import edu.ncsu.csc573.project.common.messages.Parameter;
 import edu.ncsu.csc573.project.common.messages.PublishRequestMessage;
 import edu.ncsu.csc573.project.common.messages.RegisterRequestMessage;
-import edu.ncsu.csc573.project.common.messages.SearchRequestMessage;
-import edu.ncsu.csc573.project.common.schema.FileParamType;
 import edu.ncsu.csc573.project.common.schema.MatchFileParamType;
 import edu.ncsu.csc573.project.controllayer.hashspacemanagement.DigestAdaptor;
 import edu.ncsu.csc573.project.viewlayer.gui.Search;
@@ -140,7 +140,12 @@ public class Controller implements IController {
         IResponse response = CommunicationServiceFactory.getInstance().executeRequest(getRequest, destPeer);
         
         validateResponse(response);
-        return ((GetResponse)response).getGetParams().getFile();
+        
+        List<MatchFileParamType> unSortedSearchResults = ((GetResponse)response).getGetParams().getFile();
+        MatchFileParamType[] arrResults = unSortedSearchResults.toArray(new MatchFileParamType[0]);
+        
+        Arrays.sort(arrResults, new MatchFactorComparator());
+		return Arrays.asList(arrResults);
 	}
 
 	public String register(String firstName, String lastName, String username,
@@ -185,4 +190,18 @@ public class Controller implements IController {
 		IResponse response = CommunicationServiceFactory.getInstance().executeRequest(ForgotPWDRequest, bootstrapServerIP);
 		return validateResponse(response);
 	}
+
+}
+
+class MatchFactorComparator implements Comparator<MatchFileParamType> {
+	public int compare(MatchFileParamType o1, MatchFileParamType o2) {
+		if(o1.getMatchFactor() > o2.getMatchFactor()) {
+			return 1;
+		} else if(o1.getMatchFactor() < o2.getMatchFactor()){
+			return -1;
+		} else {
+			return 0;
+		}
+	}
+	
 }

@@ -57,7 +57,7 @@ public abstract class RequestMessage implements IRequest {
 	}
 
 	// 
-	public String getXML(Request req) throws Exception{
+	public static String getXML(Request req) throws Exception{
 		logger = Logger.getLogger(RequestMessage.class);
 		StringWriter reqXMLWriter = new StringWriter();
 		//req.setId(String.valueOf(System.currentTimeMillis()));
@@ -124,7 +124,7 @@ public abstract class RequestMessage implements IRequest {
 		
 	}
 	
-	private static Request getRequestFromGenXML(String XML) throws Exception {
+	public static Request getRequestFromGenXML(String XML) throws Exception {
 		JAXBContext context = JAXBContext.newInstance(Request.class);
 		Unmarshaller unMarsheller = context.createUnmarshaller();
 		Request req = (Request)unMarsheller.unmarshal(new StringReader(XML));

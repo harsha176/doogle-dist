@@ -17,14 +17,16 @@ public class DefaultMatcher implements IMatcher {
 	 * Threshold value fetched from configuration file
 	 */
 	private static final double THRESHOLD = ConfigurationManager.getInstance().getThresholdValue();
+	private double matchFactor;
 
+	
 	/**
 	 * This method checks if the query digest matches other one.
 	 * It uses configured THRESHOLD_VALUE as a parameter for match.
 	 * 
 	 * return true if it matches
 	 */
-	public boolean isMatches(byte[] query, byte[] other, Double matchFactor) {
+	public boolean isMatches(byte[] query, byte[] other) {
 		//matchFactor = new Double(0);
 		byte[] result = ByteOperationUtil.and(query, other);
 		
@@ -38,7 +40,7 @@ public class DefaultMatcher implements IMatcher {
 		}
 	}
 
-	public boolean isMatches(byte[] query, byte[] other) {
-		return isMatches(query, other, null);
+	public double getMatchFactor() {
+		return matchFactor;
 	}
 }

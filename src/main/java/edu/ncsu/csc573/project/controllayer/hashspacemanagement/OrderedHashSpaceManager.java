@@ -51,19 +51,18 @@ public class OrderedHashSpaceManager {
 		List<DownloadFileParamType> matchResuts;
 		while (itr.hasNext()) {
 			IPoint temp = itr.next();
-			Double matchFactor = new Double(0);
+			//Double matchFactor;
 			matchResuts = hashspace.get(temp);			 
 				//matchResuts = hashspace.get(temp.getPoint());
 				for (DownloadFileParamType file : matchResuts) {
-					if (matcher.isMatches(query.getQueryDigest(), ByteOperationUtil.convertStringToBytes(file.getFiledigest()),
-							matchFactor)) {
+					if (matcher.isMatches(query.getQueryDigest(), ByteOperationUtil.convertStringToBytes(file.getFiledigest()))) {
 					MatchFileParamType aMatch = new MatchFileParamType();
 					aMatch.setAbstract(file.getAbstract());
 					aMatch.setFiledigest(file.getFiledigest());
 					aMatch.setFilename(file.getFilename());
 					aMatch.setIpaddress(file.getIpaddress());
 					aMatch.setFilesize(file.getFilesize());
-					double matchCoefficient = matchFactor * 0.9
+					double matchCoefficient = matcher.getMatchFactor() * 0.9
 							+ file.getDownloads() * 0.1;
 					aMatch.setMatchFactor(matchCoefficient);
 					logger.debug("match found with Filename : "
@@ -141,5 +140,18 @@ public class OrderedHashSpaceManager {
 		
 		existingFiles.add(newFileDetails);
 		hashspace.put(key, existingFiles);
+	}
+	
+	public void updateDownloadCount(IPoint fileDigest, String fileName) {
+		List<DownloadFileParamType> fileList = hashspace.get(fileDigest);
+		if(fileList == null) {
+			logger.error("File not found in hashspace : " + fileName);
+		}
+		for(DownloadFileParamType dfpt: fileList) {
+			if(dfpt.getFilename().equals(fileName)) {
+				dfpt.setDownloads(dfpt.getDownloads()+1);
+				logger.debug("Updated download count for file : " + fileName + " to " + dfpt.getDownloads() );
+			}
+		}
 	}
 }

@@ -55,8 +55,8 @@ public abstract class ResponseMessage extends RequestMessage implements
 		createResponse(opType, parameter);
 	}
 
-	@Override
-	public String getXML(Request req) throws Exception {
+	//@Override
+	public static String getXML(Request req) throws Exception {
 		throw new Exception(
 				"Invalid operation getXNL from request on response object");
 	}
