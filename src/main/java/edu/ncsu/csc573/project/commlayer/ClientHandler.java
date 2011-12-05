@@ -16,11 +16,8 @@ import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.log4j.Logger;
-import org.omg.Dynamic.Parameter;
 
 import edu.ncsu.csc573.project.common.ByteOperationUtil;
 import edu.ncsu.csc573.project.common.ConfigurationManager;
@@ -35,7 +32,6 @@ import edu.ncsu.csc573.project.common.messages.ResponseMessage;
 import edu.ncsu.csc573.project.common.schema.Request;
 import edu.ncsu.csc573.project.controllayer.ConcurrentQueueManagement;
 import edu.ncsu.csc573.project.controllayer.RequestProcessor;
-import edu.ncsu.csc573.project.controllayer.hashspacemanagement.Digest;
 import edu.ncsu.csc573.project.controllayer.hashspacemanagement.DigestAdaptor;
 
 /**
