@@ -20,5 +20,5 @@ public interface IQuery {
 	 * This 
 	 * @return
 	 */
-	public byte[] getCordinates();
+	public int[] getCordinates();
 }

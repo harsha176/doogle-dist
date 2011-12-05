@@ -43,13 +43,21 @@ public class ByteOperationUtil {
 	}
 
 	public static byte[] and(byte[] d1, byte[] d2) {
-		byte[] d1Andd2 = new byte[DIGEST_SIZE];
-		for (int i = 0; i < DIGEST_SIZE; i++) {
+		byte[] d1Andd2 = new byte[d1.length];
+		for (int i = 0; i < d1.length; i++) {
 			d1Andd2[i] = (byte) (d1[i] & d2[i]);
 		}
 		return d1Andd2;
 	}
 
+	public static int[] and(int[] d1, int[] d2) {
+		int[] d1Andd2 = new int[d1.length];
+		for (int i = 0; i < d1.length; i++) {
+			d1Andd2[i] = (byte) (d1[i] & d2[i]);
+		}
+		return d1Andd2;
+	}
+	
 	/*public static getMatchFactor(byte[] query, byte[] other) {
 		
 	}*/
@@ -64,20 +72,30 @@ public class ByteOperationUtil {
 		return count;
 	}
 	
-	public static byte[] getCordinates(byte[] digest) {
+	public static int countSetBits(int[] other) {
+		int count = 0;
+		for (int b : other) {
+			for (; b != 0; count++) {
+				b &= b - 1;
+			}
+		}
+		return count;
+	}
+	
+	public static int[] getCordinates(byte[] digest) {
 		int totalLength = digest.length;
-		byte[] coordinates = new byte[grid_dimensions];
+		int[] coordinates = new int[grid_dimensions];
 		int step = totalLength/grid_dimensions;
 		
 		for(int i = step, j = 0; i <= totalLength && j < grid_dimensions; i = i + step, j++) {
 			//System.out.println((i-step)+","+(i-1));
-			coordinates[j] =  (byte)countSetBits(Arrays.copyOfRange(digest, i-step, i));
+			coordinates[j] =  countSetBits(Arrays.copyOfRange(digest, i-step, i));
 		}
 		
 		return coordinates;
 	}
 	
-	public static byte[] getCordinates(String digest) {
+	public static int[] getCordinates(String digest) {
 		return getCordinates(convertStringToBytes(digest));
 	}
 	

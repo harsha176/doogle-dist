@@ -6,6 +6,7 @@ package edu.ncsu.csc573.project.controllayer;
 import java.util.List;
 
 import edu.ncsu.csc573.project.common.schema.FileParamType;
+import edu.ncsu.csc573.project.common.schema.MatchFileParamType;
 
 /**
  * This interface provides flow control for peer/BS view layer.
@@ -45,7 +46,7 @@ public interface IController {
 	 * @param query
 	 * @throws Exception
 	 */
-	public List<FileParamType> search(String query) throws Exception;
+	public List<MatchFileParamType> search(String query) throws Exception;
 
 	/**
 	 * 

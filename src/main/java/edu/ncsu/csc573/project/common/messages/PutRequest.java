@@ -53,7 +53,7 @@ public class PutRequest extends RequestMessage {
 	public void parseXML(String XML) {
 		try {
 			Request req = getRequest(XML);
-
+			id = req.getId();
 			CommandRequestType command = req.getCommand();
 			PutType regType = command.getPut();
 			PutTypeParams regparams = regType.getParams();

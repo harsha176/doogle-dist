@@ -85,10 +85,10 @@ public abstract class ResponseMessage extends RequestMessage implements
 		return req;
 	}
 
-	public static IResponse createResponse(String XML, String id) throws Exception {
+	public static IResponse createResponse(String XML) throws Exception {
 		logger = Logger.getLogger(RequestMessage.class);
 		IResponse res = null;
-
+		String id = "1";
 		if (XML.indexOf("Register") != -1) {
 			res = new RegisterResponseMessage(id);
 			res.parseXML(XML);

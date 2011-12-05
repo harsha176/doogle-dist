@@ -255,9 +255,9 @@ public class CommunicationService implements ICommunicationService {
 					ftSoc.getOutputStream())));
 			logger.debug("Successfully opened socket for file transfer");
 
-			pw.println("<request>");
+			pw.println("<Request>");
 			pw.println("File:" + fileName);
-			pw.println("</request>");
+			pw.println("</Request>");
 			pw.flush();
 			logger.debug("Sent request " + "File:" + fileName);
 			br = new BufferedReader(new InputStreamReader(

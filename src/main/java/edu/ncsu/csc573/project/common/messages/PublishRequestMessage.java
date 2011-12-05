@@ -146,13 +146,13 @@ public class PublishRequestMessage extends RequestMessage {
 		
 		String localIPAddress = ConfigurationManager.getInstance()
 				.getHostInterface();
-		
-		try {
-			localIPAddress = InetAddress.getLocalHost().getHostAddress();
-		} catch (UnknownHostException e) {
-			logger.error("Unable to get IPAddress of the host interface", e);
-		}
-		
+		//*
+		//try {
+		//	localIPAddress = InetAddress.getLocalHost().getHostAddress();
+//		} catch (UnknownHostException e) {
+//			logger.error("Unable to get IPAddress of the host interface", e);
+		//}
+		//
 		ICommunicationService commService = CommunicationServiceFactory.getInstance();
 		
 		for (File file : files) {

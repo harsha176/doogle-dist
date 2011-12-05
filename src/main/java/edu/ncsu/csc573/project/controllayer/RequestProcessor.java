@@ -79,7 +79,8 @@ public class RequestProcessor {
 		return instance;
 	}
 
-	public synchronized MessageDetails processRequest(IRequest req, String peerIp) {
+	public synchronized MessageDetails processRequest(IRequest req,
+			String peerIp) {
 		logger = Logger.getLogger(RequestProcessor.class);
 		IResponse response = null;
 		IParameter params = null;
@@ -87,13 +88,13 @@ public class RequestProcessor {
 		/*
 		 * Check if its a valid request for this node
 		 */
-		
-		 if (!adminFilter.isRequestValid(req.getOperationType())) { response =
-				 new InvalidResponseMessage(req.getId(), req.getOperationType() +
-						 "is not a requested operation "); 
-		 return new MessageDetails(peerIp, response); 
-		 }
-		
+
+		/*if (!adminFilter.isRequestValid(req.getOperationType())) {
+			response = new InvalidResponseMessage(req.getId(),
+					req.getOperationType() + "is not a requested operation ");
+			return new MessageDetails(peerIp, response);
+		}*/
+
 		/*
 		 * if(ConfigurationManager.getInstance().isAdminServer()) { myZone = new
 		 * Zone(); myZone.create(Point.getHashSpaceStartPoint(),
@@ -249,88 +250,94 @@ public class RequestProcessor {
 			response.createResponse(EnumOperationType.FORGOTPASSWORD, params);
 			destPeerIP = peerIp;
 			break;
-		/*case PUBLISH:
-			logger.debug("Processing publish request");
-			hashSpaceManager.handlePublishRequest((PublishRequestMessage) req);
-			response = new PublishResponseMessage(req.getId());
-			params = new Parameter();
-			params.add(EnumParamsType.STATUSCODE,
-					new BigInteger(String.valueOf(0)));
-			params.add(EnumParamsType.MESSAGE,
-					"Successfully published folder on server");
-			response.createResponse(EnumOperationType.PUBLISHRESPONSE, params);
-			/*
-			 * choose destination ip and return it inform of messageDetail object 
-			destPeerIP = peerIp;
-			break;*/
-		/*case SEARCH:
-			logger.debug("Processing search request");
-			response = new SearchResponseMessage(req.getId());
-			IParameter searchResponseparams;
-			String query_string = req.getParameter()
-					.getParamValue(EnumParamsType.SEARCHKEY).toString();
-			searchResponseparams = hashSpaceManager.search(new Query(
-					query_string));
-			response.createResponse(EnumOperationType.SEARCHRESPONSE,
-					searchResponseparams);
-
-			response.createResponse(EnumOperationType.SEARCHRESPONSE,
-					searchResponseparams);
-			/*
-			 * choose destination ip and return it inform of messageDetail object 
-			destPeerIP = peerIp;
-			break;
-			*/
+		/*
+		 * case PUBLISH: logger.debug("Processing publish request");
+		 * hashSpaceManager.handlePublishRequest((PublishRequestMessage) req);
+		 * response = new PublishResponseMessage(req.getId()); params = new
+		 * Parameter(); params.add(EnumParamsType.STATUSCODE, new
+		 * BigInteger(String.valueOf(0))); params.add(EnumParamsType.MESSAGE,
+		 * "Successfully published folder on server");
+		 * response.createResponse(EnumOperationType.PUBLISHRESPONSE, params);
+		 * /* choose destination ip and return it inform of messageDetail object
+		 * destPeerIP = peerIp; break;
+		 */
+		/*
+		 * case SEARCH: logger.debug("Processing search request"); response =
+		 * new SearchResponseMessage(req.getId()); IParameter
+		 * searchResponseparams; String query_string = req.getParameter()
+		 * .getParamValue(EnumParamsType.SEARCHKEY).toString();
+		 * searchResponseparams = hashSpaceManager.search(new Query(
+		 * query_string));
+		 * response.createResponse(EnumOperationType.SEARCHRESPONSE,
+		 * searchResponseparams);
+		 * 
+		 * response.createResponse(EnumOperationType.SEARCHRESPONSE,
+		 * searchResponseparams); /* choose destination ip and return it inform
+		 * of messageDetail object destPeerIP = peerIp; break;
+		 */
 		case JOIN:
 			logger.debug("Processing join request");
 			int count = 0;
 			response = new JoinResponse(req.getId());
 			IZone child = myZone.split(count);
-			
+
 			logger.info("Created new child zone : " + child.toString());
 			JoinResponse joinResponse = new JoinResponse(req.getId());
-			
+
 			// send first, last hash and peer id
 			joinResponse.setFirsthash(child.getStart().getAsString());
 			joinResponse.setLasthash(child.getEnd().getAsString());
 			joinResponse.setPeerid(child.getStart().getAsString());
-			joinResponse.setMyipaddress(ConfigurationManager.getInstance().getHostInterface());
+			joinResponse.setMyipaddress(ConfigurationManager.getInstance()
+					.getHostInterface());
 			// send routing table
-			List<TableParamType> routingTableAsList = Router.getInstance().getRoutingTableAsList();
+			List<TableParamType> routingTableAsList = Router.getInstance()
+					.getRoutingTableAsList();
 			joinResponse.getTable().addAll(routingTableAsList);
 			logger.info("Published routing table");
-			for(TableParamType table:routingTableAsList) {
-				logger.info(table.getDirection() + ":" + table.getNexthop() + ":" + table.getPeerid());
+			for (TableParamType table : routingTableAsList) {
+				logger.info(table.getDirection() + ":" + table.getNexthop()
+						+ ":" + table.getPeerid());
 			}
-			
-			List<DownloadFileParamType> allFileDetailsAsList = hashSpaceManager.getAllFileDetails(child);
+
+			List<DownloadFileParamType> allFileDetailsAsList = hashSpaceManager
+					.getAllFileDetails(child);
 			joinResponse.getFile().addAll(allFileDetailsAsList);
-			for(FileParamType table:allFileDetailsAsList) {
+			for (FileParamType table : allFileDetailsAsList) {
 				logger.info(table.getFilename() + ":" + table.getIpaddress());
 			}
-			
+
 			// Send routing table and file entries
 			// response.createResponse(EnumOperationType.JOINRESPONSE,
 			// joinResponseparams);
-			
+
 			IParameter joinParams = new Parameter();
-			joinParams.add(EnumParamsType.STATUSCODE, new BigInteger(String.valueOf(0)));
-			joinParams.add(EnumParamsType.MESSAGE, "Successfully executed request");
-			joinResponse.createResponse(EnumOperationType.JOINRESPONSE, joinParams);
-			
+			joinParams.add(EnumParamsType.STATUSCODE,
+					new BigInteger(String.valueOf(0)));
+			joinParams.add(EnumParamsType.MESSAGE,
+					"Successfully executed request");
+			joinResponse.createResponse(EnumOperationType.JOINRESPONSE,
+					joinParams);
+
 			response = joinResponse;
 			try {
-				logger.info("Successfull created response " + response.getRequestInXML());
+				logger.info("Successfull created response "
+						+ response.getRequestInXML());
 			} catch (Exception e1) {
 				logger.error("Failed to create join response", e1);
 			}
 			// update routing table in that direction
-			Router.getInstance().update(count, child.getStart(), req.getParameter().getParamValue(EnumParamsType.IPADDRESS).toString());
+			Router.getInstance().update(
+					count,
+					child.getStart(),
+					req.getParameter().getParamValue(EnumParamsType.IPADDRESS)
+							.toString());
 			count++;
 			count = count % 15;
-			
+
 			/*
-			 * TODO choose destination ip and return it inform of messageDetail object 
+			 * TODO choose destination ip and return it inform of messageDetail
+			 * object
 			 */
 			destPeerIP = peerIp;
 			break;
@@ -355,15 +362,19 @@ public class RequestProcessor {
 			counter++;
 			counter = counter % 15;
 			/*
-			 * TODO choose destination ip and return it inform of messageDetail object 
+			 * TODO choose destination ip and return it inform of messageDetail
+			 * object
 			 */
 			destPeerIP = peerIp;
 			break;
 		case PUT:
 			logger.debug("Processing put request");
-			
-			destPeerIP = Router.getInstance().getNextHop(new Point(ByteOperationUtil.getCordinates(req.getParameter().getParamValue(EnumParamsType.FILEDIGEST).toString())));
-			if(destPeerIP.equalsIgnoreCase("127.0.0.1")) {
+
+			destPeerIP = Router.getInstance().getNextHop(
+					new Point(ByteOperationUtil.getCordinates((byte[])(req
+							.getParameter()
+							.getParamValue(EnumParamsType.FILEDIGEST)))));
+			if (destPeerIP.equalsIgnoreCase("127.0.0.1")) {
 				hashSpaceManager.handlePutRequest((PutRequest) req);
 				response = new PutResponse(req.getId());
 				params = new Parameter();
@@ -372,38 +383,45 @@ public class RequestProcessor {
 				params.add(EnumParamsType.MESSAGE,
 						"Successfully published file on peer");
 				response.createResponse(EnumOperationType.PUTRESPONSE, params);
-				//return new MessageDetails(ip, req); 
+				// return new MessageDetails(ip, req);
 			} else {
 				return new MessageDetails(destPeerIP, req);
 			}
 			break;
 		case GET:
-			destPeerIP = Router.getInstance().getNextHop(new Point(ByteOperationUtil.getCordinates(req.getParameter().getParamValue(EnumParamsType.FILEDIGEST).toString())));
-			if(destPeerIP.equalsIgnoreCase("127.0.0.1")) {
+			destPeerIP = Router.getInstance().getNextHop(
+					new Point(ByteOperationUtil
+							.getCordinates((byte[])req.getParameter()
+									.getParamValue(EnumParamsType.SEARCHKEY))));
+			if (destPeerIP.equalsIgnoreCase("127.0.0.1")) {
 				GetResponse getResp = new GetResponse(req.getId());
 				List<MatchFileParamType> getResponseparams;
-				String query_string_get = req.getParameter()
-						.getParamValue(EnumParamsType.SEARCHKEY).toString();
+				String query_string_get = ByteOperationUtil.convertBytesToString((byte[])req.getParameter()
+						.getParamValue(EnumParamsType.SEARCHKEY));
 				getResponseparams = hashSpaceManager.search(new Query(
 						query_string_get));
-				
+
 				getResp.getGetParams().getFile().addAll(getResponseparams);
 				IParameter getParams = new Parameter();
-				getParams.add(EnumParamsType.STATUSCODE, new BigInteger(String.valueOf(0)));
-				getParams.add(EnumParamsType.MESSAGE, "Successfully executed request");
-				
-				getResp.createResponse(EnumOperationType.GETRESPONSE,
-						getParams); //return new MessageDetails(ip, req); 
-				
+				getParams.add(EnumParamsType.STATUSCODE,
+						new BigInteger(String.valueOf(0)));
+				getParams.add(EnumParamsType.MESSAGE,
+						"Successfully executed request");
+
+				getResp.createResponse(EnumOperationType.GETRESPONSE, getParams); // return
+																					// new
+																					// MessageDetails(ip,
+																					// req);
+
 				response = getResp;
 			} else {
 				return new MessageDetails(destPeerIP, req);
 			}
 			break;
 		case UPDATE:
-				/*
-				 * TODO retreive filedigest from request
-				 */
+			/*
+			 * TODO retreive filedigest from request
+			 */
 			break;
 		default:
 			try {

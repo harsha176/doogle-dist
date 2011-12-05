@@ -43,7 +43,7 @@ public class PutResponse extends ResponseMessage {
 		logger = Logger.getLogger(LoginResponseMessage.class);
 		try {
 			Response req = getResponse(XML);
-			
+			id = req.getId();
 			CommandResponseType command = req.getCommand();
 			PutResponseType leaveType = command.getPutResponse();
 			PutResponseTypeParams leaveparams = leaveType.getParams();

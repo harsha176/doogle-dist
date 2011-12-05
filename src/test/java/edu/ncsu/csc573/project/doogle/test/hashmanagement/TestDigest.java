@@ -29,21 +29,27 @@ public class TestDigest {
 			e.printStackTrace();
 		}
 	}*/
-	
-	public static String testCoordinates() {
+	@Test
+	public void testCoordinates() {
 		try{
-			IDigest digestUtil = DigestAdaptor.getInstance();
-			String query = "Today is sunday";
-			String filename = "/home/doogle-dev/downloads/Metallica.txt";
+			//IDigest digestUtil = DigestAdaptor.getInstance();
+			//String query = "Today is sunday";
+			//String filename = "/home/doogle-dev/temp/ip_id_2.txt";
 			//System.out.println(filename);
-			byte[] queryDigest = digestUtil.getDigest(new File(filename));
-			return ByteOperationUtil.convertBytesToString((ByteOperationUtil.getCordinates(queryDigest)));
+			//byte[] queryDigest = digestUtil.getDigest(new File(filename));
+			//System.out.println(ByteOperationUtil.countSetBits(queryDigest));
+			int[] other = new int[1];
+			other[0] = 31;
+			//other[1] = 
+			System.out.println(ByteOperationUtil.countSetBits(other));
+			//System.out.println(ByteOperationUtil.printCoordinates(ByteOperationUtil.getCordinates(queryDigest)));
+			//return ByteOperationUtil.convertBytesToString((ByteOperationUtil.getCordinates(queryDigest)));
 			//System.out.println("Total number of set bits " + ByteOperationUtil.countSetBits(Arrays.copyOf(queryDigest, queryDigest.length)));
 			//System.out.println((ByteOperationUtil.printCoordinates(ByteOperationUtil.getCordinates(queryDigest))));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return ;
 	}
 	/*@Test
 	public void testquery(){

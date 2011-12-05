@@ -27,7 +27,7 @@ public class TestRouter {
 	}
 	
 	public IPoint generateRandomPoint() {
-		byte[] p = new byte[ConfigurationManager.getInstance().getDimensions()];
+		int[] p = new int[ConfigurationManager.getInstance().getDimensions()];
 		Random randInt = new Random();
 		int limit = (int)1024/ConfigurationManager.getInstance().getDimensions();
 		Assert.assertTrue(limit < 255);
@@ -36,7 +36,7 @@ public class TestRouter {
 			int val = randInt.nextInt(limit);
 			Assert.assertTrue(val >= 0);
 			Assert.assertTrue(val < 127);
-			p[i] = (byte)val;
+			p[i] = (int)val;
 			Assert.assertTrue(p[i] >= 0);
 		}
 		

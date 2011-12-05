@@ -105,16 +105,13 @@ public class ClientHandler implements Runnable {
 					return ;
 				}
 				
-				
-				
-				
 				/*
 				 * Handle response 
 				 */
 				if(sb.indexOf("</Response>") != -1) {
 					IResponse resp;
 					try {
-						resp = ResponseMessage.createResponse(sb.toString().trim(), String.valueOf(100));
+						resp = ResponseMessage.createResponse(sb.toString().trim());
 					} catch (Exception e) {
 						logger.error("Received invalid request or response " + sb.toString());
 						return ;
@@ -224,7 +221,7 @@ public class ClientHandler implements Runnable {
 
 
 	public static String getFileName(StringBuffer sb) {
-		int endIndex = sb.indexOf("</request>")-(System.getProperty("line.separator")).length();
+		int endIndex = sb.indexOf("</Request>")-(System.getProperty("line.separator")).length();
 		int stIndex = sb.indexOf("File:");
 		return sb.substring(stIndex+"File:".length(), endIndex);
 	}

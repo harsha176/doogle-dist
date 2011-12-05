@@ -55,13 +55,12 @@ public class Router implements IRouter {
 	}
 
 	public void update(int direction, IPoint p, String add) {
-		routingTable[direction][1] = p.toString();
+		routingTable[direction][1] = p.getAsString();
 		routingTable[direction][2] = add;
 		logger.info("Router point co-ordinates in direction : "
 				+ direction
 				+ " is : "
-				+ ByteOperationUtil.printCoordinates(ByteOperationUtil
-						.convertStringToBytes(p.getAsString())));
+				+ p.toString());
 		isInitialized = true;
 	}
 
@@ -73,8 +72,7 @@ public class Router implements IRouter {
 		 }
 
 		logger.info("Destination point co-ordinates : "
-				+ ByteOperationUtil.printCoordinates(ByteOperationUtil
-						.convertStringToBytes(destPoint.getAsString())));
+				+ destPoint.toString());
 		for (int i = 0; i < ConfigurationManager.getInstance().getDimensions(); i++) {
 			if(routingTable[i][1] == null) {
 				continue;

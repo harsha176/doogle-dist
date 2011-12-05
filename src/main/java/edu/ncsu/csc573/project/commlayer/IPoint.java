@@ -1,7 +1,6 @@
 package edu.ncsu.csc573.project.commlayer;
 
 public interface IPoint {
-	public void createPoint(String p);
 	
 	public boolean isPointGreater(IPoint p, int direction);
 	
@@ -11,5 +10,5 @@ public interface IPoint {
 	
 	public String getAsString();
 	
-	public byte[] getPoint();
+	public int[] getPoint();
 }
