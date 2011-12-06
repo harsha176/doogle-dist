@@ -27,9 +27,23 @@
             <xs:element name="Get" type="GetType"></xs:element>
             <xs:element name="FileDownload" type="FileDownloadType"></xs:element>
             <xs:element name="DownloadUpdate" type="DownloadUpdateType"></xs:element>
+            <xs:element name="Unpublish" type="UnpublishType"></xs:element>
 		</xs:choice>
 	</xs:complexType>
 
+	<xs:complexType name="UnpublishType">
+		<xs:sequence>
+			<xs:element name="Operation" type="xs:string" fixed="Unpublish" />
+			<xs:element name="params" type="UnpublishTypeParams"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="UnpublishTypeParams">
+		<xs:sequence>
+			<xs:element name="filedigest" type="xs:string"/>
+			<xs:element name="filename" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="DownloadUpdateType">
 		<xs:sequence>
 			<xs:element name="Operation" type="xs:string" fixed="DownloadUpdate" />

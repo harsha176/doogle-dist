@@ -86,7 +86,11 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                              <Component id="resultsnumber" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="fname1" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="abs1" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="fname2" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -151,7 +155,10 @@
                   <Component id="Search" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="resultsnumber" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="fname1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -359,6 +366,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="download5ActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="resultsnumber">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="results"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

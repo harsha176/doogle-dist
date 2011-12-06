@@ -15,17 +15,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for SearchType complex type.
+ * <p>Java class for UnpublishType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="SearchType">
+ * &lt;complexType name="UnpublishType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="Operation" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="params" type="{http://www.doogle.project.csc573.csc.ncsu.edu}SearchTypeParams"/>
+ *         &lt;element name="params" type="{http://www.doogle.project.csc573.csc.ncsu.edu}UnpublishTypeParams"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,16 +35,16 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "SearchType", propOrder = {
+@XmlType(name = "UnpublishType", propOrder = {
     "operation",
     "params"
 })
-public class SearchType {
+public class UnpublishType {
 
     @XmlElement(name = "Operation", required = true)
     protected String operation;
     @XmlElement(required = true)
-    protected SearchTypeParams params;
+    protected UnpublishTypeParams params;
 
     /**
      * Gets the value of the operation property.
@@ -75,10 +75,10 @@ public class SearchType {
      * 
      * @return
      *     possible object is
-     *     {@link SearchTypeParams }
+     *     {@link UnpublishTypeParams }
      *     
      */
-    public SearchTypeParams getParams() {
+    public UnpublishTypeParams getParams() {
         return params;
     }
 
@@ -87,10 +87,10 @@ public class SearchType {
      * 
      * @param value
      *     allowed object is
-     *     {@link SearchTypeParams }
+     *     {@link UnpublishTypeParams }
      *     
      */
-    public void setParams(SearchTypeParams value) {
+    public void setParams(UnpublishTypeParams value) {
         this.params = value;
     }
 

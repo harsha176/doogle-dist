@@ -68,4 +68,13 @@ public interface IController {
 	public String changePasswd(String newPasswd, String oldPasswd) throws Exception;
 	
 	public String forgotPasswd(String username) throws Exception;
+	
+	/**
+	 * 
+	 * @param fileName
+	 * @param fileDigest
+	 * @return
+	 * @throws Exception
+	 */
+	public String unPublishFile(String fileName, String fileDigest) throws Exception;
 }

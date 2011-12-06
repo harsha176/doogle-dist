@@ -146,7 +146,7 @@ private void enterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
-            @Override
+            //@Override
             public void run() {
                 new Forgotpwd().setVisible(true);
             }

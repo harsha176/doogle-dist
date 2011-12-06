@@ -28,6 +28,7 @@ import edu.ncsu.csc573.project.common.messages.LogoutRequestMessage;
 import edu.ncsu.csc573.project.common.messages.Parameter;
 import edu.ncsu.csc573.project.common.messages.PublishRequestMessage;
 import edu.ncsu.csc573.project.common.messages.RegisterRequestMessage;
+import edu.ncsu.csc573.project.common.messages.UnPublishRequestMessage;
 import edu.ncsu.csc573.project.common.schema.MatchFileParamType;
 import edu.ncsu.csc573.project.controllayer.hashspacemanagement.DigestAdaptor;
 import edu.ncsu.csc573.project.viewlayer.gui.Search;
@@ -188,6 +189,20 @@ public class Controller implements IController {
 		ForgotPWDRequest.createRequest(EnumOperationType.FORGOTPASSWORD,
 				ForgotPWDparams);
 		IResponse response = CommunicationServiceFactory.getInstance().executeRequest(ForgotPWDRequest, bootstrapServerIP);
+		return validateResponse(response);
+	}
+
+	public String unPublishFile(String fileName, String fileDigest)
+			throws Exception {
+		UnPublishRequestMessage unPubReq = new UnPublishRequestMessage();
+		IParameter param = new Parameter();
+		param.add(EnumParamsType.FILENAME, fileName);
+		param.add(EnumParamsType.FILEDIGEST, fileDigest);
+		
+		unPubReq.createRequest(EnumOperationType.UNPUBLISH, param);
+		String destPeer = Router.getInstance().getNextHop(new Point(ByteOperationUtil.getCordinates(fileDigest)));
+		IResponse response = CommunicationServiceFactory.getInstance().executeRequest(unPubReq, destPeer);
+		
 		return validateResponse(response);
 	}
 

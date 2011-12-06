@@ -358,7 +358,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
-            @Override
+            //@Override
             public void run() {
                 new Register().setVisible(true);
             }

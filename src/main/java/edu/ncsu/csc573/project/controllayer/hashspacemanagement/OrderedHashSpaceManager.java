@@ -154,4 +154,18 @@ public class OrderedHashSpaceManager {
 			}
 		}
 	}
+	
+	public void unPublishFile(String fileDigest, String fileName) {
+		IPoint fileLoc = new Point(ByteOperationUtil.getCordinates(fileDigest));
+		List<DownloadFileParamType> fileList = hashspace.get(fileDigest);
+		if(fileList == null) {
+			logger.error("File not found in hashspace : " + fileName);
+		}
+		for(DownloadFileParamType dfpt: fileList) {
+			if(dfpt.getFilename().equals(fileName) && dfpt.getFiledigest().equals(fileDigest)) {
+				fileList.remove(dfpt);
+				logger.debug("Removed file " + fileName + " from repository and its size is : " + hashspace.size());
+			}
+		}
+	}
 }
