@@ -50,6 +50,8 @@ public class SearchResults extends javax.swing.JFrame {
 
 	public void setMessage(List<MatchFileParamType> searchResults) {
 		allResults = searchResults;
+                int results = searchResults.size();
+           resultsnumber.setText(results + " results found");
 
 		if (i < searchResults.size()) {
 			fname1.setText(searchResults.get(i).getFilename());
@@ -156,406 +158,306 @@ public class SearchResults extends javax.swing.JFrame {
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-		jButton2 = new javax.swing.JButton();
-		jPanel1 = new javax.swing.JPanel();
-		newSearch = new javax.swing.JTextField();
-		Search = new javax.swing.JButton();
-		jLabel2 = new javax.swing.JLabel();
-		Previous = new javax.swing.JButton();
-		Next = new javax.swing.JButton();
-		fname1 = new javax.swing.JLabel();
-		abs1 = new javax.swing.JLabel();
-		IPAdd1 = new javax.swing.JLabel();
-		fname2 = new javax.swing.JLabel();
-		abs2 = new javax.swing.JLabel();
-		IPAdd2 = new javax.swing.JLabel();
-		fname3 = new javax.swing.JLabel();
-		abs3 = new javax.swing.JLabel();
-		IPAdd3 = new javax.swing.JLabel();
-		fname4 = new javax.swing.JLabel();
-		abs4 = new javax.swing.JLabel();
-		IPAdd4 = new javax.swing.JLabel();
-		fname5 = new javax.swing.JLabel();
-		abs5 = new javax.swing.JLabel();
-		IPAdd5 = new javax.swing.JLabel();
-		download1 = new javax.swing.JButton();
-		download2 = new javax.swing.JButton();
-		download3 = new javax.swing.JButton();
-		download4 = new javax.swing.JButton();
-		download5 = new javax.swing.JButton();
-		jMenuBar1 = new javax.swing.JMenuBar();
-		Options = new javax.swing.JMenu();
-		Settings = new javax.swing.JMenuItem();
-		Publish = new javax.swing.JMenuItem();
-		Logout = new javax.swing.JMenuItem();
+        jButton2 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        newSearch = new javax.swing.JTextField();
+        Search = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        Previous = new javax.swing.JButton();
+        Next = new javax.swing.JButton();
+        fname1 = new javax.swing.JLabel();
+        abs1 = new javax.swing.JLabel();
+        IPAdd1 = new javax.swing.JLabel();
+        fname2 = new javax.swing.JLabel();
+        abs2 = new javax.swing.JLabel();
+        IPAdd2 = new javax.swing.JLabel();
+        fname3 = new javax.swing.JLabel();
+        abs3 = new javax.swing.JLabel();
+        IPAdd3 = new javax.swing.JLabel();
+        fname4 = new javax.swing.JLabel();
+        abs4 = new javax.swing.JLabel();
+        IPAdd4 = new javax.swing.JLabel();
+        fname5 = new javax.swing.JLabel();
+        abs5 = new javax.swing.JLabel();
+        IPAdd5 = new javax.swing.JLabel();
+        download1 = new javax.swing.JButton();
+        download2 = new javax.swing.JButton();
+        download3 = new javax.swing.JButton();
+        download4 = new javax.swing.JButton();
+        download5 = new javax.swing.JButton();
+        resultsnumber = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        Options = new javax.swing.JMenu();
+        Settings = new javax.swing.JMenuItem();
+        Publish = new javax.swing.JMenuItem();
+        Logout = new javax.swing.JMenuItem();
 
-		jButton2.setText("jButton2");
+        jButton2.setText("jButton2");
 
-		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(
-				jPanel1);
-		jPanel1.setLayout(jPanel1Layout);
-		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 100,
-				Short.MAX_VALUE));
-		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 100,
-				Short.MAX_VALUE));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		setResizable(false);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
-		newSearch.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				newSearchActionPerformed(evt);
-			}
-		});
+        newSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newSearchActionPerformed(evt);
+            }
+        });
 
-		Search.setText("Search");
-		Search.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				SearchActionPerformed(evt);
-			}
-		});
+        Search.setText("Search");
+        Search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchActionPerformed(evt);
+            }
+        });
 
-		jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12));
-		jLabel2.setText("Search Results");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12));
+        jLabel2.setText("Search Results");
 
-		Previous.setText("Previous");
-		Previous.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				PreviousActionPerformed(evt);
-			}
-		});
+        Previous.setText("Previous");
+        Previous.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PreviousActionPerformed(evt);
+            }
+        });
 
-		Next.setText("Next");
-		Next.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				NextActionPerformed(evt);
-			}
-		});
+        Next.setText("Next");
+        Next.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NextActionPerformed(evt);
+            }
+        });
 
-		fname1.setText("Filename");
+        fname1.setText("Filename");
 
-		abs1.setText("Abstract");
+        abs1.setText("Abstract");
 
-		IPAdd1.setText("IP Address");
+        IPAdd1.setText("IP Address");
 
-		fname2.setText("Filename");
+        fname2.setText("Filename");
 
-		abs2.setText("Abstract");
+        abs2.setText("Abstract");
 
-		IPAdd2.setText("IP Address");
+        IPAdd2.setText("IP Address");
 
-		fname3.setText("Filename");
+        fname3.setText("Filename");
 
-		abs3.setText("Abstract");
+        abs3.setText("Abstract");
 
-		IPAdd3.setText("IP Address");
+        IPAdd3.setText("IP Address");
 
-		fname4.setText("Filename");
+        fname4.setText("Filename");
 
-		abs4.setText("Abstract");
+        abs4.setText("Abstract");
 
-		IPAdd4.setText("IP Address");
+        IPAdd4.setText("IP Address");
 
-		fname5.setText("Filename");
+        fname5.setText("Filename");
 
-		abs5.setText("Abstract");
+        abs5.setText("Abstract");
 
-		IPAdd5.setText("IP Address");
+        IPAdd5.setText("IP Address");
 
-		download1.setText("Download");
-		download1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				download1ActionPerformed(evt);
-			}
-		});
+        download1.setText("Download");
+        download1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                download1ActionPerformed(evt);
+            }
+        });
 
-		download2.setText("Download");
-		download2.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				download2ActionPerformed(evt);
-			}
-		});
+        download2.setText("Download");
+        download2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                download2ActionPerformed(evt);
+            }
+        });
 
-		download3.setText("Download");
-		download3.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				download3ActionPerformed(evt);
-			}
-		});
+        download3.setText("Download");
+        download3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                download3ActionPerformed(evt);
+            }
+        });
 
-		download4.setText("Download");
-		download4.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				download4ActionPerformed(evt);
-			}
-		});
+        download4.setText("Download");
+        download4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                download4ActionPerformed(evt);
+            }
+        });
 
-		download5.setText("Download");
-		download5.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				download5ActionPerformed(evt);
-			}
-		});
+        download5.setText("Download");
+        download5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                download5ActionPerformed(evt);
+            }
+        });
 
-		Options.setText("Options");
+        resultsnumber.setText("results");
 
-		Settings.setText("Settings");
-		Settings.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				SettingsActionPerformed(evt);
-			}
-		});
-		Options.add(Settings);
+        Options.setText("Options");
 
-		Publish.setText("Publish");
-		Publish.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				PublishActionPerformed(evt);
-			}
-		});
-		Options.add(Publish);
+        Settings.setText("Settings");
+        Settings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SettingsActionPerformed(evt);
+            }
+        });
+        Options.add(Settings);
 
-		Logout.setText("Logout");
-		Logout.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				LogoutActionPerformed(evt);
-			}
-		});
-		Options.add(Logout);
+        Publish.setText("Publish");
+        Publish.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PublishActionPerformed(evt);
+            }
+        });
+        Options.add(Publish);
 
-		jMenuBar1.add(Options);
+        Logout.setText("Logout");
+        Logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutActionPerformed(evt);
+            }
+        });
+        Options.add(Logout);
 
-		setJMenuBar(jMenuBar1);
+        jMenuBar1.add(Options);
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
-				getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(
-						layout.createSequentialGroup()
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.LEADING)
-												.addGroup(
-														layout.createSequentialGroup()
-																.addGap(63, 63,
-																		63)
-																.addGroup(
-																		layout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
-																				.addComponent(
-																						jLabel2)
-																				.addComponent(
-																						fname1)
-																				.addComponent(
-																						abs1)
-																				.addComponent(
-																						fname2)
-																				.addComponent(
-																						abs2)
-																				.addComponent(
-																						fname3)
-																				.addComponent(
-																						abs3)
-																				.addComponent(
-																						fname4)
-																				.addComponent(
-																						abs4)
-																				.addComponent(
-																						fname5)
-																				.addComponent(
-																						abs5)
-																				.addGroup(
-																						layout.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.TRAILING,
-																								false)
-																								.addGroup(
-																										javax.swing.GroupLayout.Alignment.LEADING,
-																										layout.createSequentialGroup()
-																												.addComponent(
-																														IPAdd5)
-																												.addPreferredGap(
-																														javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																														javax.swing.GroupLayout.DEFAULT_SIZE,
-																														Short.MAX_VALUE)
-																												.addComponent(
-																														download5))
-																								.addGroup(
-																										javax.swing.GroupLayout.Alignment.LEADING,
-																										layout.createSequentialGroup()
-																												.addComponent(
-																														IPAdd4)
-																												.addPreferredGap(
-																														javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																														javax.swing.GroupLayout.DEFAULT_SIZE,
-																														Short.MAX_VALUE)
-																												.addComponent(
-																														download4))
-																								.addGroup(
-																										javax.swing.GroupLayout.Alignment.LEADING,
-																										layout.createSequentialGroup()
-																												.addComponent(
-																														IPAdd3)
-																												.addPreferredGap(
-																														javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																														javax.swing.GroupLayout.DEFAULT_SIZE,
-																														Short.MAX_VALUE)
-																												.addComponent(
-																														download3))
-																								.addGroup(
-																										javax.swing.GroupLayout.Alignment.LEADING,
-																										layout.createSequentialGroup()
-																												.addComponent(
-																														IPAdd2)
-																												.addPreferredGap(
-																														javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																														javax.swing.GroupLayout.DEFAULT_SIZE,
-																														Short.MAX_VALUE)
-																												.addComponent(
-																														download2))
-																								.addGroup(
-																										javax.swing.GroupLayout.Alignment.LEADING,
-																										layout.createSequentialGroup()
-																												.addComponent(
-																														IPAdd1)
-																												.addPreferredGap(
-																														javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																														javax.swing.GroupLayout.DEFAULT_SIZE,
-																														Short.MAX_VALUE)
-																												.addComponent(
-																														download1))
-																								.addGroup(
-																										javax.swing.GroupLayout.Alignment.LEADING,
-																										layout.createSequentialGroup()
-																												.addComponent(
-																														newSearch,
-																														javax.swing.GroupLayout.PREFERRED_SIZE,
-																														228,
-																														javax.swing.GroupLayout.PREFERRED_SIZE)
-																												.addGap(56,
-																														56,
-																														56)
-																												.addComponent(
-																														Search)))))
-												.addGroup(
-														layout.createSequentialGroup()
-																.addGap(134,
-																		134,
-																		134)
-																.addComponent(
-																		Previous)
-																.addGap(45, 45,
-																		45)
-																.addComponent(
-																		Next)))
-								.addContainerGap(51, Short.MAX_VALUE)));
+        setJMenuBar(jMenuBar1);
 
-		layout.linkSize(javax.swing.SwingConstants.HORIZONTAL,
-				new java.awt.Component[] { Next, Previous });
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(78, 78, 78)
+                                .addComponent(resultsnumber))
+                            .addComponent(fname1)
+                            .addComponent(abs1)
+                            .addComponent(fname2)
+                            .addComponent(abs2)
+                            .addComponent(fname3)
+                            .addComponent(abs3)
+                            .addComponent(fname4)
+                            .addComponent(abs4)
+                            .addComponent(fname5)
+                            .addComponent(abs5)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(IPAdd5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(download5))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(IPAdd4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(download4))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(IPAdd3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(download3))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(IPAdd2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(download2))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(IPAdd1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(download1))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(newSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(56, 56, 56)
+                                    .addComponent(Search)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(134, 134, 134)
+                        .addComponent(Previous)
+                        .addGap(45, 45, 45)
+                        .addComponent(Next)))
+                .addContainerGap(51, Short.MAX_VALUE))
+        );
 
-		layout.linkSize(javax.swing.SwingConstants.HORIZONTAL,
-				new java.awt.Component[] { Search, download1 });
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Next, Previous});
 
-		layout.setVerticalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(
-						layout.createSequentialGroup()
-								.addContainerGap()
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(
-														newSearch,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addComponent(Search))
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-								.addComponent(jLabel2)
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-								.addComponent(fname1)
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(abs1)
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(IPAdd1)
-												.addComponent(download1))
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-								.addComponent(fname2)
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(abs2)
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(IPAdd2)
-												.addComponent(download2))
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-								.addComponent(fname3)
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(abs3)
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(IPAdd3)
-												.addComponent(download3))
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-								.addComponent(fname4)
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(abs4)
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(IPAdd4)
-												.addComponent(download4))
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-								.addComponent(fname5)
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(abs5)
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(IPAdd5)
-												.addComponent(download5))
-								.addGap(18, 18, 18)
-								.addGroup(
-										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(Previous)
-												.addComponent(Next))
-								.addContainerGap(
-										javax.swing.GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)));
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Search, download1});
 
-		pack();
-	}// </editor-fold>//GEN-END:initComponents
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(newSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Search))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(resultsnumber))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(fname1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(abs1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(IPAdd1)
+                    .addComponent(download1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(fname2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(abs2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(IPAdd2)
+                    .addComponent(download2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(fname3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(abs3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(IPAdd3)
+                    .addComponent(download3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(fname4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(abs4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(IPAdd4)
+                    .addComponent(download4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(fname5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(abs5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(IPAdd5)
+                    .addComponent(download5))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Previous)
+                    .addComponent(Next))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
 	private void linkButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_linkButton3ActionPerformed
 	// TODO add your handling code here:
@@ -750,38 +652,39 @@ public class SearchResults extends javax.swing.JFrame {
 		});
 	}
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JLabel IPAdd1;
-	private javax.swing.JLabel IPAdd2;
-	private javax.swing.JLabel IPAdd3;
-	private javax.swing.JLabel IPAdd4;
-	private javax.swing.JLabel IPAdd5;
-	private javax.swing.JMenuItem Logout;
-	private javax.swing.JButton Next;
-	private javax.swing.JMenu Options;
-	private javax.swing.JButton Previous;
-	private javax.swing.JMenuItem Publish;
-	private javax.swing.JButton Search;
-	private javax.swing.JMenuItem Settings;
-	private javax.swing.JLabel abs1;
-	private javax.swing.JLabel abs2;
-	private javax.swing.JLabel abs3;
-	private javax.swing.JLabel abs4;
-	private javax.swing.JLabel abs5;
-	private javax.swing.JButton download1;
-	private javax.swing.JButton download2;
-	private javax.swing.JButton download3;
-	private javax.swing.JButton download4;
-	private javax.swing.JButton download5;
-	private javax.swing.JLabel fname1;
-	private javax.swing.JLabel fname2;
-	private javax.swing.JLabel fname3;
-	private javax.swing.JLabel fname4;
-	private javax.swing.JLabel fname5;
-	private javax.swing.JButton jButton2;
-	private javax.swing.JLabel jLabel2;
-	private javax.swing.JMenuBar jMenuBar1;
-	private javax.swing.JPanel jPanel1;
-	private javax.swing.JTextField newSearch;
-	// End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel IPAdd1;
+    private javax.swing.JLabel IPAdd2;
+    private javax.swing.JLabel IPAdd3;
+    private javax.swing.JLabel IPAdd4;
+    private javax.swing.JLabel IPAdd5;
+    private javax.swing.JMenuItem Logout;
+    private javax.swing.JButton Next;
+    private javax.swing.JMenu Options;
+    private javax.swing.JButton Previous;
+    private javax.swing.JMenuItem Publish;
+    private javax.swing.JButton Search;
+    private javax.swing.JMenuItem Settings;
+    private javax.swing.JLabel abs1;
+    private javax.swing.JLabel abs2;
+    private javax.swing.JLabel abs3;
+    private javax.swing.JLabel abs4;
+    private javax.swing.JLabel abs5;
+    private javax.swing.JButton download1;
+    private javax.swing.JButton download2;
+    private javax.swing.JButton download3;
+    private javax.swing.JButton download4;
+    private javax.swing.JButton download5;
+    private javax.swing.JLabel fname1;
+    private javax.swing.JLabel fname2;
+    private javax.swing.JLabel fname3;
+    private javax.swing.JLabel fname4;
+    private javax.swing.JLabel fname5;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField newSearch;
+    private javax.swing.JLabel resultsnumber;
+    // End of variables declaration//GEN-END:variables
 }

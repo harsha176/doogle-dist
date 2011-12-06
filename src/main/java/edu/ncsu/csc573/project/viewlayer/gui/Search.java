@@ -179,27 +179,29 @@ private void PublishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     	Controller.getInstance().publish();
     } catch (IOException ex) {
         Logger.getLogger(Search.class.getName()).error("Failed to create publish request", ex);
+        PublishFrame Pubfail = new PublishFrame();
+        Pubfail.setMessage("Failed to create publish request");
+        Pubfail.setVisible(true);
+        Pubfail.setLocationRelativeTo(this);
+       
     } catch (Exception e) {
         Logger.getLogger(Search.class.getName()).error("Failed to send request to boot strap server", e);
-    }
-
-
-
-    PublishFrame Publish = new PublishFrame();
-    //this.setVisible(false);
-    Publish.setVisible(true);
+        PublishFrame Pubfail = new PublishFrame();
+        Pubfail.setMessage("Failed to create publish request");
+        Pubfail.setVisible(true);
+        Pubfail.setLocationRelativeTo(this);
+       }
 
 
     // IRequest publishRequest = new PublishRequestMessage();
     //     IParameter publishparams = new Parameter();
     //Response
-    Publish.setVisible(false);
-    PublishFrame newPub = new PublishFrame();
+  /*  PublishFrame newPub = new PublishFrame();
     newPub.setMessage("Successfully Published");
     Publish.setVisible(false);
     newPub.setVisible(true);
     newPub.setVisible(false);
-
+*/
 }//GEN-LAST:event_PublishActionPerformed
 
 private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
