@@ -193,6 +193,7 @@ public class SearchResults extends javax.swing.JFrame {
         Options = new javax.swing.JMenu();
         Settings = new javax.swing.JMenuItem();
         Publish = new javax.swing.JMenuItem();
+        unpublish = new javax.swing.JMenuItem();
         Logout = new javax.swing.JMenuItem();
 
         jButton2.setText("jButton2");
@@ -326,6 +327,14 @@ public class SearchResults extends javax.swing.JFrame {
         });
         Options.add(Publish);
 
+        unpublish.setText("Unpublish");
+        unpublish.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                unpublishActionPerformed(evt);
+            }
+        });
+        Options.add(unpublish);
+
         Logout.setText("Logout");
         Logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -352,15 +361,10 @@ public class SearchResults extends javax.swing.JFrame {
                                 .addGap(78, 78, 78)
                                 .addComponent(resultsnumber))
                             .addComponent(fname1)
-                            .addComponent(abs1)
                             .addComponent(fname2)
-                            .addComponent(abs2)
                             .addComponent(fname3)
-                            .addComponent(abs3)
                             .addComponent(fname4)
-                            .addComponent(abs4)
                             .addComponent(fname5)
-                            .addComponent(abs5)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(IPAdd5)
@@ -385,7 +389,12 @@ public class SearchResults extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(newSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(56, 56, 56)
-                                    .addComponent(Search)))))
+                                    .addComponent(Search)))
+                            .addComponent(abs1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(abs2, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(abs3, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(abs4, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(abs5, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(134, 134, 134)
                         .addComponent(Previous)
@@ -412,7 +421,7 @@ public class SearchResults extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(fname1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(abs1)
+                .addComponent(abs1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(IPAdd1)
@@ -420,7 +429,7 @@ public class SearchResults extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(fname2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(abs2)
+                .addComponent(abs2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(IPAdd2)
@@ -428,7 +437,7 @@ public class SearchResults extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(fname3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(abs3)
+                .addComponent(abs3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(IPAdd3)
@@ -436,7 +445,7 @@ public class SearchResults extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(fname4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(abs4)
+                .addComponent(abs4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(IPAdd4)
@@ -444,7 +453,7 @@ public class SearchResults extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(fname5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(abs5)
+                .addComponent(abs5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(IPAdd5)
@@ -458,6 +467,15 @@ public class SearchResults extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+private void unpublishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unpublishActionPerformed
+// TODO add your handling code here:
+    Unpublish remove = new Unpublish();
+    remove.setVisible(true);
+    remove.setLocationRelativeTo(this);
+
+
+}//GEN-LAST:event_unpublishActionPerformed
 
 	private void linkButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_linkButton3ActionPerformed
 	// TODO add your handling code here:
@@ -516,20 +534,23 @@ public class SearchResults extends javax.swing.JFrame {
 
 	private void NextActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_NextActionPerformed
 	// TODO add your handling code here:
-		SearchResults newResults = new SearchResults();
-		newResults.setMessage(allResults);
 		this.setVisible(false);
-		newResults.setVisible(true);
-		newResults.setLocationRelativeTo(this);
+                this.setMessage(allResults);
+                this.setVisible(true);
+//		newResults.setVisible(true);
+		this.setLocationRelativeTo(this);
 	}// GEN-LAST:event_NextActionPerformed
 
 	private void PreviousActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_PreviousActionPerformed
-		i = i - 5 ;
-	// TODO add your handling code here:
-		  SearchResults newResults = new SearchResults();
-		  newResults.setMessage(allResults); 
-		  this.setVisible(false);
-		  newResults.setVisible(true); newResults.setLocationRelativeTo(this);
+		if (i>5)
+                {
+                i = i - 5;
+                this.setVisible(false);
+                this.setMessage(allResults);
+                this.setVisible(true);
+//		newResults.setVisible(true);
+		this.setLocationRelativeTo(this);
+                }
 		 
 	}// GEN-LAST:event_PreviousActionPerformed
 
@@ -548,7 +569,7 @@ public class SearchResults extends javax.swing.JFrame {
 			// newResults.setVisible(true);
 			// newResults.setLocationRelativeTo(this);
 
-                          		SearchResults sr = new SearchResults();
+                SearchResults sr = new SearchResults();
 		sr.setMessage(searchResults);
 		this.setVisible(false);
 		sr.setVisible(true);
@@ -666,7 +687,7 @@ public class SearchResults extends javax.swing.JFrame {
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 
-			@Override
+			//@Override
 			public void run() {
 				new SearchResults().setVisible(true);
 			}
@@ -707,5 +728,6 @@ public class SearchResults extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField newSearch;
     private javax.swing.JLabel resultsnumber;
+    private javax.swing.JMenuItem unpublish;
     // End of variables declaration//GEN-END:variables
 }

@@ -179,4 +179,14 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         jButton1.setText("Try Again");  
       
     }
+
+    void Unpublishfailed() {
+        errorMsg.setText("Unpublished failed because file not found / invald file");
+        jButton1.setText("Try Again");    
+    }
+    void Unpublishsuccess(){
+           errorMsg.setText("File successfully removed");
+        jButton1.setText("OK");    
+    }
 }
+

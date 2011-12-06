@@ -191,6 +191,7 @@ public class RequestProcessor {
 						.getParamValue(EnumParamsType.USERNAME).toString());
 				params.add(EnumParamsType.STATUSCODE,
 						new BigInteger(String.valueOf(0)));
+                                params.add(EnumParamsType.MESSAGE, "Logged out successfully");
 				peers.remove(peerIp);
 			} catch (UserManagementException e1) {
 				params.add(EnumParamsType.STATUSCODE,
@@ -420,10 +421,6 @@ public class RequestProcessor {
 			}
 			break;
 		case DOWNLOADUPDATE:
-			/*
-			 * TODO retreive filedigest from request
-			 *
-			 */
 			destPeerIP = Router.getInstance().getNextHop(
 					new Point(ByteOperationUtil
 							.getCordinates((byte[])req.getParameter()
@@ -443,6 +440,32 @@ public class RequestProcessor {
 				getParams.add(EnumParamsType.MESSAGE,
 						"Successfully updated file download count");
 
+				ackResp.createResponse(EnumOperationType.ACKRESPONSE, getParams); 
+
+				response = ackResp;
+			} else {
+				return new MessageDetails(destPeerIP, req);
+			}
+			break;
+		case UNPUBLISH:
+			destPeerIP = Router.getInstance().getNextHop(
+					new Point(ByteOperationUtil
+							.getCordinates((byte[])req.getParameter()
+									.getParamValue(EnumParamsType.FILEDIGEST))));
+			if (destPeerIP.equalsIgnoreCase("127.0.0.1")) {
+				ACKResponse ackResp = new ACKResponse(req.getId());
+				/*String fileDigest = ByteOperationUtil.convertBytesToString((byte[])req.getParameter()
+						.getParamValue(EnumParamsType.FILEDIGEST));*/
+				String fileDigest = ByteOperationUtil.convertBytesToString(((byte[])req.getParameter()
+						.getParamValue(EnumParamsType.FILEDIGEST)));
+				String fileName = req.getParameter().getParamValue(EnumParamsType.FILENAME).toString();
+				hashSpaceManager.unPublishFile(fileDigest, fileName);
+
+				IParameter getParams = new Parameter();
+				getParams.add(EnumParamsType.STATUSCODE,
+						new BigInteger(String.valueOf(0)));
+				getParams.add(EnumParamsType.MESSAGE,
+						"Successfully unpublished file");
 				ackResp.createResponse(EnumOperationType.ACKRESPONSE, getParams); 
 
 				response = ackResp;

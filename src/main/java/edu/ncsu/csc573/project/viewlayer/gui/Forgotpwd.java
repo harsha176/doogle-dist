@@ -45,6 +45,7 @@ public class Forgotpwd extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         userName = new javax.swing.JTextField();
         enter = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(475, 310, 0, 0));
@@ -61,6 +62,13 @@ public class Forgotpwd extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -73,13 +81,18 @@ public class Forgotpwd extends javax.swing.JFrame {
                         .addGap(32, 32, 32)
                         .addComponent(userName, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addComponent(enter))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(104, 104, 104)
-                        .addComponent(passwddRequest)))
+                        .addComponent(passwddRequest))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(enter)
+                        .addGap(32, 32, 32)
+                        .addComponent(jButton1)))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {enter, jButton1});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -90,7 +103,9 @@ public class Forgotpwd extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(userName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(enter)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(enter)
+                    .addComponent(jButton1))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -115,6 +130,15 @@ private void enterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
      SuccessFrame.SuccessFrameFalse(); 
     }
 }//GEN-LAST:event_enterActionPerformed
+
+private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+// TODO add your handling code here:
+    
+        Login login = new Login();
+    this.setVisible(false);
+    login.setVisible(true);
+    login.setLocationRelativeTo(this);
+}//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,7 +170,7 @@ private void enterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
-            @Override
+            //@Override
             public void run() {
                 new Forgotpwd().setVisible(true);
             }
@@ -155,6 +179,7 @@ private void enterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton enter;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel passwddRequest;
     private javax.swing.JTextField userName;

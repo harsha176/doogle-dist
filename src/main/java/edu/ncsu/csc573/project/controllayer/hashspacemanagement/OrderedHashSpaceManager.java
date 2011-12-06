@@ -12,6 +12,7 @@ import edu.ncsu.csc573.project.commlayer.IPoint;
 import edu.ncsu.csc573.project.commlayer.IZone;
 import edu.ncsu.csc573.project.commlayer.Point;
 import edu.ncsu.csc573.project.common.ByteOperationUtil;
+import edu.ncsu.csc573.project.common.ConfigurationManager;
 import edu.ncsu.csc573.project.common.schema.DownloadFileParamType;
 import edu.ncsu.csc573.project.common.messages.EnumParamsType;
 import edu.ncsu.csc573.project.common.messages.PublishRequestMessage;
@@ -63,7 +64,7 @@ public class OrderedHashSpaceManager {
 					aMatch.setIpaddress(file.getIpaddress());
 					aMatch.setFilesize(file.getFilesize());
 					double matchCoefficient = matcher.getMatchFactor() * 0.9
-							+ file.getDownloads() * 0.1;
+						+ ((file.getDownloads()/ConfigurationManager        .getInstance().getMaxDownloadLimit()) * 0.1);
 					aMatch.setMatchFactor(matchCoefficient);
 					logger.debug("match found with Filename : "
 							+ file.getFilename() + " with match factor : "
@@ -151,6 +152,22 @@ public class OrderedHashSpaceManager {
 			if(dfpt.getFilename().equals(fileName)) {
 				dfpt.setDownloads(dfpt.getDownloads()+1);
 				logger.debug("Updated download count for file : " + fileName + " to " + dfpt.getDownloads() );
+			}
+		}
+	}
+	
+	public void unPublishFile(String fileDigest, String fileName) {
+		IPoint fileLoc = new Point(ByteOperationUtil.getCordinates(fileDigest));
+		List<DownloadFileParamType> fileList = hashspace.get(fileLoc);
+		if(fileList == null) {
+			logger.error("File not found in hashspace : " + fileName);
+		}
+               
+		for(int i = 0; i < fileList.size(); i++) {
+		DownloadFileParamType dfpt = fileList.get(i);	
+                if(dfpt.getFilename().equals(fileName) /*&& dfpt.getFiledigest().equals(fileDigest)*/) {
+				fileList.remove(dfpt);
+				logger.debug("Removed file " + fileName + " from repository and its size is : " + hashspace.size());
 			}
 		}
 	}

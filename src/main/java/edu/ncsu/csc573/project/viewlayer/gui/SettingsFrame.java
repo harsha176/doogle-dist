@@ -326,7 +326,7 @@ private void downloadchoosebuttonActionPerformed(java.awt.event.ActionEvent evt)
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
-            @Override
+            //@Override
             public void run() {
                 new SettingsFrame().setVisible(true);
             }

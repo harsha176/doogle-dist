@@ -45,6 +45,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PublishActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="unpublish">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Unpublish"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="unpublishActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="Logout">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Logout"/>
@@ -92,15 +100,10 @@
                               <Component id="resultsnumber" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="fname1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="abs1" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="fname2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="abs2" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="fname3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="abs3" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="fname4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="abs4" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="fname5" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="abs5" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="1">
                                   <Component id="IPAdd5" min="-2" max="-2" attributes="0"/>
@@ -133,6 +136,11 @@
                                   <Component id="Search" linkSize="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <Component id="abs1" alignment="0" min="-2" pref="322" max="-2" attributes="0"/>
+                          <Component id="abs2" alignment="0" min="-2" pref="331" max="-2" attributes="0"/>
+                          <Component id="abs3" alignment="0" min="-2" pref="338" max="-2" attributes="0"/>
+                          <Component id="abs4" alignment="0" min="-2" pref="333" max="-2" attributes="0"/>
+                          <Component id="abs5" alignment="0" min="-2" pref="342" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -162,7 +170,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="fname1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="abs1" min="-2" max="-2" attributes="0"/>
+              <Component id="abs1" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="IPAdd1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -171,7 +179,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="fname2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="abs2" min="-2" max="-2" attributes="0"/>
+              <Component id="abs2" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="IPAdd2" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -180,7 +188,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="fname3" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="abs3" min="-2" max="-2" attributes="0"/>
+              <Component id="abs3" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="IPAdd3" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -189,7 +197,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="fname4" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="abs4" min="-2" max="-2" attributes="0"/>
+              <Component id="abs4" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="IPAdd4" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -198,7 +206,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="fname5" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="abs5" min="-2" max="-2" attributes="0"/>
+              <Component id="abs5" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="IPAdd5" alignment="3" min="-2" max="-2" attributes="0"/>

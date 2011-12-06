@@ -127,7 +127,7 @@ private void loginTryagainActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
-            @Override
+            //@Override
             public void run() {
                 new ForgotpwdSuccessFailure().setVisible(true);
             }

@@ -30,7 +30,7 @@ public class LogoutResponseMessage extends ResponseMessage {
 		LogoutResponseParamsType rpt = new LogoutResponseParamsType();
 		
 		rpt.setStatuscode((BigInteger)(getParameter().getParamValue(EnumParamsType.STATUSCODE)));
-//		rpt.setMessage(getParameter().getParamValue(EnumParamsType.MESSAGE).toString());
+		rpt.setMessage(getParameter().getParamValue(EnumParamsType.MESSAGE).toString());
             
                 rt.setParams(rpt);
 		Logoutresponse.setLogoutResponse(rt);
@@ -49,7 +49,7 @@ public class LogoutResponseMessage extends ResponseMessage {
 			LogoutResponseParamsType regparams = logoutType.getParams();
 			IParameter param = new Parameter();
 			param.add(EnumParamsType.STATUSCODE, regparams.getStatuscode());
-//			param.add(EnumParamsType.MESSAGE, regparams.getMessage());
+			param.add(EnumParamsType.MESSAGE, regparams.getMessage());
 			
 			this.setOperationType(EnumOperationType.LOGOUTRESPONSE);
 			this.setParameter(param);

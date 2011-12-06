@@ -22,7 +22,8 @@ public class ConfigurationManager {
     private static final String DEFAULT_DOWNLOAD_DIRECTORY = System.getProperty("user.home") + "/downloads";
     private static final String DEFAULT_PUBLISH_DIRECTORY = System.getProperty("user.home") + "/publish";
 	private static final boolean DEFAULT_ADMIN_SERVER = false;
-
+        private static final int DEFAULT_MAX_DOWNLOADS = 100;
+        private int downloadsLimit = 0;
     private int serverPort;
     private int timeOut;
     private long cliTimeOut;
@@ -275,5 +276,11 @@ public class ConfigurationManager {
     		dimensions = getAsInt("GRID_DIMENSIONS", DEFAULT_GRID_DIMENSIONS);
     	}
     	return dimensions;
+    }
+     public int getMaxDownloadLimit() {
+        if(downloadsLimit == 0) {
+            downloadsLimit = getAsInt("MAX_DOWNLOADS", DEFAULT_MAX_DOWNLOADS);
+        }
+        return downloadsLimit;
     }
 }

@@ -20,16 +20,30 @@
 			<xs:element name="ForgotPWD" type="ForgotPasswdType"></xs:element>
 			<xs:element name="Search" type="SearchType"></xs:element>
 			<xs:element name="Publish" type="PublishType"></xs:element>
-             <xs:element name="ChangePassword" type="ChangePasswordType"></xs:element>
-             <xs:element name="Join" type="JoinType"></xs:element>
-             <xs:element name="Leave" type="LeaveType"></xs:element>
-             <xs:element name="Put" type="PutType"></xs:element>
-             <xs:element name="Get" type="GetType"></xs:element>
-             <xs:element name="FileDownload" type="FileDownloadType"></xs:element>
-             <xs:element name="DownloadUpdate" type="DownloadUpdateType"></xs:element>
+            <xs:element name="ChangePassword" type="ChangePasswordType"></xs:element>
+            <xs:element name="Join" type="JoinType"></xs:element>
+            <xs:element name="Leave" type="LeaveType"></xs:element>
+            <xs:element name="Put" type="PutType"></xs:element>
+            <xs:element name="Get" type="GetType"></xs:element>
+            <xs:element name="FileDownload" type="FileDownloadType"></xs:element>
+            <xs:element name="DownloadUpdate" type="DownloadUpdateType"></xs:element>
+            <xs:element name="Unpublish" type="UnpublishType"></xs:element>
 		</xs:choice>
 	</xs:complexType>
 
+	<xs:complexType name="UnpublishType">
+		<xs:sequence>
+			<xs:element name="Operation" type="xs:string" fixed="Unpublish" />
+			<xs:element name="params" type="UnpublishTypeParams"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="UnpublishTypeParams">
+		<xs:sequence>
+			<xs:element name="filedigest" type="xs:string"/>
+			<xs:element name="filename" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="DownloadUpdateType">
 		<xs:sequence>
 			<xs:element name="Operation" type="xs:string" fixed="DownloadUpdate" />
@@ -243,7 +257,7 @@
 		<xs:sequence>
 			<xs:element name="ipaddress" type="xs:string" />
 			<xs:element name="searchdigest" type="xs:string" />
-                        <xs:element name="ttl" type="xs:string" />
+            <xs:element name="ttl" type="xs:string" />
 		</xs:sequence>
 	</xs:complexType>
         
