@@ -173,4 +173,10 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
       errorMsg.setText("Designation not selected");
         jButton1.setText("Try Again");        
     }
+
+    void DownloadSuccess() {
+               errorMsg.setText("Server not reachable");
+        jButton1.setText("Try Again");  
+      
+    }
 }

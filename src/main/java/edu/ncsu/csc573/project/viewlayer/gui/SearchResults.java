@@ -578,12 +578,21 @@ public class SearchResults extends javax.swing.JFrame {
 	// TODO add your handling code here:
 		CommunicationServiceFactory.getInstance().getFile(IPAdd1.getText(),
 				fname1.getText());
+                RegisterErrors download = new RegisterErrors();
+                download.DownloadSuccess();
+                download.setVisible(true);
+                download.setLocationRelativeTo(this);
+                        
 	}// GEN-LAST:event_download1ActionPerformed
 
 	private void download2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_download2ActionPerformed
 	// TODO add your handling code here:
 		CommunicationServiceFactory.getInstance().getFile(IPAdd2.getText(),
 				fname2.getText());
+                RegisterErrors download = new RegisterErrors();
+                download.DownloadSuccess();
+                download.setVisible(true);
+                download.setLocationRelativeTo(this);
 	}// GEN-LAST:event_download2ActionPerformed
 
 	private void download3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_download3ActionPerformed
@@ -591,18 +600,30 @@ public class SearchResults extends javax.swing.JFrame {
 
 		CommunicationServiceFactory.getInstance().getFile(IPAdd3.getText(),
 				fname3.getText());
+                RegisterErrors download = new RegisterErrors();
+                download.DownloadSuccess();
+                download.setVisible(true);
+                download.setLocationRelativeTo(this);
 	}// GEN-LAST:event_download3ActionPerformed
 
 	private void download4ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_download4ActionPerformed
 	// TODO add your handling code here:
 		CommunicationServiceFactory.getInstance().getFile(IPAdd4.getText(),
 				fname4.getText());
+                RegisterErrors download = new RegisterErrors();
+                download.DownloadSuccess();
+                download.setVisible(true);
+                download.setLocationRelativeTo(this);
 	}// GEN-LAST:event_download4ActionPerformed
 
 	private void download5ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_download5ActionPerformed
 	// TODO add your handling code here:
 		CommunicationServiceFactory.getInstance().getFile(IPAdd5.getText(),
 				fname5.getText());
+                RegisterErrors download = new RegisterErrors();
+                download.DownloadSuccess();
+                download.setVisible(true);
+                download.setLocationRelativeTo(this);
 	}// GEN-LAST:event_download5ActionPerformed
 
 	/**
