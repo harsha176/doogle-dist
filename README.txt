@@ -445,4 +445,3 @@ scalable and redundant. The centralised system is more efficient in searches but
 EAGLE EYE – Eagle is known to see clearly in a large space analogous to large file storage capacity and good 
 search results identification
 DTEXTR – Distributed Text search
-
